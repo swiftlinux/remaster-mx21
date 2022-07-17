@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# NOTE: set -o pipefail is needed to ensure that any error or failure causes the whole pipeline to fail.
+# Without this specification, the CI status will provide a false sense of security by showing builds
+# as succeeding in spite of errors or failures.
+set -eo pipefail
+
+source definitions.sh
+
+echo '#########################################'
+echo 'BEGIN Stage 2: testing the upload process'
+echo '#########################################'
+
+# PURPOSE
+# This script offers a quick and early test of the process of uploading to Sourceforge.
+
+# To execute uploads without a prompt for your password,
+# you must create an ssh key (with OpenSSH) and post it to SourceForge.
+# The procedure is at:
+# https://sourceforge.net/p/forge/documentation/SSH%20Keys/
+
+DATE1=$(date +%s)
+
+if [ "$CI" = true' ]
+then
+  rsync -avPz -e ssh "$DIR_MAIN/tmp/timestamp.txt" jhsu802701@frs.sourceforge.net:/home/frs/p/swiftlinux/test-upload/$MX_VERSION/
+else
+  echo 'Skipping the process of testing the upload process in the development environment'
+fi
+
+
+DATE2=$(date +%s)
+
+echo '#######################################################################'
+echo "FINISHED Stage 2: testing the upload process ($((DATE2-DATE1)) seconds)"
+echo '#######################################################################'
