@@ -21,13 +21,12 @@ echo '#########################################'
 
 DATE1=$(date +%s)
 
-if [ "$CI" = true' ]
+if [ "$CI" = 'true' ]
 then
   rsync -avPz -e ssh "$DIR_MAIN/tmp/timestamp.txt" jhsu802701@frs.sourceforge.net:/home/frs/p/swiftlinux/test-upload/$MX_VERSION/
 else
   echo 'Skipping the process of testing the upload process in the development environment'
 fi
-
 
 DATE2=$(date +%s)
 
