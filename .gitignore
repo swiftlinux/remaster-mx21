@@ -1,0 +1,9 @@
+log/*
+remaster/*
+iso-downloaded/*
+iso-output/*
+tmp*
+download
+download.*
+wget-log
+MX-*
