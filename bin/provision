@@ -1,0 +1,58 @@
+#!/bin/bash
+
+# NOTE: set -o pipefail is needed to ensure that any error or failure causes the whole pipeline to fail.
+# Without this specification, the CI status will provide a false sense of security by showing builds
+# as succeeding in spite of errors or failures.
+set -eo pipefail
+
+echo '###########################'
+echo 'BEGIN stage 1: provisioning'
+echo '###########################'
+
+DATE1=$(date +%s)
+
+echo '---------------------'
+echo 'BEGIN: apt-get update'
+echo '---------------------'
+apt-get update
+wait
+echo '------------------------'
+echo 'FINISHED: apt-get update'
+echo '------------------------'
+echo ''
+
+function install_package {
+  PACKAGE=$1
+  echo '----------------------------------'
+  echo "BEGIN: apt-get install -y $PACKAGE"
+  echo '----------------------------------'
+  apt-get install -y $PACKAGE
+  wait
+  echo '-------------------------------------'
+  echo "FINISHED: apt-get install -y $PACKAGE"
+  echo '-------------------------------------'
+}
+
+# wget: needed to download Linux ISO
+install_package 'wget'
+
+# rsync: needed for remastering and uploading
+install_package 'rsync'
+
+# squashfs-tools: needed for remastering
+install_package 'squashfs-tools'
+
+# genisoimage: needed for remastering
+install_package 'genisoimage'
+
+# syslinux-utils: needed for isohybrid
+install_package 'syslinux-utils'
+
+# bind9: for Internet connection in chroot
+install_package 'bind9'
+
+DATE2=$(date +%s)
+
+echo '#########################################################'
+echo "FINISHED stage 1: provisioning ($((DATE2-DATE1)) seconds)"
+echo '#########################################################'
