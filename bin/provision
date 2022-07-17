@@ -20,14 +20,6 @@ echo '------------------------'
 echo 'FINISHED: apt-get update'
 echo '------------------------'
 echo ''
-echo '-------------------------'
-echo 'BEGIN: apt-get upgrade -y'
-echo '-------------------------'
-apt-get upgrade -y
-wait
-echo '-------------------------'
-echo 'FINISHED: apt-get upgrade -y'
-echo '-------------------------'
 
 function install_package {
   PACKAGE=$1
