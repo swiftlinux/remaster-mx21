@@ -8,3 +8,5 @@ set -eo pipefail
 source definitions.sh
 
 sudo bin/provision
+
+bin/test-upload
