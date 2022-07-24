@@ -21,10 +21,10 @@ echo '#########################################'
 
 DATE1=$(date +%s)
 
-ssh-keygen -q -t ed25519 -N "" -C "jhsu802701@shell.sf.net" -f $HOME/.ssh/id_ed25519
-
 if [ "$CI" = 'true' ]
 then
+  echo "$SSH_PUBLIC_KEY" > $HOME/.ssh/id_ed25519.pub
+  echo "$SSH_PRIVATE_KEY" > $HOME/.ssh/id_ed25519
   echo "Uploading $DIR_MAIN/tmp/timestamp.txt to SourceForge"
   rsync -avPz -e ssh "$DIR_MAIN/tmp/timestamp.txt" jhsu802701@frs.sourceforge.net:/home/frs/p/swiftlinux/test-upload/$MX_VERSION/
 else
