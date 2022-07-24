@@ -27,6 +27,9 @@ then
   mkdir -p $HOME/.ssh
   echo "$SSH_PUBLIC_KEY" > $HOME/.ssh/id_rsa.pub
   echo "$SSH_PRIVATE_KEY" > $HOME/.ssh/id_rsa
+  echo '----------------'
+  echo "ls -l $HOME/.ssh"
+  ls -l $HOME/.ssh
   echo '-------------------------'
   echo "cat $HOME/.ssh/id_rsa.pub"
   cat $HOME/.ssh/id_rsa.pub
