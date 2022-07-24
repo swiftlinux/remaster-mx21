@@ -25,6 +25,7 @@ ssh-keygen -q -t ed25519 -N "" -C "jhsu802701@shell.sf.net" -f $HOME/.ssh/id_ed2
 
 if [ "$CI" = 'true' ]
 then
+  echo "Uploading $DIR_MAIN/tmp/timestamp.txt to SourceForge"
   rsync -avPz -e ssh "$DIR_MAIN/tmp/timestamp.txt" jhsu802701@frs.sourceforge.net:/home/frs/p/swiftlinux/test-upload/$MX_VERSION/
 else
   echo 'Skipping the process of testing the upload process in the development environment'
