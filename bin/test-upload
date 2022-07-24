@@ -21,6 +21,8 @@ echo '#########################################'
 
 DATE1=$(date +%s)
 
+ssh-keygen -q -t ed25519 -N "" -C "jhsu802701@shell.sf.net"
+
 if [ "$CI" = 'true' ]
 then
   rsync -avPz -e ssh "$DIR_MAIN/tmp/timestamp.txt" jhsu802701@frs.sourceforge.net:/home/frs/p/swiftlinux/test-upload/$MX_VERSION/
