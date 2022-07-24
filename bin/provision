@@ -33,6 +33,9 @@ function install_package {
   echo '-------------------------------------'
 }
 
+# openssh-client: needed to connect to SourceForge
+install_package 'openssh-client'
+
 # wget: needed to download Linux ISO
 install_package 'wget'
 
