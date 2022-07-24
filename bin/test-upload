@@ -30,9 +30,9 @@ then
     echo 'Filling in known hosts'
     ssh-keyscan 'frs.sourceforge.net' >> ~/.ssh/known_hosts
   end
-  echo '---------------------'
-  echo "cat $HOME/.ssh/id_rsa"
-  cat $HOME/.ssh/id_rsa
+  echo '-------------------------'
+  echo "cat $HOME/.ssh/id_rsa.pub"
+  cat $HOME/.ssh/id_rsa.pub
   echo ''
   echo "Uploading $DIR_MAIN/tmp/timestamp.txt to SourceForge"
   rsync -avPz -e ssh "$DIR_MAIN/tmp/timestamp.txt" jhsu802701@frs.sourceforge.net:/home/frs/p/swiftlinux/test-upload/$MX_VERSION/
