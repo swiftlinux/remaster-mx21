@@ -25,10 +25,12 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
-      # Needed for uploading
-      - uses: webfactory/ssh-agent@v0.5.4
+      # Needed for uploading to SourceForge
+      - name: Install SSH Key
+        uses: shimataro/ssh-key-action@v2
         with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          known_hosts: unnecessary
 
       # Runs the parts of the remastering process common to all Swift Linux editions
       - name: General
