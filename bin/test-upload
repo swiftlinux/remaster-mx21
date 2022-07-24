@@ -21,7 +21,7 @@ echo '#########################################'
 
 DATE1=$(date +%s)
 
-ssh-keygen -q -t ed25519 -N "" -C "jhsu802701@shell.sf.net"
+ssh-keygen -q -t ed25519 -N "" -C "jhsu802701@shell.sf.net" -f $HOME/.ssh/id_ed25519
 
 if [ "$CI" = 'true' ]
 then
