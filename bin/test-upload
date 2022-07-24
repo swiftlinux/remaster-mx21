@@ -29,7 +29,7 @@ then
   ssh-keyscan 'frs.sourceforge.net' >> ~/.ssh/known_hosts
   echo '----------------'
   echo "ls -l $HOME/.ssh"
-  ls -l $HOME/.ssh/id_rsa
+  ls -l $HOME/.ssh
   echo "Uploading $DIR_MAIN/tmp/timestamp.txt to SourceForge"
   rsync -avPz -e ssh "$DIR_MAIN/tmp/timestamp.txt" jhsu802701@frs.sourceforge.net:/home/frs/p/swiftlinux/test-upload/$MX_VERSION/
 else
