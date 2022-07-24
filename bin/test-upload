@@ -25,6 +25,8 @@ if [ "$CI" = 'true' ]
 then
   echo 'Filling in SSH keys'
   ssh-keygen -t rsa -f $HOME/.ssh/id_rsa -q -N "" -C "jhsu802701@shell.sf.net"
+  echo 'Filling in known hosts'
+  ssh-keyscan 'frs.sourceforge.net' >> ~/.ssh/known_hosts
   echo '----------------'
   echo "ls -l $HOME/.ssh"
   ls -l $HOME/.ssh/id_rsa
