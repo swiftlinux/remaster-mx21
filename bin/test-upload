@@ -28,8 +28,8 @@ then
     echo 'Filling in SSH keys'
     ssh-keygen -t rsa -f $HOME/.ssh/id_rsa -q -N "" -C "jhsu802701@shell.sf.net"
     echo 'Filling in known hosts'
-    ssh-keyscan 'frs.sourceforge.net' >> ~/.ssh/known_hosts
-  end
+    ssh-keyscan 'frs.sourceforge.net' >> $HOME/.ssh/known_hosts
+  fi
   echo '-------------------------'
   echo "cat $HOME/.ssh/id_rsa.pub"
   cat $HOME/.ssh/id_rsa.pub
