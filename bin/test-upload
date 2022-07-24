@@ -27,6 +27,12 @@ then
   mkdir -p $HOME/.ssh
   echo "$SSH_PUBLIC_KEY" > $HOME/.ssh/id_rsa.pub
   echo "$SSH_PRIVATE_KEY" > $HOME/.ssh/id_rsa
+  echo '-------------------------'
+  echo "cat $HOME/.ssh/id_rsa.pub"
+  cat $HOME/.ssh/id_rsa.pub
+  echo '--------------------'
+  cat "cat $HOME/.ssh/id_rsa"
+  cat $HOME/.ssh/id_rsa
   echo "Uploading $DIR_MAIN/tmp/timestamp.txt to SourceForge"
   rsync -avPz -e ssh "$DIR_MAIN/tmp/timestamp.txt" jhsu802701@frs.sourceforge.net:/home/frs/p/swiftlinux/test-upload/$MX_VERSION/
 else
