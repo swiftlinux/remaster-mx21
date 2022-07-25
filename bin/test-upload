@@ -23,17 +23,6 @@ DATE1=$(date +%s)
 
 if [ "$CI" = 'true' ]
 then
-  if [ ! -f $HOME/.ssh/id_rsa ]
-  then
-    echo 'Filling in SSH keys'
-    ssh-keygen -t rsa -f $HOME/.ssh/id_rsa -q -N "" -C "jhsu802701@shell.sf.net"
-    echo 'Filling in known hosts'
-    ssh-keyscan 'frs.sourceforge.net' >> $HOME/.ssh/known_hosts
-  fi
-  echo '-------------------------'
-  echo "cat $HOME/.ssh/id_rsa.pub"
-  cat $HOME/.ssh/id_rsa.pub
-  echo ''
   echo "Uploading $DIR_MAIN/tmp/timestamp.txt to SourceForge"
   rsync -avPz -e ssh "$DIR_MAIN/tmp/timestamp.txt" jhsu802701@frs.sourceforge.net:/home/frs/p/swiftlinux/test-upload/$MX_VERSION/
 else
