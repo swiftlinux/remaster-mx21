@@ -12,7 +12,10 @@ PATHNAME=~/.ssh/$FILENAME
 if [ ! -f "$PATHNAME" ]
 then
   echo 'STEP 1: generating SSH key'
-  ssh-keygen -t "$TYPE" -N '' -C 'jhsu802701@shell.sf.net' <<<$'\ny\n\n'
+
+  # Use default path name for SSH key files.
+  # Piping in the newline character means automatically pressing enter.
+  ssh-keygen -t "$TYPE" -N '' -C 'jhsu802701@shell.sf.net' <<<$'\n'
   # ssh-keygen -t "$TYPE" -f "$PATHNAME" -N '' -C 'jhsu802701@shell.sf.net' -q
   # echo 'ssh-keyscan'
   # ssh-keyscan -H frs.sf.net >> ~/.ssh/known_hosts
@@ -34,3 +37,5 @@ read
 
 echo 'STEP 3: uploading tmp1/timestamp.txt'
 rsync -avPz -e ssh "tmp1/timestamp.txt" jhsu802701@frs.sourceforge.net:/home/frs/p/swiftlinux/test-upload-manual/$MX_VERSION/
+
+# The second iteration of this script should be fully automatic.
