@@ -22,11 +22,10 @@ echo "$TIME_STAMP" > tmp/timestamp.txt
 echo 'Configuring SSH'
 ssh-keygen -t "$TYPE" -N '' -C 'jhsu802701@shell.sf.net' <<<$'\n'
 wait
+ssh-keyscan -H frs.sourceforge.net >> ~/.ssh/known_hosts
+wait
 echo "$ID_RSA" > "$PATHNAME"
 echo "$ID_RSA_PUB" > "$PATHNAME.pub"
-wait
-
-ssh-keyscan -H frs.sourceforge.net >> ~/.ssh/known_hosts
 wait
 echo "$KNOWN_HOSTS" > "$HOME/.ssh/known_hosts"
 wait
