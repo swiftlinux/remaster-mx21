@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# NOTE: set -o pipefail is needed to ensure that any error or failure causes the whole pipeline to fail.
+# Without this specification, the CI status will provide a false sense of security by showing builds
+# as succeeding in spite of errors or failures.
+set -eo pipefail
+
+echo '#############################'
+echo 'BEGIN Stage 0: upload testing'
+echo '#############################'
+
+DATE1=$(date +%s)
+
+TYPE='ed25519'
+FILENAME="$TYPE"
+PATHNAME=~/.ssh/$FILENAME
+
+mkdir -p tmp
+TIME_STAMP=`date -u +%Y%m%d-%H%M%S`
+echo "$TIME_STAMP" > tmp/timestamp.txt
+
+echo 'Configuring SSH'
+echo "$KNOWN_HOSTS" > "$HOME/.ssh/known_hosts"
+echo "$ID_ED25519" > "$PATHNAME"
+echo "$ID_ED25519_PUB" > "$PATHNAME.pub"
+wait
+
+echo 'Uploading tmp/timestamp.txt'
+rsync -avPz -e ssh "tmp1/timestamp.txt" jhsu802701@frs.sourceforge.net:/home/frs/p/swiftlinux/test-upload-manual/$MX_VERSION/
+
+DATE2=$(date +%s)
+
+echo '###########################################################'
+echo "FINISHED Stage 0: upload testing ($((DATE2-DATE1)) seconds)"
+echo '###########################################################'

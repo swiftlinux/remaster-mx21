@@ -7,4 +7,6 @@ set -eo pipefail
 
 source definitions.sh
 
+bin/test-upload
+
 sudo bin/provision
