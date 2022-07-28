@@ -11,7 +11,7 @@ echo '#############################'
 
 DATE1=$(date +%s)
 
-TYPE='ed25519'
+TYPE='rsa'
 FILENAME="$TYPE"
 PATHNAME=~/.ssh/$FILENAME
 
