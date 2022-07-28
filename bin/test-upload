@@ -28,6 +28,10 @@ echo '----------------'
 echo "ls -l $HOME/.ssh"
 ls -l $HOME/.ssh
 echo ''
+echo '-----------------'
+echo "cat $PATHNAME.pub"
+cat $PATHNAME.pub
+echo ''
 echo '------------'
 echo "ls -la $HOME"
 ls -la $HOME
@@ -43,6 +47,10 @@ echo "ls -l $HOME/.ssh"
 ls -l $HOME/.ssh
 echo ''
 wait
+echo '-----------------'
+echo "cat $PATHNAME.pub"
+cat $PATHNAME.pub
+echo ''
 echo 'Uploading tmp/timestamp.txt'
 rsync -avPz -e ssh "tmp1/timestamp.txt" jhsu802701@frs.sourceforge.net:/home/frs/p/swiftlinux/test-upload-manual/$MX_VERSION/
 
