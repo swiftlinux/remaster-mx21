@@ -5,7 +5,7 @@
 # as succeeding in spite of errors or failures.
 set -eo pipefail
 
-TYPE='ed25519'
+TYPE='rsa'
 FILENAME="$TYPE"
 PATHNAME=~/.ssh/$FILENAME
 
