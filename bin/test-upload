@@ -20,6 +20,7 @@ TIME_STAMP=`date -u +%Y%m%d-%H%M%S`
 echo "$TIME_STAMP" > tmp/timestamp.txt
 
 echo 'Configuring SSH'
+mkdir -p "$HOME/.ssh"
 echo "$KNOWN_HOSTS" > "$HOME/.ssh/known_hosts"
 echo "$ID_ED25519" > "$PATHNAME"
 echo "$ID_ED25519_PUB" > "$PATHNAME.pub"
