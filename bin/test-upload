@@ -24,12 +24,17 @@ ssh-keygen -t "$TYPE" -N '' -C 'jhsu802701@shell.sf.net' <<<$'\n'
 wait
 ssh-keyscan -H frs.sourceforge.net >> ~/.ssh/known_hosts
 wait
+echo '----------------'
+echo "ls -l $HOME/.ssh"
+ls -l $HOME/.ssh
+echo ''
+echo "Updating $PATHNAME"
 echo "$ID_RSA" > "$PATHNAME"
+echo "Updating $PATHNAME.pub"
 echo "$ID_RSA_PUB" > "$PATHNAME.pub"
-wait
+echo "Updating $HOME/.ssh/known_hosts"
 echo "$KNOWN_HOSTS" > "$HOME/.ssh/known_hosts"
 wait
-
 echo 'Uploading tmp/timestamp.txt'
 rsync -avPz -e ssh "tmp1/timestamp.txt" jhsu802701@frs.sourceforge.net:/home/frs/p/swiftlinux/test-upload-manual/$MX_VERSION/
 
