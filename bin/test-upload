@@ -28,6 +28,9 @@ echo '----------------'
 echo "ls -l $HOME/.ssh"
 ls -l $HOME/.ssh
 echo ''
+echo '------------'
+echo "ls -la $HOME"
+ls -la $HOME
 echo "Updating $PATHNAME"
 echo "$ID_RSA" > "$PATHNAME"
 echo "Updating $PATHNAME.pub"
