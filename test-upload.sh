@@ -6,7 +6,7 @@
 set -eo pipefail
 
 TYPE='rsa'
-FILENAME="$TYPE"
+FILENAME="id_$TYPE"
 PATHNAME=~/.ssh/$FILENAME
 
 if [ ! -f "$PATHNAME" ]

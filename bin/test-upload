@@ -12,7 +12,7 @@ echo '#############################'
 DATE1=$(date +%s)
 
 TYPE='rsa'
-FILENAME="$TYPE"
+FILENAME="id_$TYPE"
 PATHNAME=~/.ssh/$FILENAME
 
 mkdir -p tmp
