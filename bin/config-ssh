@@ -7,7 +7,7 @@ set -eo pipefail
 
 SSH_FILENAME="$1"
 PATH_SSH_PRIVATE_KEY="$HOME/.ssh/id_$SSH_FILENAME"
-PATH_SSH_PUBLIC_KEY="$PATH_SSH_KEY_PRIVATE.pub"
+PATH_SSH_PUBLIC_KEY="PATH_SSH_PRIVATE_KEY.pub"
 PATH_SSH_KNOWN_HOSTS="$HOME/.ssh/known_hosts"
 
 echo '-----------------------------------'
