@@ -13,6 +13,8 @@ PATH_SSH_KNOWN_HOSTS="$HOME/.ssh/known_hosts"
 echo '-----------------------------------'
 echo 'Configuring SSH For GitHub Workflow'
 
+mkdir -p "$HOME/.ssh"
+
 echo "$SSH_PRIVATE_KEY" | sudo tee $PATH_SSH_PRIVATE_KEY
 echo "$SSH_PUBLIC_KEY" | sudo tee $PATH_SSH_PUBLIC_KEY
 echo "$SSH_KNOWN_HOSTS" | sudo tee $PATH_SSH_KNOWN_HOSTS
