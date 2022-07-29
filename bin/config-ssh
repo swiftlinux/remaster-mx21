@@ -5,7 +5,12 @@
 # as succeeding in spite of errors or failures.
 set -eo pipefail
 
+source definitions.sh
+
 SSH_FILENAME="$1"
+TMP_SSH_PRIVATE_KEY="$DIR_MAIN/tmp/id_$SSH_FILENAME"
+TMP_SSH_PUBLIC_KEY="$DIR_MAIN/tmp/$PATH_SSH_PRIVATE_KEY.pub"
+TMP_SSH_KNOWN_HOSTS="$DIR_MAIN/tmp/known_hosts"
 PATH_SSH_PRIVATE_KEY="$HOME/.ssh/id_$SSH_FILENAME"
 PATH_SSH_PUBLIC_KEY="$PATH_SSH_PRIVATE_KEY.pub"
 PATH_SSH_KNOWN_HOSTS="$HOME/.ssh/known_hosts"
@@ -15,11 +20,19 @@ echo 'Configuring SSH For GitHub Workflow'
 
 mkdir -p "$HOME/.ssh"
 
-ls -la $HOME
+echo "$SSH_PRIVATE_KEY" > "$TMP_SSH_PRIVATE_KEY"
+echo "$SSH_PUBLIC_KEY" > "$TMP_SSH_PUBLIC_KEY"
+echo "$SSH_KNOWN_HOSTS" > "TMP_SSH_KNOWN_HOSTS"
 
-echo "$SSH_PRIVATE_KEY" | sudo tee $PATH_SSH_PRIVATE_KEY
-echo "$SSH_PUBLIC_KEY" | sudo tee $PATH_SSH_PUBLIC_KEY
-echo "$SSH_KNOWN_HOSTS" | sudo tee $PATH_SSH_KNOWN_HOSTS
+ls -l tmp
+
+mv $TMP_SSH_PRIVATE_KEY $PATH_SSH_PRIVATE_KEY
+mv $TMP_SSH_PUBLIC_KEY $PATH_SSH_PUBLIC_KEY
+mv $TMP_SSH_KNOWN_HOSTS $PATH_SSH_KNOWN_HOSTS
+
+# echo "$SSH_PRIVATE_KEY" | sudo tee $PATH_SSH_PRIVATE_KEY
+# echo "$SSH_PUBLIC_KEY" | sudo tee $PATH_SSH_PUBLIC_KEY
+# echo "$SSH_KNOWN_HOSTS" | sudo tee $PATH_SSH_KNOWN_HOSTS
 
 echo ''
 echo '----------------'
