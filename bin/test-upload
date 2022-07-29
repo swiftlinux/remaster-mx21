@@ -11,48 +11,14 @@ echo '#############################'
 
 DATE1=$(date +%s)
 
-TYPE='rsa'
-FILENAME="id_$TYPE"
-PATHNAME=~/.ssh/$FILENAME
-
 mkdir -p tmp
 TIME_STAMP=`date -u +%Y%m%d-%H%M%S`
 echo "$TIME_STAMP" > tmp/timestamp.txt
 
-echo 'Configuring SSH'
-ssh-keygen -t "$TYPE" -N '' -C 'jhsu802701@shell.sf.net' <<<$'\n'
-wait
-ssh-keyscan -H frs.sourceforge.net >> ~/.ssh/known_hosts
-wait
-echo '----------------'
-echo "ls -l $HOME/.ssh"
-ls -l $HOME/.ssh
-echo ''
-echo '-----------------'
-echo "cat $PATHNAME.pub"
-cat $PATHNAME.pub
-echo ''
-echo '------------'
-echo "ls -la $HOME"
-ls -la $HOME
-echo "Updating $PATHNAME"
-echo "$ID_RSA" > "$PATHNAME"
-echo "Updating $PATHNAME.pub"
-echo "$ID_RSA_PUB" > "$PATHNAME.pub"
-echo "Updating $HOME/.ssh/known_hosts"
-echo "$KNOWN_HOSTS" > "$HOME/.ssh/known_hosts"
-wait
-echo '----------------'
-echo "ls -l $HOME/.ssh"
-ls -l $HOME/.ssh
-echo ''
-wait
-echo '-----------------'
-echo "cat $PATHNAME.pub"
-cat $PATHNAME.pub
-echo ''
+bin config/ssh
+
 echo 'Uploading tmp/timestamp.txt'
-rsync -avPz -e ssh "tmp1/timestamp.txt" jhsu802701@frs.sourceforge.net:/home/frs/p/swiftlinux/test-upload-manual/$MX_VERSION/
+rsync -avPz -e ssh "tmp/timestamp.txt" jhsu802701@frs.sourceforge.net:/home/frs/p/swiftlinux/test-upload-manual/$MX_VERSION/
 
 DATE2=$(date +%s)
 
