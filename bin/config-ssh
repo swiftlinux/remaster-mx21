@@ -1,0 +1,50 @@
+#!/bin/bash
+
+# NOTE: set -o pipefail is needed to ensure that any error or failure causes the whole pipeline to fail.
+# Without this specification, the CI status will provide a false sense of security by showing builds
+# as succeeding in spite of errors or failures.
+set -eo pipefail
+
+source definitions.sh
+
+SSH_FILENAME="$1"
+PATH_SSH_PRIVATE_KEY="$HOME/.ssh/id_$SSH_FILENAME"
+PATH_SSH_PUBLIC_KEY="$PATH_SSH_PRIVATE_KEY.pub"
+PATH_SSH_KNOWN_HOSTS="$HOME/.ssh/known_hosts"
+
+echo '-----------------------------------'
+echo 'Configuring SSH For GitHub Workflow'
+mkdir -p "$HOME/.ssh"
+echo "$SSH_PRIVATE_KEY" > "$PATH_SSH_PRIVATE_KEY"
+echo "$SSH_PUBLIC_KEY" > "$PATH_SSH_PUBLIC_KEY"
+echo "$SSH_KNOWN_HOSTS" > "$PATH_SSH_KNOWN_HOSTS"
+
+# PERMISSIONS/OWNERSHIP NEEDED
+# PATH_SSH_PRIVATE_KEY: -rw------- 1 runner docker 
+# PATH_SSH_PUBLIC_KEY:  -rw-r--r-- 1 runner docker
+# PATH_SSH_KNOWN_HOSTS: -rw-r--r-- 1 runner docker
+
+# Set permissions for PATH_SSH_PRIVATE_KEY
+sudo chmod a-x "$PATH_SSH_PRIVATE_KEY" # Non-executable for all
+sudo chmod a-r "$PATH_SSH_PRIVATE_KEY" # Non-readable for all
+sudo chmod a-w "$PATH_SSH_PRIVATE_KEY" # Non-writable for all
+sudo chmod u+r "$PATH_SSH_PRIVATE_KEY" # Readable for owner
+sudo chmod u+w "$PATH_SSH_PRIVATE_KEY" # Writable for owner
+
+# Set permissions for PATH_SSH_PUBLIC_KEY
+sudo chmod a-x "$PATH_SSH_PUBLIC_KEY" # Non-executable for all
+sudo chmod a+r "$PATH_SSH_PUBLIC_KEY" # Readable for all
+sudo chmod a-w "$PATH_SSH_PUBLIC_KEY" # Non-writable for all
+sudo chmod u+w "$PATH_SSH_PUBLIC_KEY" # Writable for owner
+
+# Set permissions for PATH_SSH_KNOWN_HOSTS
+sudo chmod a-x "$PATH_SSH_KNOWN_HOSTS" # Non-executable for all
+sudo chmod a+r "$PATH_SSH_KNOWN_HOSTS" # Readable for all
+sudo chmod a-w "$PATH_SSH_KNOWN_HOSTS" # Non-writable for all
+sudo chmod u+w "$PATH_SSH_KNOWN_HOSTS" # Writable for owner
+
+echo ''
+echo '----------------'
+echo "ls -l $HOME/.ssh"
+ls -l $HOME/.ssh
+echo ''

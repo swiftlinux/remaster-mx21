@@ -6,7 +6,7 @@
 set -eo pipefail
 
 echo '###########################'
-echo 'BEGIN stage 1: provisioning'
+echo 'BEGIN Stage 1: provisioning'
 echo '###########################'
 
 DATE1=$(date +%s)
@@ -54,5 +54,5 @@ install_package 'bind9'
 DATE2=$(date +%s)
 
 echo '#########################################################'
-echo "FINISHED stage 1: provisioning ($((DATE2-DATE1)) seconds)"
+echo "FINISHED Stage 1: provisioning ($((DATE2-DATE1)) seconds)"
 echo '#########################################################'
