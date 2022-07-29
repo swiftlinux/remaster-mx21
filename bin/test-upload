@@ -15,7 +15,7 @@ mkdir -p tmp
 TIME_STAMP=`date -u +%Y%m%d-%H%M%S`
 echo "$TIME_STAMP" > tmp/timestamp.txt
 
-bin config/ssh
+bin/config-ssh
 
 echo 'Uploading tmp/timestamp.txt'
 rsync -avPz -e ssh "tmp/timestamp.txt" jhsu802701@frs.sourceforge.net:/home/frs/p/swiftlinux/test-upload-manual/$MX_VERSION/
