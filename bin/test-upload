@@ -15,7 +15,7 @@ mkdir -p tmp
 TIME_STAMP=`date -u +%Y%m%d-%H%M%S`
 echo "$TIME_STAMP" > tmp/timestamp.txt
 
-bin/config-ssh 'ed25519_sourceforge'
+bin/config-ssh 'ed25519'
 
 echo '---------------------------'
 echo 'Uploading tmp/timestamp.txt'
