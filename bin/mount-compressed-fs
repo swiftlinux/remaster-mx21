@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# NOTE: set -o pipefail is needed to ensure that any error or failure causes the whole pipeline to fail.
+# Without this specification, the CI status will provide a false sense of security by showing builds
+# as succeeding in spite of errors or failures.
+set -eo pipefail
+
+echo '#########################################'
+echo 'BEGIN STAGE 5: mounting the squashfs file'
+echo '#########################################'
+
+# PURPOSE:
+
+DATE1=$(date +%s)
+
+source definitions.sh
+
+mkdir -p $DIR_SQUASHFS_ORIG
+
+echo '----------------------------------------------------------------'
+echo "mount -t squashfs -o loop $FILE_SQUASHFS_ORIG $DIR_SQUASHFS_ORIG"
+mount -t squashfs -o loop $FILE_SQUASHFS_ORIG $DIR_SQUASHFS_ORIG
+wait
+echo ''
+echo '------------------------'
+echo "ls -l $DIR_SQUASHFS_ORIG"
+ls -l $DIR_SQUASHFS_ORIG
+
+DATE2=$(date +%s)
+
+echo '#######################################################################'
+echo "FINISHED STAGE 5: mounting the squashfs file ($((DATE2-DATE1)) seconds)"
+echo '#######################################################################'

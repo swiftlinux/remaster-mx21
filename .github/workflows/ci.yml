@@ -55,3 +55,7 @@ jobs:
       # Stage 4
       - name: Copying the content from the virtual Linux DVD
         run: sudo bin/copy-iso
+
+      # Stage 5
+      - name: Mounting the compressed FS file
+        run: sudo bin/mount-compressed-fs
