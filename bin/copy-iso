@@ -1,0 +1,79 @@
+#!/bin/bash
+
+# NOTE: set -o pipefail is needed to ensure that any error or failure causes the whole pipeline to fail.
+# Without this specification, the CI status will provide a false sense of security by showing builds
+# as succeeding in spite of errors or failures.
+set -eo pipefail
+
+echo '##########################################################'
+echo 'BEGIN STAGE 4: copying the content in the virtual Linux CD'
+echo '##########################################################'
+
+# PURPOSE:
+# In the previous stage, the files in the Linux ISO file were copied
+# to the $DIR_ISO_ORIG directory.
+# In this stage, all files EXCEPT for the squashfs file (antiX/linuxfs file)
+# are copied to the $DIR_ISO_NEW directory.
+# The squashfs file is the compressed file system containing the files
+# you'd see when booting up the Linux ISO file.
+# The $DIR_ISO_NEW directory is used in the process of creating a new Linux ISO file.
+# A modified antiX/linuxfs file will be inserted in the $DIR_ISO_NEW directory later.
+
+DATE1=$(date +%s)
+
+source definitions.sh
+
+mkdir -p "$DIR_ISO_NEW"
+
+mkdir -p tmp4
+
+# Finds the biggest file in ISO, which is most likely the squash file.
+
+# Some commands worked on my host machine but DID NOT WORK in GitLab CI,
+# where I originally started this repository.
+
+# NOTE: The head command DOES NOT WORK in GitLab CI.
+# Thus, it is necessary to sort files from smallest to largest
+# and pick the last one.
+
+# FIND1: Get the recursive list of all files (NOT directories) in $DIR_ISO_ORIG.
+# Each line contains the file size and path.
+FIND1=$(find $DIR_ISO_ORIG -type f -printf "%s %p\n")
+echo "$FIND1" > tmp4/find1.txt
+
+# FIND2: Sort the file list in numeric order.
+FIND2=`cat tmp4/find1.txt | sort -n`
+echo "$FIND2" > tmp4/find2.txt
+
+# FIND3: Get the last (largest) file.
+FIND3=`cat tmp4/find2.txt | tail --lines=1`
+echo "$FIND3" > tmp4/find3.txt
+
+# SQUASH: Extract the information, delimit by a blank space, and get the item from the second field (path)
+SQUASH=`cat tmp4/find3.txt | cut -d ' ' -f 2`
+echo "$SQUASH" > $DIR_MAIN/tmp/path_squashfs.txt
+
+rm -rf tmp4 # No longer needed
+
+# Path to the squashfs file from relative to the $DIR_ISO_ORIG directory
+SQUASH_REL=${SQUASH#$DIR_ISO_ORIG/}
+
+# Copy cdrom content (except squash file) from $DIR_ISO_ORIG to $DIR_ISO_NEW
+echo "Copying files from $DIR_ISO_ORIG to $DIR_ISO_NEW"
+echo "except $SQUASH_REL"
+echo "rsync -a $DIR_ISO_ORIG/ $DIR_ISO_NEW --exclude=$SQUASH_REL"
+rsync -a $DIR_ISO_ORIG/ $DIR_ISO_NEW --exclude=$SQUASH_REL
+echo ''
+echo '-------------------'
+echo "ls -l $DIR_ISO_ORIG"
+ls -l $DIR_ISO_ORIG/antiX
+echo ''
+echo '------------------------'
+echo "ls -l $DIR_ISO_NEW/antiX"
+ls -l $DIR_ISO_NEW/antiX
+
+DATE2=$(date +%s)
+
+echo '########################################################################################'
+echo "FINISHED STAGE 4: copying the content in the virtual Linux CD ($((DATE2-DATE1)) seconds)"
+echo '########################################################################################'
