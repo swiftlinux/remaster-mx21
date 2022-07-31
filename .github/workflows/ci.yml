@@ -51,3 +51,7 @@ jobs:
       # Stage 3
       - name: Mounting the virtual Linux DVD
         run: sudo bin/mount-iso
+
+      # Stage 4
+      - name: Copying the content from the virtual Linux DVD
+        run: sudo bin/copy-iso

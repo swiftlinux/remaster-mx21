@@ -6,9 +6,9 @@
 set -eo pipefail
 
 # Creating the test file to upload
-mkdir -p tmp1
+mkdir -p tmp0
 TIME_STAMP=`date -u +%Y%m%d-%H%M%S`
-echo "$TIME_STAMP" > tmp1/timestamp.txt
+echo "$TIME_STAMP" > tmp0/timestamp.txt
 
 TYPE='ed25519'
 FILENAME="id_$TYPE"
@@ -33,11 +33,11 @@ echo 'Press Enter when finished.'
 read
 
 echo ''
-echo 'STEP 4: uploading tmp1/timestamp.txt'
-rsync -avPz -e ssh "tmp1/timestamp.txt" jhsu802701@frs.sourceforge.net:/home/frs/p/swiftlinux/test-upload-manual/$MX_VERSION/
+echo 'STEP 4: uploading tmp0/timestamp.txt'
+rsync -avPz -e ssh "tmp0/timestamp.txt" jhsu802701@frs.sourceforge.net:/home/frs/p/swiftlinux/test-upload-manual/$MX_VERSION/
 
 echo ''
-echo "If all went well, the last step (uploading tmp1/timestamp.txt)"
+echo "If all went well, the last step (uploading tmp0/timestamp.txt)"
 echo 'proceeded without any input from you.'
 echo ''
 echo 'STEP 5: Configuring GitHub.'

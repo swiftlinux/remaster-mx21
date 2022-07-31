@@ -6,7 +6,7 @@
 set -eo pipefail
 
 echo '#############################'
-echo 'BEGIN Stage 0: upload testing'
+echo 'BEGIN STAGE 0: upload testing'
 echo '#############################'
 
 DATE1=$(date +%s)
@@ -24,5 +24,5 @@ rsync -avPz -e ssh "tmp/timestamp.txt" jhsu802701@frs.sourceforge.net:/home/frs/
 DATE2=$(date +%s)
 
 echo '###########################################################'
-echo "FINISHED Stage 0: upload testing ($((DATE2-DATE1)) seconds)"
+echo "FINISHED STAGE 0: upload testing ($((DATE2-DATE1)) seconds)"
 echo '###########################################################'
