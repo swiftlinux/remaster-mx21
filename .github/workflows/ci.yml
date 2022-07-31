@@ -25,6 +25,19 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
+      # Stage 1
+      - name: Test upload to SourceForge
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_PUBLIC_KEY: ${{ secrets.SSH_PUBLIC_KEY }}
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+        run: bin/test-upload
+
+      # Stage 2
+      - name: Provision
+        run: sudo bin/provision
+
+      # Stage 3
       - name: Cache downloaded ISO file
         id: cache-downloaded-iso
         uses: actions/cache@v3
@@ -32,10 +45,5 @@ jobs:
           path: iso-downloaded
           key: key-iso-file
 
-      # Runs the parts of the remastering process common to all Swift Linux editions
-      - name: General
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          SSH_PUBLIC_KEY: ${{ secrets.SSH_PUBLIC_KEY }}
-          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
-        run: bash ci-general.sh
+      - name: Downloading the Linux ISO
+        run: bin/download-iso
