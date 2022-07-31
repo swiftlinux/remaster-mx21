@@ -11,6 +11,17 @@ echo '#########################################'
 
 # PURPOSE:
 
+#  In the previous stage, all of the ISO file content (except the squash file)
+#  was copied to $DIR_ISO_NEW.
+
+#  The path of the squashfs file was copied to $DIR_MAIN/tmp/path_squashfs.txt .
+
+#  In this stage, the squashfs file ($FILE_SQUASHFS_ORIG) is mounted at $DIR_SQUASHFS_ORIG .
+
+#  After the squashfs file is mounted, the files and directories (the same
+#  ones you see in the file browser when booting the live media) appear
+#  in the $DIR_SQUASHFS_ORIG directory.
+
 DATE1=$(date +%s)
 
 source definitions.sh
