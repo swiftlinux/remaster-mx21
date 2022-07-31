@@ -49,7 +49,8 @@ echo "$FIND2" > tmp4/find2.txt
 FIND3=`cat tmp4/find2.txt | tail --lines=1`
 echo "$FIND3" > tmp4/find3.txt
 
-# SQUASH: Extract the information, delimit by a blank space, and get the item from the second field (path)
+# SQUASH: Extract the information, delimit by a blank space, and get the item from the second field (path).
+# This is the squashfs file.
 SQUASH=`cat tmp4/find3.txt | cut -d ' ' -f 2`
 echo "$SQUASH" > $DIR_MAIN/tmp/path_squashfs.txt
 
@@ -58,7 +59,7 @@ rm -rf tmp4 # No longer needed
 # Path to the squashfs file from relative to the $DIR_ISO_ORIG directory
 SQUASH_REL=${SQUASH#$DIR_ISO_ORIG/}
 
-# Copy cdrom content (except squash file) from $DIR_ISO_ORIG to $DIR_ISO_NEW
+# Copy all ISO file content (except the squash file) from $DIR_ISO_ORIG to $DIR_ISO_NEW
 echo "Copying files from $DIR_ISO_ORIG to $DIR_ISO_NEW"
 echo "except $SQUASH_REL"
 echo "rsync -a $DIR_ISO_ORIG/ $DIR_ISO_NEW --exclude=$SQUASH_REL"

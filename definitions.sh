@@ -27,3 +27,12 @@ then
 fi
 
 TIME_STAMP=`cat tmp/timestamp.txt`
+
+FILE_SQUASHFS_ORIG=''
+
+if [ -f $DIR_MAIN/tmp/path_squashfs.txt ]
+then
+  FILE_SQUASHFS_ORIG=`cat $DIR_MAIN/tmp/path_squashfs.txt`
+fi
+
+DIR_SQUASHFS_ORIG=$DIR_REMASTER/squash-orig
