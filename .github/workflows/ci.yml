@@ -50,4 +50,4 @@ jobs:
 
       # Stage 3
       - name: Mounting the virtual Linux DVD
-        run: bin/mount-iso
+        run: sudo bin/mount-iso
