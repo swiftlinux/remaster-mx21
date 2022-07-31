@@ -25,7 +25,7 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
-      # Stage 1
+      # Stage 0
       - name: Test upload to SourceForge
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
@@ -33,11 +33,11 @@ jobs:
           SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
         run: bin/test-upload
 
-      # Stage 2
+      # Stage 1
       - name: Provision
         run: sudo bin/provision
 
-      # Stage 3
+      # Stage 2
       - name: Cache downloaded ISO file
         id: cache-downloaded-iso
         uses: actions/cache@v3
@@ -47,3 +47,7 @@ jobs:
 
       - name: Downloading the Linux ISO
         run: bin/download-iso
+
+      # Stage 3
+      - name: Mounting the virtual Linux DVD
+        run: bin/mount-iso
