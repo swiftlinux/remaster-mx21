@@ -31,7 +31,7 @@ jobs:
 
       # Stage 2
       - name: Provision
-        run: bin/provision
+        run: sudo bin/provision
 
       # Stage 3
       - name: Cache downloaded ISO file
