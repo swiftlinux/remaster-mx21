@@ -1,0 +1,53 @@
+#!/bin/bash
+
+# NOTE: set -o pipefail is needed to ensure that any error or failure causes the whole pipeline to fail.
+# Without this specification, the CI status will provide a false sense of security by showing builds
+# as succeeding in spite of errors or failures.
+set -eo pipefail
+
+echo '#############################################'
+echo 'BEGIN STAGE 3: mounting the virtual Linux DVD'
+echo '#############################################'
+
+# PURPOSE:
+# This stage involves mounting a loop device.
+# If you open the ISO file on your Linux machine with Archive Manager,
+# you'll see several files and directories.
+# After the ISO file ($CD_VIRTUAL) is mounted,
+# the above files and directories appear in the $DIR_ISO_ORIG directory.
+
+DATE1=$(date +%s)
+
+source definitions.sh
+
+mkdir -p $DIR_ISO_ORIG
+
+cd $DIR_MAIN
+
+# ISO files can only be mounted read-only.
+# Specifying a read-only mount (-r) prevents the following annoying warning message:
+# WARNING: device write-protected, mounted read-only.
+echo '------------------------------------------'
+echo "mount -r -o loop $CD_VIRTUAL $DIR_ISO_ORIG"
+mount -r -o loop $CD_VIRTUAL $DIR_ISO_ORIG
+
+if [[ $? -ne 0 ]]; then
+  echo -n "Could not mount the CD image, do you want to try again"
+  Y_or_n || exit 3
+  $0
+  exit
+fi
+
+echo '-------------------'
+echo "ls -l $DIR_ISO_ORIG"
+ls -l $DIR_ISO_ORIG
+
+echo '-------------------------'
+echo "ls -l $DIR_ISO_ORIG/antiX"
+ls -l $DIR_ISO_ORIG/antiX
+
+DATE2=$(date +%s)
+
+echo '###########################################################################'
+echo "FINISHED STAGE 3: mounting the virtual Linux DVD ($((DATE2-DATE1)) seconds)"
+echo '###########################################################################'
