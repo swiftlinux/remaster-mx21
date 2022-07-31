@@ -25,6 +25,13 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
+      - name: Cache downloaded ISO file
+        id: cache-downloaded-iso
+        uses: actions/cache@v3
+        with:
+          path: iso-downloaded
+          key: key-iso-file
+
       # Runs the parts of the remastering process common to all Swift Linux editions
       - name: General
         env:

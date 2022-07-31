@@ -10,3 +10,5 @@ source definitions.sh
 bin/test-upload
 
 sudo bin/provision
+
+bin/download-iso
