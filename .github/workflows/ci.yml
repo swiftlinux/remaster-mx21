@@ -30,7 +30,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: iso-downloaded
-          key: key-iso-file
+          key: key-iso-file-1
 
       # Runs the parts of the remastering process common to all Swift Linux editions
       - name: General
