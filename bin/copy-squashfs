@@ -13,14 +13,9 @@ echo '#########################################'
 # In the previous stage, the squashfs file ($FILE_SQUASHFS_ORIG) was mounted
 # at $DIR_SQUASHFS_ORIG .
 
-# In the previous stage, the files in the Linux ISO file were copied
-# to the $DIR_ISO_ORIG directory.
-# In this stage, all files EXCEPT for the squashfs file (antiX/linuxfs file)
-# are copied to the $DIR_ISO_NEW directory.
-# The squashfs file is the compressed file system containing the files
-# you'd see when booting up the Linux ISO file.
-# The $DIR_ISO_NEW directory is used in the process of creating a new Linux ISO file.
-# A modified antiX/linuxfs file will be inserted in the $DIR_ISO_NEW directory later.
+# In this stage, the contents of $DIR_SQUASHFS_ORIG are copied to
+# $DIR_SQUASHFS_NEW .
+
 
 DATE1=$(date +%s)
 
@@ -30,6 +25,10 @@ echo '-------------------------------------------------------------------------'
 echo "Copying mounted $DIR_SQUASHFS_ORIG to $DIR_SQUASHFS_NEW (takes some time)"
 cp -a "$DIR_SQUASHFS_ORIG" "$DIR_SQUASHFS_NEW"
 
+echo '-----------------------'
+echo "ls -l $DIR_SQUASHFS_NEW"
+ls -l $DIR_SQUASHFS_NEW
+
 # Unmounting things now that the files and directories are ready to be edited.
 echo '-----------------------------'
 echo "Unmounting $DIR_SQUASHFS_ORIG"
@@ -38,7 +37,6 @@ umount "$DIR_SQUASHFS_ORIG"
 echo '------------------------'
 echo "Unmounting $DIR_ISO_ORIG"
 umount "$DIR_ISO_ORIG"
-
 
 DATE2=$(date +%s)
 
