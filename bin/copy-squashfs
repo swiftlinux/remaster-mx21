@@ -1,0 +1,44 @@
+#!/bin/bash
+
+# NOTE: set -o pipefail is needed to ensure that any error or failure causes the whole pipeline to fail.
+# Without this specification, the CI status will provide a false sense of security by showing builds
+# as succeeding in spite of errors or failures.
+set -eo pipefail
+
+echo '#########################################'
+echo 'BEGIN STAGE 6: copying the squashfs files'
+echo '#########################################'
+
+# PURPOSE:
+# In the previous stage, the squashfs file ($FILE_SQUASHFS_ORIG) was mounted
+# at $DIR_SQUASHFS_ORIG .
+
+# In this stage, the contents of $DIR_SQUASHFS_ORIG are copied to
+# $DIR_SQUASHFS_NEW .
+
+DATE1=$(date +%s)
+
+source definitions.sh
+
+echo '-------------------------------------------------------------------------'
+echo "Copying mounted $DIR_SQUASHFS_ORIG to $DIR_SQUASHFS_NEW (takes some time)"
+cp -a "$DIR_SQUASHFS_ORIG" "$DIR_SQUASHFS_NEW"
+
+echo '-----------------------'
+echo "ls -l $DIR_SQUASHFS_NEW"
+ls -l $DIR_SQUASHFS_NEW
+
+# Unmounting things now that the files and directories are ready to be edited.
+echo '-----------------------------'
+echo "Unmounting $DIR_SQUASHFS_ORIG"
+umount "$DIR_SQUASHFS_ORIG"
+
+echo '------------------------'
+echo "Unmounting $DIR_ISO_ORIG"
+umount "$DIR_ISO_ORIG"
+
+DATE2=$(date +%s)
+
+echo '#######################################################################'
+echo "FINISHED STAGE 6: copying the squashfs files ($((DATE2-DATE1)) seconds)"
+echo '#######################################################################'
