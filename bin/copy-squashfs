@@ -16,7 +16,6 @@ echo '#########################################'
 # In this stage, the contents of $DIR_SQUASHFS_ORIG are copied to
 # $DIR_SQUASHFS_NEW .
 
-
 DATE1=$(date +%s)
 
 source definitions.sh
