@@ -26,17 +26,18 @@ DATE1=$(date +%s)
 
 source definitions.sh
 
-echo "Copying mounted $SQUASHFS_ORIG to $SQUASHFS_NEW (takes some time)\n"
-cp -a "$SQUASHFS_ORIG" "$SQUASHFS_NEW"
+echo '-------------------------------------------------------------------------'
+echo "Copying mounted $DIR_SQUASHFS_ORIG to $DIR_SQUASHFS_NEW (takes some time)"
+cp -a "$DIR_SQUASHFS_ORIG" "$DIR_SQUASHFS_NEW"
 
 # Unmounting things now that the files and directories are ready to be edited.
-echo '-------------------------'
-echo "Unmounting $SQUASHFS_ORIG"
-umount "$SQUASHFS_ORIG"
+echo '-----------------------------'
+echo "Unmounting $DIR_SQUASHFS_ORIG"
+umount "$DIR_SQUASHFS_ORIG"
 
-echo '--------------------'
-echo "Unmounting $ISO_ORIG"
-umount "$ISO_ORIG"
+echo '------------------------'
+echo "Unmounting $DIR_ISO_ORIG"
+umount "$DIR_ISO_ORIG"
 
 
 DATE2=$(date +%s)

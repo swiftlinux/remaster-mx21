@@ -35,4 +35,6 @@ then
   FILE_SQUASHFS_ORIG=`cat $DIR_MAIN/tmp/path_squashfs.txt`
 fi
 
-DIR_SQUASHFS_ORIG=$DIR_REMASTER/squash-orig
+DIR_SQUASHFS_ORIG=$DIR_REMASTER/squashfs-orig
+
+DIR_SQUASHFS_NEW=$DIR_REMASTER/squashfs-new
