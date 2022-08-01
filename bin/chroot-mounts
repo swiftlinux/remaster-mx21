@@ -1,0 +1,51 @@
+#!/bin/bash
+
+# NOTE: set -o pipefail is needed to ensure that any error or failure causes the whole pipeline to fail.
+# Without this specification, the CI status will provide a false sense of security by showing builds
+# as succeeding in spite of errors or failures.
+set -eo pipefail
+
+echo '#####################'
+echo 'BEGIN STAGE 7: chroot'
+echo '#####################'
+
+echo '++++++++++++++++++++++++++++++++++'
+echo 'BEGIN STAGE 7A: chroot bind mounts'
+echo '++++++++++++++++++++++++++++++++++'
+
+#  PURPOSE:
+
+#  A chroot is an operation that changes the apparent root directory in
+#  order to run certain processes.
+
+#  This script focuses on 
+
+#  In this script, chroot is used to upgrade packages and install KeePassXC.
+#  This ensures that the new Linux ISO to be created includes pre-installed
+#  KeePassXC and fully updated software.
+
+DATE1=$(date +%s)
+
+source definitions.sh
+
+echo '----------------------------------------'
+echo 'BEGIN STAGE 7A: establishing bind mounts'
+echo '----------------------------------------'
+
+echo "mount --bind /dev $DIR_SQUASHFS_NEW/dev"
+mount --bind /dev $DIR_SQUASHFS_NEW/dev
+
+echo "mount --bind /dev/pts $DIR_SQUASHFS_NEW/dev/pts"
+mount --bind /dev/pts $DIR_SQUASHFS_NEW/dev/pts
+
+echo "mount --bind /proc $DIR_SQUASHFS_NEW/proc"
+mount --bind /proc $DIR_SQUASHFS_NEW/proc
+
+echo "mount --bind /sys $DIR_SQUASHFS_NEW/sys"
+mount --bind /sys $DIR_SQUASHFS_NEW/sys
+
+DATE2=$(date +%s)
+
+echo '################################################################'
+echo "FINISHED STAGE 7A: chroot bind mounts ($((DATE2-DATE1)) seconds)"
+echo '################################################################'

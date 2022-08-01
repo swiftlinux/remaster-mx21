@@ -63,3 +63,7 @@ jobs:
       # Stage 6
       - name: Copying the squashfs files
         run: sudo bin/copy-squashfs
+
+      # Stage 7A: chroot mounts
+      - name: Mounting directories needed for chroot
+        run: sudo bin/chroot-mounts
