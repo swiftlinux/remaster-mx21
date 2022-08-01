@@ -59,3 +59,7 @@ jobs:
       # Stage 5
       - name: Mounting the compressed FS file
         run: sudo bin/mount-compressed-fs
+
+      # Stage 6
+      - name: Copying the squashfs files
+        run: sudo bin/copy-squashfs

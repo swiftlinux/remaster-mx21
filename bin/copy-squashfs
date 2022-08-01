@@ -1,0 +1,46 @@
+#!/bin/bash
+
+# NOTE: set -o pipefail is needed to ensure that any error or failure causes the whole pipeline to fail.
+# Without this specification, the CI status will provide a false sense of security by showing builds
+# as succeeding in spite of errors or failures.
+set -eo pipefail
+
+echo '#########################################'
+echo 'BEGIN STAGE 6: copying the squashfs files'
+echo '#########################################'
+
+# PURPOSE:
+# In the previous stage, the squashfs file ($FILE_SQUASHFS_ORIG) was mounted
+# at $DIR_SQUASHFS_ORIG .
+
+# In the previous stage, the files in the Linux ISO file were copied
+# to the $DIR_ISO_ORIG directory.
+# In this stage, all files EXCEPT for the squashfs file (antiX/linuxfs file)
+# are copied to the $DIR_ISO_NEW directory.
+# The squashfs file is the compressed file system containing the files
+# you'd see when booting up the Linux ISO file.
+# The $DIR_ISO_NEW directory is used in the process of creating a new Linux ISO file.
+# A modified antiX/linuxfs file will be inserted in the $DIR_ISO_NEW directory later.
+
+DATE1=$(date +%s)
+
+source definitions.sh
+
+echo "Copying mounted $SQUASHFS_ORIG to $SQUASHFS_NEW (takes some time)\n"
+cp -a "$SQUASHFS_ORIG" "$SQUASHFS_NEW"
+
+# Unmounting things now that the files and directories are ready to be edited.
+echo '-------------------------'
+echo "Unmounting $SQUASHFS_ORIG"
+umount "$SQUASHFS_ORIG"
+
+echo '--------------------'
+echo "Unmounting $ISO_ORIG"
+umount "$ISO_ORIG"
+
+
+DATE2=$(date +%s)
+
+echo '########################################################################'
+echo "FINISHED STAGE 6: copying the squashfs files' ($((DATE2-DATE1)) seconds)"
+echo '########################################################################'
