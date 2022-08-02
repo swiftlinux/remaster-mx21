@@ -79,3 +79,7 @@ jobs:
       # Stage 7D: chroot install of KeePassXC
       - name: Installing KeePassXC in chroot
         run: sudo bin/chroot-keepassxc
+
+      # Stage 7E: chroot unmounting
+      - name: Ending the chroot mounts
+        run: sudo bin/chroot-unmount
