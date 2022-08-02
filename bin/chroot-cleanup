@@ -32,7 +32,7 @@ mkdir $DIR_SQUASHFS_NEW/var/lib/apt/lists/partial
 DATE2=$(date +%s)
 
 echo '++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
-echo "FINISHED STAGE 7E: chroot cleanup ($((DATE2-DATE1)) seconds)"
+echo "FINISHED STAGE 7F: chroot cleanup ($((DATE2-DATE1)) seconds)"
 echo '++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
 
 echo '########################'
