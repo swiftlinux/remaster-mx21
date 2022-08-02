@@ -17,9 +17,16 @@ DATE1=$(date +%s)
 
 source definitions.sh
 
+echo "rm -f $DIR_SQUASHFS_NEW/root/.synaptic/log/*"
 rm -f $DIR_SQUASHFS_NEW/root/.synaptic/log/*
+
+echo "rm -f $DIR_SQUASHFS_NEW/root/.bash_history"
 rm -f $DIR_SQUASHFS_NEW/root/.bash_history
+
+echo "rm -r $DIR_SQUASHFS_NEW/var/lib/apt/lists/*"
 rm -r $DIR_SQUASHFS_NEW/var/lib/apt/lists/*
+
+echo "mkdir $DIR_SQUASHFS_NEW/var/lib/apt/lists/partial"
 mkdir $DIR_SQUASHFS_NEW/var/lib/apt/lists/partial
 
 DATE2=$(date +%s)
