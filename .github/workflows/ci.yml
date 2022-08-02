@@ -67,3 +67,7 @@ jobs:
       # Stage 7A: chroot mounts
       - name: Mounting directories needed for chroot
         run: sudo bin/chroot-mounts
+
+      # Stage 7B: chroot apt-get update
+      - name: Updating the chroot environment
+        run: sudo bin/chroot-update

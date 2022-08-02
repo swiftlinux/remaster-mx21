@@ -11,7 +11,7 @@ echo '#####################################'
 
 #  PURPOSE:
 
-#  Perform apt-get update in the chroot environment
+#  This substage performs apt-get update in the chroot environment.
 
 DATE1=$(date +%s)
 
