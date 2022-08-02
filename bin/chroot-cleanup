@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# NOTE: set -o pipefail is needed to ensure that any error or failure causes the whole pipeline to fail.
+# Without this specification, the CI status will provide a false sense of security by showing builds
+# as succeeding in spite of errors or failures.
+set -eo pipefail
+
+echo '++++++++++++++++++++++++++++++'
+echo 'BEGIN STAGE 7F: chroot cleanup'
+echo '++++++++++++++++++++++++++++++'
+
+#  PURPOSE:
+
+#  This substage 
+
+DATE1=$(date +%s)
+
+source definitions.sh
+
+rm -f $DIR_SQUASHFS_NEW/root/.synaptic/log/*
+rm -f $DIR_SQUASHFS_NEW/root/.bash_history
+rm -r $DIR_SQUASHFS_NEW/var/lib/apt/lists/*
+mkdir $DIR_SQUASHFS_NEW/var/lib/apt/lists/partial
+
+DATE2=$(date +%s)
+
+echo '++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
+echo "FINISHED STAGE 7E: chroot cleanup ($((DATE2-DATE1)) seconds)"
+echo '++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
+
+echo '########################'
+echo 'FINISHED STAGE 7: chroot'
+echo '########################'
