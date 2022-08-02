@@ -71,3 +71,7 @@ jobs:
       # Stage 7B: chroot apt-get update
       - name: Updating the chroot environment
         run: sudo bin/chroot-update
+
+      # Stage 7B: chroot apt-get upgrade
+      - name: Upgrading the chroot environment
+        run: sudo bin/chroot-upgrade

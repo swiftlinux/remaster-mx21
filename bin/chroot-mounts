@@ -36,10 +36,6 @@ DATE1=$(date +%s)
 
 source definitions.sh
 
-echo '----------------------------------------'
-echo 'BEGIN STAGE 7A: establishing bind mounts'
-echo '----------------------------------------'
-
 echo "mount --bind /dev $DIR_SQUASHFS_NEW/dev"
 mount --bind /dev $DIR_SQUASHFS_NEW/dev
 
@@ -54,6 +50,6 @@ mount --bind /sys $DIR_SQUASHFS_NEW/sys
 
 DATE2=$(date +%s)
 
-echo '################################################################'
+echo '++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
 echo "FINISHED STAGE 7A: chroot bind mounts ($((DATE2-DATE1)) seconds)"
-echo '################################################################'
+echo '++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
