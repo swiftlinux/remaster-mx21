@@ -72,6 +72,10 @@ jobs:
       - name: Updating the chroot environment
         run: sudo bin/chroot-update
 
-      # Stage 7B: chroot apt-get upgrade
+      # Stage 7C: chroot apt-get upgrade
       - name: Upgrading the chroot environment
         run: sudo bin/chroot-upgrade
+
+      # Stage 7D: chroot install of KeePassXC
+      - name: Installing KeePassXC in chroot
+        run: sudo bin/chroot-keepassxc
