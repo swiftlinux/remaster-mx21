@@ -17,6 +17,10 @@ DATE1=$(date +%s)
 
 source definitions.sh
 
+echo '-----'
+echo 'mount'
+mount
+
 rm -f $DIR_SQUASHFS_NEW/etc/hosts
 rm -f $DIR_SQUASHFS_NEW/etc/resolv.conf
 
@@ -27,7 +31,7 @@ grep "$DIR_SQUASHFS_NEW" /etc/mtab >/dev/null && {
   umount $DIR_SQUASHFS_NEW/proc
 }
 
-echo "ROOTPART: $ROOTPART"
+# ROOTPART=''
 
 grep "gshadow" /etc/mtab >/dev/null && {
   cd /
