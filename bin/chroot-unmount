@@ -27,6 +27,8 @@ grep "$DIR_SQUASHFS_NEW" /etc/mtab >/dev/null && {
   umount $DIR_SQUASHFS_NEW/proc
 }
 
+echo "ROOTPART: $ROOTPART"
+
 grep "gshadow" /etc/mtab >/dev/null && {
   cd /
   umount $ROOTPART/etc/group
