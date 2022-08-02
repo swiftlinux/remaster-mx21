@@ -20,6 +20,9 @@ source definitions.sh
 echo '-----'
 echo 'mount'
 mount
+echo ''
+echo 'Unmounting'
+echo ''
 
 rm -f $DIR_SQUASHFS_NEW/etc/hosts
 rm -f $DIR_SQUASHFS_NEW/etc/resolv.conf
@@ -46,6 +49,9 @@ grep "gshadow" /etc/mtab >/dev/null && {
   cd $DIR_REMASTER
 }
 
+echo '-----'
+echo 'mount'
+mount
 
 DATE2=$(date +%s)
 
