@@ -63,3 +63,27 @@ jobs:
       # Stage 6
       - name: Copying the squashfs files
         run: sudo bin/copy-squashfs
+
+      # Stage 7A: chroot mounts
+      - name: Mounting directories needed for chroot
+        run: sudo bin/chroot-mounts
+
+      # Stage 7B: chroot apt-get update
+      - name: Updating the chroot environment
+        run: sudo bin/chroot-update
+
+      # Stage 7C: chroot apt-get upgrade
+      - name: Upgrading the chroot environment
+        run: sudo bin/chroot-upgrade
+
+      # Stage 7D: chroot install of KeePassXC
+      - name: Installing KeePassXC in chroot
+        run: sudo bin/chroot-keepassxc
+
+      # Stage 7E: chroot unmounting
+      - name: Ending the chroot mounts
+        run: sudo bin/chroot-unmount
+
+      # Stage 7F: chroot cleanup
+      - name: Post-chroot cleanup operations
+        run: sudo bin/chroot-cleanup

@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# NOTE: set -o pipefail is needed to ensure that any error or failure causes the whole pipeline to fail.
+# Without this specification, the CI status will provide a false sense of security by showing builds
+# as succeeding in spite of errors or failures.
+set -eo pipefail
+
+echo '+++++++++++++++++++++++++++++++++++++++++'
+echo 'BEGIN STAGE 7C: chroot apt-get upgrade -y'
+echo '+++++++++++++++++++++++++++++++++++++++++'
+
+#  PURPOSE:
+
+#  This substage performs apt-get upgrade in the chroot environment.
+
+DATE1=$(date +%s)
+
+source definitions.sh
+
+echo '--------------------------------------------------'
+echo "BEGIN: chroot $DIR_SQUASHFS_NEW apt-get upgrade -y"
+echo '--------------------------------------------------'
+chroot $DIR_SQUASHFS_NEW apt-get upgrade -y
+echo '-----------------------------------------------------'
+echo "FINISHED: chroot $DIR_SQUASHFS_NEW apt-get upgrade -y"
+echo '-----------------------------------------------------'
+
+DATE2=$(date +%s)
+
+echo '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
+echo "FINISHED STAGE 7C: chroot apt-get upgrade -y ($((DATE2-DATE1)) seconds)"
+echo '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'

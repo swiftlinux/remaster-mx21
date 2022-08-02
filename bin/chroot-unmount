@@ -1,0 +1,49 @@
+#!/bin/bash
+
+# NOTE: set -o pipefail is needed to ensure that any error or failure causes the whole pipeline to fail.
+# Without this specification, the CI status will provide a false sense of security by showing builds
+# as succeeding in spite of errors or failures.
+set -eo pipefail
+
+echo '+++++++++++++++++++++++++++++++++'
+echo 'BEGIN STAGE 7E: chroot unmounting'
+echo '+++++++++++++++++++++++++++++++++'
+
+#  PURPOSE:
+
+#  This substage reverses the bind mounts at the beginning of the chroot process.
+
+DATE1=$(date +%s)
+
+source definitions.sh
+
+rm -f $DIR_SQUASHFS_NEW/etc/hosts
+rm -f $DIR_SQUASHFS_NEW/etc/resolv.conf
+
+grep "$DIR_SQUASHFS_NEW" /etc/mtab >/dev/null && {
+  umount $DIR_SQUASHFS_NEW/dev/pts
+  umount $DIR_SQUASHFS_NEW/dev
+  umount $DIR_SQUASHFS_NEW/sys
+  umount $DIR_SQUASHFS_NEW/proc
+}
+
+# ROOTPART=''
+
+grep "gshadow" /etc/mtab >/dev/null && {
+  cd /
+  umount $ROOTPART/etc/group
+  umount $ROOTPART/etc/gshadow
+  umount $ROOTPART/etc/hostname
+  umount $ROOTPART/etc/hosts
+  umount $ROOTPART/etc/passwd
+  umount $ROOTPART/etc/shadow
+  umount $ROOTPART/etc/sudoers
+  umount $ROOTPART/home
+  cd $DIR_REMASTER
+}
+
+DATE2=$(date +%s)
+
+echo '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
+echo "FINISHED STAGE 7E: chroot unmounting ($((DATE2-DATE1)) seconds)"
+echo '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
