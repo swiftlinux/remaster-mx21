@@ -11,6 +11,8 @@ echo '###########################'
 
 DATE1=$(date +%s)
 
+source definitions.sh
+
 echo '---------------------'
 echo 'BEGIN: apt-get update'
 echo '---------------------'
