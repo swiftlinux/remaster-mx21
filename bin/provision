@@ -51,6 +51,18 @@ install_package 'syslinux-utils'
 # bind9: for Internet connection in chroot
 install_package 'bind9'
 
+if [ "$GIT_MAIN_BRANCH" = 'true' ]; then
+  echo '-------------------------'
+  echo 'BEGIN: apt-get upgrade -y'
+  echo '-------------------------'
+  apt-get upgrade -y
+  echo '----------------------------'
+  echo 'FINISHED: apt-get upgrade -y'
+  echo '----------------------------' 
+else
+  echo 'Skipping apt-get upgrade to save time'
+fi
+
 DATE2=$(date +%s)
 
 echo '#########################################################'
