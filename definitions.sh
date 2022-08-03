@@ -28,6 +28,12 @@ fi
 
 TIME_STAMP=`cat tmp/timestamp.txt`
 
+GIT_MAIN_BRANCH=''
+
+if [ `git rev-parse --abbrev-ref HEAD` = 'main' ]; then
+  GIT_MAIN_BRANCH='true'
+fi
+
 FILE_SQUASHFS_ORIG=''
 
 if [ -f $DIR_MAIN/tmp/path_squashfs.txt ]
