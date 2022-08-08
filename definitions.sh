@@ -44,3 +44,15 @@ fi
 DIR_SQUASHFS_ORIG=$DIR_REMASTER/squashfs-orig
 
 DIR_SQUASHFS_NEW=$DIR_REMASTER/squashfs-new
+
+EDITION_SHORT_NAME=''
+if [ -f $DIR_MAIN/tmp/edition-short-name.txt ]
+then
+  EDITION_SHORT_NAME=`cat tmp/edition-short-name.txt`
+fi
+
+EDITION_LONG_NAME=''
+if [ -f $DIR_MAIN/tmp/edition-long-name.txt ]
+then
+  EDITION_LONG_NAME=`cat tmp/edition-long-name.txt`
+fi

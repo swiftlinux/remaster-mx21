@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# NOTE: set -o pipefail is needed to ensure that any error or failure causes the whole pipeline to fail.
+# Without this specification, the CI status will provide a false sense of security by showing builds
+# as succeeding in spite of errors or failures.
+set -eo pipefail
+
+source definitions.sh
+
+echo '#################################################'
+echo "BEGIN STAGE 8: Customizing for $EDITION_LONG_NAME"
+echo '#################################################'
+
+echo "Short name of this special edition: $EDITION_SHORT_NAME"
+echo "Full name of this special edition: $EDITION_LONG_NAME"
+
+sudo bin/customize-iso-new
+
+echo '#################################################'
+echo "BEGIN STAGE 8: Customizing for $EDITION_LONG_NAME"
+echo '#################################################'
+
