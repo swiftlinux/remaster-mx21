@@ -94,14 +94,16 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        EDITION: ['hannahmontana', 'interstate', 'taylorswift', 'twilightzone']
+        MATRIIX_EDITION: ['hannahmontana', 'interstate', 'taylorswift', 'twilightzone']
 
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
       - name: Set parameters specific to special edition
-        run: bash params-${{ $matrix.EDITION }}.sh
+        env:
+          EDITION: ${{ matrix.MATRIX_EDITION }}
+        run: bash params-$EDITION.sh
     
       - name: Customizing for the special edition of Swift Linux
         run: sudo bin/customize
