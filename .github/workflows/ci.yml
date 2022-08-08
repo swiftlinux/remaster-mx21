@@ -87,3 +87,6 @@ jobs:
       # Stage 7F: chroot cleanup
       - name: Post-chroot cleanup operations
         run: sudo bin/chroot-cleanup
+
+  test:
+    
