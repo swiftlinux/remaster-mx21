@@ -88,6 +88,15 @@ jobs:
       - name: Post-chroot cleanup operations
         run: sudo bin/chroot-cleanup
 
+      # Archive the tmp, remaster/iso-new, and remaster/squashfs-new
+      - name: Archive artifacts from the general stages
+        uses: actions/upload-artifact@v3
+        with:
+          path: |
+            tmp
+            remaster/iso-new
+            remaster/squashfs-new=
+
   # Steps for customizing each edition of Swift Linux and producing the new ISO file
   build:
     # The type of runner that the job will run on
