@@ -94,7 +94,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        MATRIIX_EDITION: ['hannahmontana', 'interstate', 'taylorswift', 'twilightzone']
+        MATRIX_EDITION: ['hannahmontana', 'interstate', 'taylorswift', 'twilightzone']
 
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
