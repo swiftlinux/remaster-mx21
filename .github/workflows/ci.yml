@@ -110,8 +110,11 @@ jobs:
         MATRIX_EDITION: ['hannahmontana', 'interstate', 'taylorswift', 'twilightzone']
 
     steps:
-      - uses: actions/upload-artifact@v3
-        with:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: |
+          actions/checkout@v3
+          actions/upload-artifact@v3
+      - with:
           path: |
             tmp
             remaster/iso-new
