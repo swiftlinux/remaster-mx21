@@ -117,7 +117,7 @@ jobs:
       - name: Set parameters specific to special edition
         env:
           EDITION: ${{ matrix.MATRIX_EDITION }}
-        run: bash params-$EDITION.sh
+        run: pwd; ls -l; bash params-$EDITION.sh
     
       - name: Customizing for the special edition of Swift Linux
         run: sudo bin/customize
