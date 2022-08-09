@@ -107,7 +107,7 @@ jobs:
 
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
+      - uses: actions/upload-artifact@v3
 
       - name: Set parameters specific to special edition
         env:
