@@ -108,6 +108,11 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/upload-artifact@v3
+        with:
+          path: |
+            tmp
+            remaster/iso-new
+            remaster/squashfs-new=
 
       - name: Set parameters specific to special edition
         env:
