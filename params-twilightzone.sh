@@ -5,7 +5,7 @@
 # as succeeding in spite of errors or failures.
 set -eo pipefail
 
-DIR_MAIN=$PWD
+source definitions.sh
 
 EDITION_SHORT_NAME='twilightzone'
 EDITION_LONG_NAME='Twilight Zone Swift Linux'

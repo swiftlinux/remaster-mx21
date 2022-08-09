@@ -5,7 +5,7 @@
 # as succeeding in spite of errors or failures.
 set -eo pipefail
 
-DIR_MAIN=$PWD
+source definitions.sh
 
 EDITION_SHORT_NAME='hannahmontana'
 EDITION_LONG_NAME='Hannah Montana Linux'
