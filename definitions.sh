@@ -9,6 +9,8 @@ DIR_MAIN=$PWD
 
 MX_VERSION=`cat $DIR_MAIN/parameters/MX-version.txt`
 
+SWIFT_VERSION=`cat $DIR_MAIN/parameters/MX-version.txt`
+
 DIR_ISO_INPUT=$DIR_MAIN/iso-downloaded
 
 CD_VIRTUAL=$DIR_ISO_INPUT/linux.iso

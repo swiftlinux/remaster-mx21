@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# NOTE: set -o pipefail is needed to ensure that any error or failure causes the whole pipeline to fail.
+# Without this specification, the CI status will provide a false sense of security by showing builds
+# as succeeding in spite of errors or failures.
+set -eo pipefail
+
+source definitions.sh
+
+echo '-------------------'
+echo 'GENERAL INFORMATION'
+echo ''
+echo "Main directory: $DIR_MAIN"
+echo ''
+echo "MX Linux version: $MX_VERSION"
+echo ''
+echo "Swift Linux version: $SWIFT_VERSION"
+echo ''
+echo "Time stamp: $TIME_STAMP"
+echo ''
+echo "Current branch: $(git rev-parse --abbrev-ref HEAD)"
+echo ''
