@@ -11,9 +11,7 @@ echo '#############################'
 
 DATE1=$(date +%s)
 
-mkdir -p tmp
-TIME_STAMP=`date -u +%Y%m%d-%H%M%S`
-echo "$TIME_STAMP" > tmp/timestamp.txt
+bin/info1
 
 bin/config-ssh 'ed25519'
 
