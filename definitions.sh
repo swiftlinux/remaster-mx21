@@ -30,17 +30,14 @@ fi
 
 TIME_STAMP=`cat tmp/timestamp.txt`
 
-GIT_BRANCH_CURRENT=''
-
-if [ "$CI" = 'true' ]; then
-  GIT_BRANCH_CURRENT=`git branch --show-current`
-else
-  GIT_BRANCH_CURRENT=`git rev-parse --abbrev-ref HEAD`
-fi
+# Get the name of the current branch
+GIT_HEAD=`cat $DIR_MAIN/.git/HEAD`
+STR_TO_REMOVE='ref: refs/heads/'
+GIT_BRANCH_CURRENT=${GIT_HEAD#"$STR_TO_REMOVE"}
 
 GIT_MAIN_BRANCH=''
 
-if [ `git rev-parse --abbrev-ref HEAD` = 'main' ]; then
+if [ "$GIT_BRANCH_CURRENT" = 'main' ]; then
   GIT_MAIN_BRANCH='true'
 fi
 
