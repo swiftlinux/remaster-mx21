@@ -18,6 +18,5 @@ echo "Swift Linux version: $SWIFT_VERSION"
 echo ''
 echo "Time stamp: $TIME_STAMP"
 echo ''
-BRANCH_CURRENT=`git rev-parse --abbrev-ref HEAD`
-echo "Current branch: $BRANCH_CURRENT"
+echo "Current branch: $GIT_BRANCH_CURRENT"
 echo ''

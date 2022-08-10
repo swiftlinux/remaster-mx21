@@ -30,6 +30,14 @@ fi
 
 TIME_STAMP=`cat tmp/timestamp.txt`
 
+GIT_BRANCH_CURRENT=''
+
+if [ "$CI" = 'true' ]; then
+  GIT_BRANCH_CURRENT=`git branch --show-current`
+else
+  GIT_BRANCH_CURRENT=`git rev-parse --abbrev-ref HEAD`
+fi
+
 GIT_MAIN_BRANCH=''
 
 if [ `git rev-parse --abbrev-ref HEAD` = 'main' ]; then
