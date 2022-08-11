@@ -5,23 +5,13 @@
 # as succeeding in spite of errors or failures.
 set -eo pipefail
 
-echo '###########################'
-echo 'BEGIN STAGE 1: provisioning'
-echo '###########################'
+echo '##################################################'
+echo 'BEGIN STAGE 1C: provisioning - installing packages'
+echo '##################################################'
 
 DATE1=$(date +%s)
 
 source definitions.sh
-
-echo '---------------------'
-echo 'BEGIN: apt-get update'
-echo '---------------------'
-apt-get update
-wait
-echo '------------------------'
-echo 'FINISHED: apt-get update'
-echo '------------------------'
-echo ''
 
 function install_package {
   PACKAGE=$1
@@ -53,21 +43,8 @@ install_package 'syslinux-utils'
 # bind9: for Internet connection in chroot
 install_package 'bind9'
 
-if [ "$GIT_MAIN_BRANCH" = 'true' ]; then
-  echo '-------------------------'
-  echo 'BEGIN: apt-get upgrade -y'
-  echo '-------------------------'
-  apt-get upgrade -y
-  echo '----------------------------'
-  echo 'FINISHED: apt-get upgrade -y'
-  echo '----------------------------' 
-else
-  echo 'The apt-get upgrade action is skipped here to save time.'
-  echo 'This step is executed only in the main branch.'
-fi
-
 DATE2=$(date +%s)
 
-echo '#########################################################'
-echo "FINISHED STAGE 1: provisioning ($((DATE2-DATE1)) seconds)"
-echo '#########################################################'
+echo '################################################################################'
+echo "FINISHED STAGE 1C: provisioning - installing packages ($((DATE2-DATE1)) seconds)"
+echo '################################################################################'
