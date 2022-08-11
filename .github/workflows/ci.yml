@@ -87,6 +87,7 @@ jobs:
         run: sudo bin/chroot-cleanup
 
   build_special_edition:
+    runs-on: ubuntu-latest
     needs: general
     strategy:
       matrix:
