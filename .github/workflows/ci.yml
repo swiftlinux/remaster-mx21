@@ -3,7 +3,7 @@
 name: CI
 
 # Controls when the workflow will run
-on: push
+on: [push, pull_request]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -25,9 +25,18 @@ jobs:
           SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
         run: bin/test-upload
 
-      # Stage 1
-      - name: Provision
-        run: sudo bin/provision
+      # Stage 1A
+      - name: Provisioning - apt-get update
+        run: sudo bin/provision-apt-get-update
+
+      # Stage 1B (main branch only)
+      - name: Provisioning - apt-get upgrade
+        run: sudo bin/provision-apt-get-upgrade
+        if: ${{ github.ref == 'refs/heads/main' }}
+
+      # Stage 1C
+      - name: Provisioning - apt-get install
+        run: sudo bin/provision-apt-get-install
 
       # Stage 2
       - name: Cache downloaded ISO file

@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# NOTE: set -o pipefail is needed to ensure that any error or failure causes the whole pipeline to fail.
+# Without this specification, the CI status will provide a false sense of security by showing builds
+# as succeeding in spite of errors or failures.
+set -eo pipefail
+
+echo '#######################################'
+echo 'BEGIN STAGE 1A: provisioning - updating'
+echo '#######################################'
+
+DATE1=$(date +%s)
+
+source definitions.sh
+
+echo '---------------------'
+echo 'BEGIN: apt-get update'
+echo '---------------------'
+apt-get update
+wait
+echo '------------------------'
+echo 'FINISHED: apt-get update'
+echo '------------------------'
+echo ''
+
+DATE2=$(date +%s)
+
+echo '#####################################################################'
+echo "FINISHED STAGE 1A: provisioning - updating ($((DATE2-DATE1)) seconds)"
+echo '#####################################################################'
