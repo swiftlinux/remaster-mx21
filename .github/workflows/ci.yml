@@ -78,9 +78,10 @@ jobs:
         run: sudo bin/chroot-upgrade
         if: ${{ github.ref == 'refs/heads/main' }}
 
-      # Stage 7D: chroot install of KeePassXC
+      # Stage 7D: chroot install of KeePassXC (main branch only)
       - name: Installing KeePassXC in chroot
         run: sudo bin/chroot-keepassxc
+        if: ${{ github.ref == 'refs/heads/main' }}
 
       # Stage 7E: chroot unmounting
       - name: Ending the chroot mounts
