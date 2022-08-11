@@ -30,7 +30,7 @@ jobs:
         run: sudo bin/provision-apt-get-update
 
       # Stage 1B (main branch only)
-      - name: Provisioning - apt-get upgrade
+      - name: Provisioning - apt-get upgrade - only in main branch
         run: sudo bin/provision-apt-get-upgrade
         if: ${{ github.ref == 'refs/heads/main' }}
 
