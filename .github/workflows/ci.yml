@@ -111,4 +111,4 @@ jobs:
         run: pwd
 
       - name: ls -l
-        run: ls -l
+        run: ls -l; ls -l /home/runner/work/remaster-mx21/
