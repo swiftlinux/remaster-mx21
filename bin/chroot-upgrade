@@ -17,18 +17,13 @@ DATE1=$(date +%s)
 
 source definitions.sh
 
-if [ "$GIT_MAIN_BRANCH" = 'true' ]; then
-  echo '--------------------------------------------------'
-  echo "BEGIN: chroot $DIR_SQUASHFS_NEW apt-get upgrade -y"
-  echo '--------------------------------------------------'
-  chroot $DIR_SQUASHFS_NEW apt-get upgrade -y
-  echo '-----------------------------------------------------'
-  echo "FINISHED: chroot $DIR_SQUASHFS_NEW apt-get upgrade -y"
-  echo '-----------------------------------------------------'  
-else
-  echo 'The apt-get upgrade action is skipped in the chroot environment to save time.'
-  echo 'This step is executed only in the main branch.'
-fi
+echo '--------------------------------------------------'
+echo "BEGIN: chroot $DIR_SQUASHFS_NEW apt-get upgrade -y"
+echo '--------------------------------------------------'
+chroot $DIR_SQUASHFS_NEW apt-get upgrade -y
+echo '-----------------------------------------------------'
+echo "FINISHED: chroot $DIR_SQUASHFS_NEW apt-get upgrade -y"
+echo '-----------------------------------------------------'  
 
 DATE2=$(date +%s)
 
