@@ -94,7 +94,8 @@ jobs:
           name: archive-tmp-and-remaster
           path: |
             tmp
-            remaster
+            remaster/iso-new
+            remaster/squashfs-new
 
   build_special_edition:
     runs-on: ubuntu-latest
