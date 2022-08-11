@@ -73,13 +73,15 @@ jobs:
       - name: Updating the chroot environment
         run: sudo bin/chroot-update
 
-      # Stage 7C: chroot apt-get upgrade
+      # Stage 7C: chroot apt-get upgrade (main branch only)
       - name: Upgrading the chroot environment
         run: sudo bin/chroot-upgrade
+        if: ${{ github.ref == 'refs/heads/main' }}
 
-      # Stage 7D: chroot install of KeePassXC
+      # Stage 7D: chroot install of KeePassXC (main branch only)
       - name: Installing KeePassXC in chroot
         run: sudo bin/chroot-keepassxc
+        if: ${{ github.ref == 'refs/heads/main' }}
 
       # Stage 7E: chroot unmounting
       - name: Ending the chroot mounts
