@@ -106,3 +106,9 @@ jobs:
       # Stage 8A: Specifying the special edition
       - name: Specifying the special edition
         run: echo "${{ matrix.EDITION_SHORT }} - ${{ matrix.EDITION_LONG }}"
+
+      - name: Present working directory
+        run: pwd
+
+      - name: ls -l
+        run: ls -l
