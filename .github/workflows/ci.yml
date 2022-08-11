@@ -1,18 +1,13 @@
-# This is a basic workflow to help you get started with Actions
-
 name: CI
 
 # Controls when the workflow will run
 on: [push, pull_request]
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
+  general_steps:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
@@ -90,3 +85,23 @@ jobs:
       # Stage 7F: chroot cleanup
       - name: Post-chroot cleanup operations
         run: sudo bin/chroot-cleanup
+
+  build_special_edition:
+    needs: general
+    strategy:
+      matrix:
+        EDITION_SHORT: ['hannahmontana', 'interstate', 'taylorswift', 'twilightzone']
+        include:
+          - EDITION_SHORT: 'hannahmontana'
+            EDITION_LONG: 'Hannah Montana Linux'
+          - EDITION_SHORT: 'interstate'
+            EDITION_LONG: 'Interstate Swift Linux'
+          - EDITION_SHORT: 'taylorswift'
+            EDITION_LONG: 'Taylor Swift Linux'
+          - EDITION_SHORT: 'twilightzone'
+            EDITION_LONG: 'Twilight Zone'
+  
+    steps:
+      # Stage 8A: Specifying the special edition
+      - name: Specifying the special edition
+        run: echo "${{ matrix.EDITION_SHORT }} - ${{ matrix.EDITION_LONG }}"
