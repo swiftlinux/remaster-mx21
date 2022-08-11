@@ -33,7 +33,7 @@ jobs:
       - name: Provisioning - apt-get install
         run: sudo bin/provision-apt-get-install
 
-      # Stage 2
+      # Cache for shortening Stage 2
       - name: Cache downloaded ISO file
         id: cache-downloaded-iso
         uses: actions/cache@v3
@@ -41,6 +41,7 @@ jobs:
           path: iso-downloaded
           key: key-iso-file
 
+      # Stage 2
       - name: Downloading the Linux ISO
         run: bin/download-iso
 
@@ -86,17 +87,14 @@ jobs:
       - name: Post-chroot cleanup operations
         run: sudo bin/chroot-cleanup
 
-      - name: Archive parameters stored in tmp directory
+      # Save work for next steps
+      - name: Archive the tmp and remaster directories
         uses: actions/upload-artifact@v3
         with:
-          name: tmp directory
-          path: tmp/*
-
-      - name: Archive remaster directory
-        uses: actions/upload-artifact@v3
-        with:
-          name: remaster directory
-          path: remaster/*
+          name: archive-tmp-and-remaster
+          path: |
+            tmp
+            remaster
 
   build_special_edition:
     runs-on: ubuntu-latest
