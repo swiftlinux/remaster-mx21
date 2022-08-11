@@ -88,7 +88,7 @@ jobs:
 
   build_special_edition:
     runs-on: ubuntu-latest
-    needs: general
+    needs: general_steps
     strategy:
       matrix:
         EDITION_SHORT: ['hannahmontana', 'interstate', 'taylorswift', 'twilightzone']
