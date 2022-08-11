@@ -103,6 +103,9 @@ jobs:
             EDITION_LONG: 'Twilight Zone'
   
     steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+
       # Stage 8A: Specifying the special edition
       - name: Specifying the special edition
         run: echo "${{ matrix.EDITION_SHORT }} - ${{ matrix.EDITION_LONG }}"
