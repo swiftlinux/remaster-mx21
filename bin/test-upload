@@ -11,15 +11,19 @@ echo '#############################'
 
 DATE1=$(date +%s)
 
-mkdir -p tmp
-TIME_STAMP=`date -u +%Y%m%d-%H%M%S`
-echo "$TIME_STAMP" > tmp/timestamp.txt
+source definitions.sh
 
 bin/config-ssh 'ed25519'
 
-echo '---------------------------'
-echo 'Uploading tmp/timestamp.txt'
-rsync -avPz -e ssh "tmp/timestamp.txt" jhsu802701@frs.sourceforge.net:/home/frs/p/swiftlinux/test-upload-manual/$MX_VERSION/
+echo 'Creating test file for uploading'
+
+TEST_FILE="$DIR_MAIN/tmp/test-file-$SWIFT_VERSION-$EDITION_SHORT.txt"
+echo "$TIME_STAMP" > $TEST_FILE
+echo "$EDITION_LONG" > $TEST_FILE
+
+echo '--------------------'
+echo "Uploading $TEST_FILE"
+rsync -avPz -e ssh "$TEST_FILE" jhsu802701@frs.sourceforge.net:/home/frs/p/swiftlinux/test-upload/
 
 DATE2=$(date +%s)
 
