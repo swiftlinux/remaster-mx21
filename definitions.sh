@@ -9,6 +9,10 @@ DIR_MAIN=$PWD
 
 MX_VERSION=`cat $DIR_MAIN/parameters/MX-version.txt`
 
+MX_DATE=`cat $DIR_MAIN/parameters/MX-date.txt`
+
+MX_CODE_NAME=`cat $DIR_MAIN/parameters/MX-code-name.txt`
+
 SWIFT_VERSION=`cat $DIR_MAIN/parameters/Swift-version.txt`
 
 DIR_ISO_INPUT=$DIR_MAIN/iso-downloaded

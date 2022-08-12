@@ -15,5 +15,9 @@ echo "Based on: MX Linux $MX_VERSION"
 echo ''
 echo "Swift Linux version: $SWIFT_VERSION"
 echo ''
-echo "Time stamp: $TIME_STAMP"
+echo "MX Linux date of creation: $MX_DATE"
+echo ''
+echo "Swift Linux time stamp: $TIME_STAMP"
+echo ''
+echo "MX Linux code name: $MX_CODE_NAME"
 echo ''
