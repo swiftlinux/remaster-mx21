@@ -17,7 +17,7 @@ jobs:
           - EDITION_SHORT: 'taylorswift'
             EDITION_LONG: 'Taylor Swift Linux'
           - EDITION_SHORT: 'twilightzone'
-            EDITION_LONG: 'Twilight Zone'
+            EDITION_LONG: 'Twilight Zone Swift Linux'
 
     env:
       EDITION_SHORT: ${{ matrix.EDITION_SHORT }}
