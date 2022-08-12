@@ -13,5 +13,7 @@ echo "Main directory: $DIR_MAIN"
 echo ''
 echo "Based on: MX Linux $MX_VERSION"
 echo ''
+echo "Swift Linux version: $SWIFT_VERSION"
+echo ''
 echo "Time stamp: $TIME_STAMP"
 echo ''
