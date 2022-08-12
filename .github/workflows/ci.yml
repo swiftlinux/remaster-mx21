@@ -17,6 +17,10 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
+      # Display parameters
+      - name: Provisioning - apt-get update
+        run: bin/welcome
+
       # Stage 0
       - name: Test upload to SourceForge
         env:
