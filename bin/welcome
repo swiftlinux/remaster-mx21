@@ -21,3 +21,7 @@ echo "Swift Linux time stamp: $TIME_STAMP"
 echo ''
 echo "MX Linux code name: $MX_CODE_NAME"
 echo ''
+echo "Swift Linux special edition (short name): $EDITION_SHORT"
+echo ''
+echo "Swift Linux special edition (full name): $EDITION_LONG"
+echo ''
