@@ -18,3 +18,29 @@ else
 fi
 
 sudo bin/provision-apt-get-install
+
+bin/download-iso
+
+sudo bin/mount-iso
+
+sudo bin/copy-iso
+
+sudo bin/mount-compressed-fs
+
+sudo bin/copy-squashfs
+
+sudo bin/chroot-mounts
+
+sudo bin/chroot-update
+
+if [ "$GIT_BRANCH" = 'main' ]; then
+  sudo bin/chroot-upgrade
+  sudo bin/chroot-keepassxc
+else
+  echo 'Skipping chroot apt-get upgrade (executed only in the main branch)'
+  echo 'Skipping chroot installation of KeePassXC (executed only in the main branch)'
+fi
+
+sudo bin/chroot-unmount
+
+sudo bin/chroot-cleanup
