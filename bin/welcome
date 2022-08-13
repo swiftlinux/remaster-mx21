@@ -11,6 +11,10 @@ source definitions.sh
 
 env
 
+echo '888888888888888888'
+sudo env
+echo '888888888888888888'
+
 echo 'Welcome to the Swift Linux remastering process!'
 echo ''
 echo "Main directory:                           $DIR_MAIN"
