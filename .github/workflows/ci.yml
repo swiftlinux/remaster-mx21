@@ -30,7 +30,7 @@ jobs:
 
       # Set parameters
       - name: Set parameters
-        run: bash params-ci.sh
+        run: bash set-params-ci.sh
 
       # Display parameters
       - name: Display parameters
