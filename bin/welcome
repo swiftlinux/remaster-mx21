@@ -9,6 +9,8 @@ rm -rf tmp
 
 source definitions.sh
 
+env
+
 echo 'Welcome to the Swift Linux remastering process!'
 echo ''
 echo "Main directory:                           $DIR_MAIN"
