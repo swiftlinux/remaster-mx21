@@ -23,12 +23,6 @@ DATE1=$(date +%s)
 
 source definitions.sh
 
-echo '------------'
-echo "$DIR_ISO_NEW"
-echo "$EDITION_SHORT"
-env
-echo '------------'
-
 mkdir -p "$DIR_ISO_NEW"
 
 mkdir -p tmp4

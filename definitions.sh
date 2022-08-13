@@ -7,10 +7,7 @@ set -eo pipefail
 
 DIR_MAIN=$PWD
 
-if [ -f tmp-edition/definitions.sh ]
-then
-  source tmp-edition/definitions.sh
-fi
+source tmp-edition/definitions.sh
 
 MX_VERSION=`cat $DIR_MAIN/parameters/MX-version.txt`
 

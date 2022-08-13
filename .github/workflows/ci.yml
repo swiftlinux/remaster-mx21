@@ -20,13 +20,17 @@ jobs:
             EDITION_LONG: 'Twilight Zone Swift Linux'
 
     env:
-      EDITION_SHORT: ${{ matrix.EDITION_SHORT }}
-      EDITION_LONG: ${{ matrix.EDITION_LONG }}
+      EDITION_SHORT_CI: ${{ matrix.EDITION_SHORT }}
+      EDITION_LONG_CI: ${{ matrix.EDITION_LONG }}
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
+
+      # Set parameters
+      - name: Set parameters
+        run: bash params-ci.sh
 
       # Display parameters
       - name: Display parameters
