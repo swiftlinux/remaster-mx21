@@ -96,6 +96,7 @@ do
   # Stage 2B: downloading the ISO file (if it is not already present)
   if ! test -f "$ISO_FILENAME"
   then
+    rm -rf $DIR_REMASTER
     download_iso_file
   fi
 

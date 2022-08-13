@@ -7,6 +7,8 @@ set -eo pipefail
 
 DIR_MAIN=$PWD
 
+source tmp-edition/definitions.sh
+
 MX_VERSION=`cat $DIR_MAIN/parameters/MX-version.txt`
 
 MX_DATE=`cat $DIR_MAIN/parameters/MX-date.txt`
@@ -23,7 +25,7 @@ DIR_REMASTER=$DIR_MAIN/remaster
 
 DIR_ISO_ORIG=$DIR_REMASTER/iso-orig
 
-DIR_ISO_NEW=$DIR_REMASTER/iso-new
+DIR_ISO_NEW="$DIR_REMASTER/iso-$EDITION_SHORT"
 
 if [ ! -f $DIR_MAIN/tmp/timestamp.txt ]
 then
@@ -49,4 +51,4 @@ fi
 
 DIR_SQUASHFS_ORIG=$DIR_REMASTER/squashfs-orig
 
-DIR_SQUASHFS_NEW=$DIR_REMASTER/squashfs-new
+DIR_SQUASHFS_NEW="$DIR_REMASTER/squashfs-$EDITION_SHORT"

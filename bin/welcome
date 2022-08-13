@@ -5,6 +5,8 @@
 # as succeeding in spite of errors or failures.
 set -eo pipefail
 
+rm -rf tmp
+
 source definitions.sh
 
 echo 'Welcome to the Swift Linux remastering process!'
