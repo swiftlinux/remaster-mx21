@@ -25,6 +25,7 @@ source definitions.sh
 
 echo '------------'
 echo "$DIR_ISO_NEW"
+echo "$EDITION_SHORT"
 echo '------------'
 
 mkdir -p "$DIR_ISO_NEW"
