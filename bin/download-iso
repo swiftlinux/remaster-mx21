@@ -13,6 +13,10 @@ DATE1=$(date +%s)
 
 source definitions.sh
 
+echo "$EDITION_SHORT"
+
+env
+
 MX_VERSION=`cat parameters/MX-version.txt`
 
 # List of MX Linux download mirrors:
