@@ -21,24 +21,24 @@ DATE1=$(date +%s)
 source definitions.sh
 
 echo ''
-echo "Updating $DIR_NEW_ISO/version"
-echo "$EDITION_LONG" > "$DIR_NEW_ISO/version"
-echo "Based on MX Linux $MX_VERSION_x64 $MX_CODE_NAME $MX_DATE" >> "$DIR_NEW_ISO/version"
+echo "Updating $DIR_ISO_NEW/version"
+echo "$EDITION_LONG" > "$DIR_ISO_NEW/version"
+echo "Based on MX Linux $MX_VERSION_x64 $MX_CODE_NAME $MX_DATE" >> "$DIR_ISO_NEW/version"
 echo ''
 echo '------------------------'
-echo "cat $DIR_NEW_ISO/version"
-cat $DIR_NEW_ISO/version
+echo "cat $DIR_ISO_NEW/version"
+cat $DIR_ISO_NEW/version
 echo ''
-echo "Updating $DIR_NEW_ISO/.disk/info"
-echo "$EDITION_LONG" > "$DIR_NEW_ISO/.disk/info"
-echo "Based on MX Linux $MX_VERSION_x64 $MX_CODE_NAME $MX_DATE" >> "$DIR_NEW_ISO/.disk/info"
+echo "Updating $DIR_ISO_NEW/.disk/info"
+echo "$EDITION_LONG" > "$DIR_ISO_NEW/.disk/info"
+echo "Based on MX Linux $MX_VERSION_x64 $MX_CODE_NAME $MX_DATE" >> "$DIR_ISO_NEW/.disk/info"
 echo ''
 echo '---------------------------'
-echo "cat $DIR_NEW_ISO/.disk/info"
-cat $DIR_NEW_ISO/.disk/info
+echo "cat $DIR_ISO_NEW/.disk/info"
+cat $DIR_ISO_NEW/.disk/info
 echo ''
-bin/error-if-snif 'Swift Linux' "$DIR_NEW_ISO/version"
-bin/error-if-snif 'Swift Linux' "$DIR_NEW_ISO/.disk/info"
+bin/error-if-snif 'Swift Linux' "$DIR_ISO_NEW/version"
+bin/error-if-snif 'Swift Linux' "$DIR_ISO_NEW/.disk/info"
 
 DATE2=$(date +%s)
 
