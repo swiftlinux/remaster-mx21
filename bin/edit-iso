@@ -6,15 +6,15 @@
 set -eo pipefail
 
 # PURPOSE:
-# In this stage, selected files in the $DIR_ISO_NEW directory are customized.
+# In this stage, selected ISO component files (in the $DIR_ISO_NEW directory) are customized.
 
 echo '#############################################################################'
 echo 'BEGIN STAGE 8: Customizing MX Linux to create the Swift Linux special edition'
 echo '#############################################################################'
 
-echo '+++++++++++++++++++++++++++++++++++++++++++++++'
-echo 'BEGIN STAGE 8A: customizing the Swift Linux ISO'
-echo '+++++++++++++++++++++++++++++++++++++++++++++++'
+echo '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
+echo 'BEGIN STAGE 8A: customizing the Swift Linux ISO component files'
+echo '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
 
 DATE1=$(date +%s)
 
@@ -42,6 +42,6 @@ bin/error-if-snif 'Swift Linux' "$DIR_NEW_ISO/.disk/info"
 
 DATE2=$(date +%s)
 
-echo '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
-echo "FINISHED 8A: customizing the Swift Linux ISO ($((DATE2-DATE1)) seconds)"
-echo '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
+echo '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
+echo "FINISHED 8A: customizing the Swift Linux ISO component files ($((DATE2-DATE1)) seconds)"
+echo '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'

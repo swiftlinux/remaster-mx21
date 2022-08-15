@@ -109,3 +109,7 @@ jobs:
       # Stage 7F: chroot cleanup
       - name: Post-chroot cleanup operations
         run: sudo bin/chroot-cleanup
+
+      # Stage 8A: customizing the Swift Linux ISO component files
+      - name: Customizing the Swift Linux ISO component files
+        run: sudo bin/edit-iso
