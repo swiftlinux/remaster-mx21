@@ -37,8 +37,15 @@ echo '---------------------------'
 echo "cat $DIR_ISO_NEW/.disk/info"
 cat $DIR_ISO_NEW/.disk/info
 echo ''
-bin/error-if-snif 'Swift Linux' "$DIR_ISO_NEW/version"
-bin/error-if-snif 'Swift Linux' "$DIR_ISO_NEW/.disk/info"
+
+if [ "$EDITION_SHORT" = 'hannahmontana' ]
+then
+  bin/error-if-snif 'Hannah Montana Linux' "$DIR_ISO_NEW/version"
+  bin/error-if-snif 'Hannah Montana Linux' "$DIR_ISO_NEW/.disk/info"
+else
+  bin/error-if-snif 'Swift Linux' "$DIR_ISO_NEW/version"
+  bin/error-if-snif 'Swift Linux' "$DIR_ISO_NEW/.disk/info"
+fi
 
 DATE2=$(date +%s)
 
