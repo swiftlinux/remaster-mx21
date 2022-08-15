@@ -1,0 +1,47 @@
+#!/bin/bash
+
+# NOTE: set -o pipefail is needed to ensure that any error or failure causes the whole pipeline to fail.
+# Without this specification, the CI status will provide a false sense of security by showing builds
+# as succeeding in spite of errors or failures.
+set -eo pipefail
+
+# PURPOSE:
+# In this stage, selected files in the $DIR_ISO_NEW directory are customized.
+
+echo '#############################################################################'
+echo 'BEGIN STAGE 8: Customizing MX Linux to create the Swift Linux special edition'
+echo '#############################################################################'
+
+echo '+++++++++++++++++++++++++++++++++++++++++++++++'
+echo 'BEGIN STAGE 8A: customizing the Swift Linux ISO'
+echo '+++++++++++++++++++++++++++++++++++++++++++++++'
+
+DATE1=$(date +%s)
+
+source definitions.sh
+
+echo ''
+echo "Updating $DIR_NEW_ISO/version"
+echo "$EDITION_LONG" > "$DIR_NEW_ISO/version"
+echo "Based on MX Linux $MX_VERSION_x64 $MX_CODE_NAME $MX_DATE" >> "$DIR_NEW_ISO/version"
+echo ''
+echo '------------------------'
+echo "cat $DIR_NEW_ISO/version"
+cat $DIR_NEW_ISO/version
+echo ''
+echo "Updating $DIR_NEW_ISO/.disk/info"
+echo "$EDITION_LONG" > "$DIR_NEW_ISO/.disk/info"
+echo "Based on MX Linux $MX_VERSION_x64 $MX_CODE_NAME $MX_DATE" >> "$DIR_NEW_ISO/.disk/info"
+echo ''
+echo '---------------------------'
+echo "cat $DIR_NEW_ISO/.disk/info"
+cat $DIR_NEW_ISO/.disk/info
+echo ''
+bin/error-if-snif 'Swift Linux' "$DIR_NEW_ISO/version"
+bin/error-if-snif 'Swift Linux' "$DIR_NEW_ISO/.disk/info"
+
+DATE2=$(date +%s)
+
+echo '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
+echo "FINISHED 8A: customizing the Swift Linux ISO ($((DATE2-DATE1)) seconds)"
+echo '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'

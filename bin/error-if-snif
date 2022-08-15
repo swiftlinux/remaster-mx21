@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# NOTE: set -o pipefail is needed to ensure that any error or failure causes the whole pipeline to fail.
+# Without this specification, the CI status will provide a false sense of security by showing builds
+# as succeeding in spite of errors or failures.
+set -eo pipefail
+
+STR1=$1
+FILENAME=$2
+
+# This script throws an error if a certain string (STR1)
+# is NOT present in a given file (FILENAME)
+
+if ! grep -q "$STR1" "$FILENAME"; then
+  echo "The file $FILENAME does NOT contain:"
+  echo "$STR1"
+  echo 'This is against expectations and constitutes an error.'
+  exit 1
+fi
