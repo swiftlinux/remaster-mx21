@@ -51,7 +51,7 @@ FILE_BOOT_GRUB_GRUB_CFG="$DIR_ISO_NEW/boot/grub/grub.cfg"
 echo ''
 echo "Updating $FILE_BOOT_GRUB_GRUB_CFG"
 bin/replace_sif 'Live version of MX' "live version of $EDITION_LONG" "$FILE_BOOT_GRUB_GRUB_CFG"
-bin/replace_sif "$MX_DATE" "$TIME_STAMP" "$FILE_BOOT_GRUB_GRUB_CFG"
+bin/replace_mx_date "$FILE_BOOT_GRUB_GRUB_CFG"
 bin/replace_sif "MX-$MX_VERSION" "$EDITION_LONG $SWIFT_VERSION" "$FILE_BOOT_GRUB_GRUB_CFG"
 
 bin/check_edition_long "$FILE_BOOT_GRUB_GRUB_CFG"
@@ -63,7 +63,7 @@ bin/error-if-sif "$MX_DATE" "$FILE_BOOT_GRUB_GRUB_CFG"
 FILE_BOOT_GRUB_THEME_BIOS="$DIR_ISO_NEW/boot/grub/theme/bios.txt"
 echo ''
 echo "Updating $FILE_BOOT_GRUB_THEME_BIOS"
-bin/replace_sif "$MX_DATE" "$TIME_STAMP" "$FILE_BOOT_GRUB_THEME_BIOS"
+bin/replace_mx_date "$FILE_BOOT_GRUB_THEME_BIOS"
 bin/replace_sif "MX-$MX_VERSION" "$EDITION_LONG $SWIFT_VERSION" "$FILE_BOOT_GRUB_THEME_BIOS"
 bin/replace_sif "$MX_CODE_NAME" "$TIME_STAMP" "$FILE_BOOT_GRUB_THEME_BIOS"
 
@@ -77,7 +77,7 @@ bin/error-if-sif "$MX_CODE_NAME" "$FILE_BOOT_GRUB_THEME_BIOS"
 FILE_BOOT_SYSLINUX_README_MSG="$DIR_ISO_NEW/boot/syslinux/readme.msg"
 echo ''
 echo "Updating $FILE_BOOT_SYSLINUX_README_MSG"
-bin/replace_sif "$MX_DATE" "$TIME_STAMP" "$FILE_BOOT_SYSLINUX_README_MSG"
+bin/replace_mx_date "$FILE_BOOT_SYSLINUX_README_MSG"
 bin/replace_sif 'MX Linux' "$EDITION_LONG" "$FILE_BOOT_SYSLINUX_README_MSG"
 bin/replace_sif "MX-$MX_VERSION" "$EDITION_LONG $SWIFT_VERSION" "$FILE_BOOT_SYSLINUX_README_MSG"
 
