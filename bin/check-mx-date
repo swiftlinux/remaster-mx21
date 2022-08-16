@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# NOTE: set -o pipefail is needed to ensure that any error or failure causes the whole pipeline to fail.
+# Without this specification, the CI status will provide a false sense of security by showing builds
+# as succeeding in spite of errors or failures.
+set -eo pipefail
+
+FILENAME=$1
+
+source definitions.sh
+
+# This script throws an error if the string MX_DATE
+# is present in a given file (FILENAME).
+
+bin/error-if-sif "$MX_DATE" "$FILENAME"

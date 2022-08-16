@@ -41,6 +41,7 @@ echo "cat $FILE_INFO"
 cat $FILE_INFO
 echo ''
 
+# Checking $DIR_ISO_NEW/version and $DIR_ISO_NEW/.disk/info
 bin/check_edition_long "$FILE_VERSION"
 bin/check_edition_long "$FILE_INFO"
 bin/error-if-snif "$SWIFT_VERSION" "$FILE_VERSION"
@@ -54,10 +55,11 @@ bin/replace_sif 'Live version of MX' "live version of $EDITION_LONG" "$FILE_BOOT
 bin/replace_mx_date "$FILE_BOOT_GRUB_GRUB_CFG"
 bin/replace_sif "MX-$MX_VERSION" "$EDITION_LONG $SWIFT_VERSION" "$FILE_BOOT_GRUB_GRUB_CFG"
 
+# Checking $DIR_ISO_NEW/boot/grub/grub.cfg
 bin/check_edition_long "$FILE_BOOT_GRUB_GRUB_CFG"
 bin/error-if-snif "$SWIFT_VERSION" "$FILE_BOOT_GRUB_GRUB_CFG"
 bin/error-if-sif 'MX' "$FILE_BOOT_GRUB_GRUB_CFG"
-bin/error-if-sif "$MX_DATE" "$FILE_BOOT_GRUB_GRUB_CFG"
+bin/check-mx-date "$FILE_BOOT_GRUB_GRUB_CFG"
 
 # Updating $DIR_ISO_NEW/boot/grub/theme/bios.txt
 FILE_BOOT_GRUB_THEME_BIOS="$DIR_ISO_NEW/boot/grub/theme/bios.txt"
@@ -67,10 +69,11 @@ bin/replace_mx_date "$FILE_BOOT_GRUB_THEME_BIOS"
 bin/replace_sif "MX-$MX_VERSION" "$EDITION_LONG $SWIFT_VERSION" "$FILE_BOOT_GRUB_THEME_BIOS"
 bin/replace_sif "$MX_CODE_NAME" "$TIME_STAMP" "$FILE_BOOT_GRUB_THEME_BIOS"
 
+# Checking $DIR_ISO_NEW/boot/grub/theme/bios.txt
 bin/check_edition_long "$FILE_BOOT_GRUB_THEME_BIOS"
 bin/error-if-snif "$SWIFT_VERSION" "$FILE_BOOT_GRUB_THEME_BIOS"
 bin/error-if-sif 'MX' "$FILE_BOOT_GRUB_THEME_BIOS"
-bin/error-if-sif "$MX_DATE" "$FILE_BOOT_GRUB_THEME_BIOS"
+bin/check-mx-date "$FILE_BOOT_GRUB_THEME_BIOS"
 bin/error-if-sif "$MX_CODE_NAME" "$FILE_BOOT_GRUB_THEME_BIOS"
 
 # Updating $DIR_ISO_NEW/boot/syslinux/readme.msg
@@ -81,10 +84,11 @@ bin/replace_mx_date "$FILE_BOOT_SYSLINUX_README_MSG"
 bin/replace_sif 'MX Linux' "$EDITION_LONG" "$FILE_BOOT_SYSLINUX_README_MSG"
 bin/replace_sif "MX-$MX_VERSION" "$EDITION_LONG $SWIFT_VERSION" "$FILE_BOOT_SYSLINUX_README_MSG"
 
+# Checking $DIR_ISO_NEW/boot/syslinux/readme.msg
 bin/check_edition_long "$FILE_BOOT_SYSLINUX_README_MSG"
 bin/error-if-snif "$SWIFT_VERSION" "$FILE_BOOT_SYSLINUX_README_MSG"
 bin/error-if-sif 'MX' "$FILE_BOOT_SYSLINUX_README_MSG"
-bin/error-if-sif "$MX_DATE" "$FILE_BOOT_SYSLINUX_README_MSG"
+bin/check-mx-date "$FILE_BOOT_SYSLINUX_README_MSG"
 
 DATE2=$(date +%s)
 
