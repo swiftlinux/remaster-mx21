@@ -20,34 +20,39 @@ DATE1=$(date +%s)
 
 source definitions.sh
 
-# Updating $DIR_ISO_NEW/version and $DIR_ISO_NEW/.disk/info
-FILE_VERSION="$DIR_ISO_NEW/version"
-FILE_INFO="$DIR_ISO_NEW/.disk/info"
+# Updating $DIR_ISO_NEW/version
+FILE1="$DIR_ISO_NEW/version"
 echo ''
-echo "Updating $DIR_ISO_NEW/version"
-echo "$EDITION_LONG $SWIFT_VERSION ($TIME_STAMP)" > "$FILE_VERSION"
-echo "Based on MX Linux $MX_VERSION (x64) $MX_CODE_NAME $MX_DATE" >> "$FILE_VERSION"
+echo "Updating $FILE1"
+echo "$EDITION_LONG $SWIFT_VERSION ($TIME_STAMP)" > "$FILE1"
+echo "Based on MX Linux $MX_VERSION (x64) $MX_CODE_NAME $MX_DATE" >> "$FILE1"
 echo ''
-echo '-----------------'
-echo "cat $FILE_VERSION"
-cat $FILE_VERSION
-echo ''
-echo "Updating $FILE_INFO"
-echo "$EDITION_LONG $SWIFT_VERSION ($TIME_STAMP)" > "$FILE_INFO"
-echo "Based on MX Linux $MX_VERSION (x64) $MX_CODE_NAME $MX_DATE" >> "$FILE_INFO"
-echo ''
-echo '--------------'
-echo "cat $FILE_INFO"
-cat $FILE_INFO
+echo '----------'
+echo "cat $FILE1"
+cat $FILE1
 echo ''
 
-# Checking $DIR_ISO_NEW/version and $DIR_ISO_NEW/.disk/info
-bin/check_edition_long "$FILE_VERSION"
-bin/check_edition_long "$FILE_INFO"
-bin/check-swift-version "$FILE_VERSION"
-bin/check-swift-version "$FILE_INFO"
-bin/check-time-stamp "$FILE_VERSION"
-bin/check-time-stamp "$FILE_INFO"
+# Checking $DIR_ISO_NEW/version
+bin/check_edition_long "$FILE1"
+bin/check-swift-version "$FILE1"
+bin/check-time-stamp "$FILE1"
+
+# Updating $DIR_ISO_NEW/.disk/info
+FILE1="$DIR_ISO_NEW/.disk/info"
+echo ''
+echo "Updating $DIR_ISO_NEW/version"
+echo "$EDITION_LONG $SWIFT_VERSION ($TIME_STAMP)" > "$FILE1"
+echo "Based on MX Linux $MX_VERSION (x64) $MX_CODE_NAME $MX_DATE" >> "$FILE1"
+echo ''
+echo '----------'
+echo "cat $FILE1"
+cat $FILE1
+echo ''
+
+# Checking $DIR_ISO_NEW/.disk/info
+bin/check_edition_long "$FILE1"
+bin/check-swift-version "$FILE1"
+bin/check-time-stamp "$FILE1"
 
 # Updating $DIR_ISO_NEW/boot/grub/grub.cfg
 FILE_BOOT_GRUB_GRUB_CFG="$DIR_ISO_NEW/boot/grub/grub.cfg"
@@ -71,7 +76,6 @@ echo "Updating $FILE_BOOT_GRUB_THEME_BIOS"
 bin/replace_mx_date "$FILE_BOOT_GRUB_THEME_BIOS"
 bin/replace_sif "MX-$MX_VERSION" "$EDITION_LONG $SWIFT_VERSION" "$FILE_BOOT_GRUB_THEME_BIOS"
 bin/replace_mx_code_name "$FILE_BOOT_GRUB_THEME_BIOS"
-bin/check-time-stamp "$FILE_BOOT_GRUB_THEME_BIOS"
 
 # Checking $DIR_ISO_NEW/boot/grub/theme/bios.txt
 bin/check_edition_long "$FILE_BOOT_GRUB_THEME_BIOS"
@@ -79,6 +83,7 @@ bin/check-swift-version "$FILE_BOOT_GRUB_THEME_BIOS"
 bin/error-if-sif 'MX' "$FILE_BOOT_GRUB_THEME_BIOS"
 bin/check-mx-date "$FILE_BOOT_GRUB_THEME_BIOS"
 bin/replace_mx_code_name "$FILE_BOOT_GRUB_THEME_BIOS"
+bin/check-time-stamp "$FILE_BOOT_GRUB_THEME_BIOS"
 
 # Updating $DIR_ISO_NEW/boot/syslinux/readme.msg
 FILE_BOOT_SYSLINUX_README_MSG="$DIR_ISO_NEW/boot/syslinux/readme.msg"
