@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# NOTE: set -o pipefail is needed to ensure that any error or failure causes the whole pipeline to fail.
+# Without this specification, the CI status will provide a false sense of security by showing builds
+# as succeeding in spite of errors or failures.
+set -eo pipefail
+
+source definitions.sh
+
+# This script replaces the string $MX_CODE_NAME with the string $TIME_STAMP in the file $FILENAME.
+
+FILENAME=$1
+
+bin/replace_sif "$MX_CODE_NAME" "$TIME_STAMP" "$FILENAME"
