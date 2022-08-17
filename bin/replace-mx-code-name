@@ -11,4 +11,4 @@ source definitions.sh
 
 FILENAME=$1
 
-bin/replace_sif "$MX_CODE_NAME" "$TIME_STAMP" "$FILENAME"
+bin/replace-sif "$MX_CODE_NAME" "$TIME_STAMP" "$FILENAME"
