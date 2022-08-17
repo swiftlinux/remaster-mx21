@@ -44,8 +44,8 @@ echo ''
 # Checking $DIR_ISO_NEW/version and $DIR_ISO_NEW/.disk/info
 bin/check_edition_long "$FILE_VERSION"
 bin/check_edition_long "$FILE_INFO"
-bin/error-if-snif "$SWIFT_VERSION" "$FILE_VERSION"
-bin/error-if-snif "$SWIFT_VERSION" "$FILE_INFO"
+bin/check-swift-version "$FILE_VERSION"
+bin/check-swift-version "$FILE_INFO"
 
 # Updating $DIR_ISO_NEW/boot/grub/grub.cfg
 FILE_BOOT_GRUB_GRUB_CFG="$DIR_ISO_NEW/boot/grub/grub.cfg"
@@ -71,7 +71,7 @@ bin/replace_mx_code_name "$FILE_BOOT_GRUB_THEME_BIOS"
 
 # Checking $DIR_ISO_NEW/boot/grub/theme/bios.txt
 bin/check_edition_long "$FILE_BOOT_GRUB_THEME_BIOS"
-bin/error-if-snif "$SWIFT_VERSION" "$FILE_BOOT_GRUB_THEME_BIOS"
+bin/check-swift-version "$FILE_BOOT_GRUB_THEME_BIOS"
 bin/error-if-sif 'MX' "$FILE_BOOT_GRUB_THEME_BIOS"
 bin/check-mx-date "$FILE_BOOT_GRUB_THEME_BIOS"
 bin/replace_mx_code_name "$FILE_BOOT_GRUB_THEME_BIOS"
@@ -86,7 +86,7 @@ bin/replace_sif "MX-$MX_VERSION" "$EDITION_LONG $SWIFT_VERSION" "$FILE_BOOT_SYSL
 
 # Checking $DIR_ISO_NEW/boot/syslinux/readme.msg
 bin/check_edition_long "$FILE_BOOT_SYSLINUX_README_MSG"
-bin/error-if-snif "$SWIFT_VERSION" "$FILE_BOOT_SYSLINUX_README_MSG"
+bin/check-swift-version "$FILE_BOOT_SYSLINUX_README_MSG"
 bin/error-if-sif 'MX' "$FILE_BOOT_SYSLINUX_README_MSG"
 bin/check-mx-date "$FILE_BOOT_SYSLINUX_README_MSG"
 
