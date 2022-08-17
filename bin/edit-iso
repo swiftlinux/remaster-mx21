@@ -57,7 +57,7 @@ bin/replace_sif "MX-$MX_VERSION" "$EDITION_LONG $SWIFT_VERSION" "$FILE_BOOT_GRUB
 
 # Checking $DIR_ISO_NEW/boot/grub/grub.cfg
 bin/check_edition_long "$FILE_BOOT_GRUB_GRUB_CFG"
-bin/error-if-snif "$SWIFT_VERSION" "$FILE_BOOT_GRUB_GRUB_CFG"
+bin/check-swift-version "$FILE_BOOT_GRUB_GRUB_CFG"
 bin/error-if-sif 'MX' "$FILE_BOOT_GRUB_GRUB_CFG"
 bin/check-mx-date "$FILE_BOOT_GRUB_GRUB_CFG"
 
