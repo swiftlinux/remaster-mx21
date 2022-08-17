@@ -59,7 +59,7 @@ FILE1="$DIR_ISO_NEW/boot/grub/grub.cfg"
 echo ''
 echo "Updating $FILE1"
 bin/replace_sif 'Live version of MX' "live version of $EDITION_LONG" "$FILE1"
-bin/replace_mx_date "$FILE1"
+bin/replace-mx-date "$FILE1"
 bin/replace_sif "MX-$MX_VERSION" "$EDITION_LONG $SWIFT_VERSION" "$FILE1"
 
 # Checking $DIR_ISO_NEW/boot/grub/grub.cfg
@@ -73,7 +73,7 @@ bin/check-time-stamp "$FILE1"
 FILE1="$DIR_ISO_NEW/boot/grub/theme/bios.txt"
 echo ''
 echo "Updating $FILE1"
-bin/replace_mx_date "$FILE1"
+bin/replace-mx-date "$FILE1"
 bin/replace_sif "MX-$MX_VERSION" "$EDITION_LONG $SWIFT_VERSION" "$FILE1"
 bin/replace_mx_code_name "$FILE1"
 
@@ -89,7 +89,7 @@ bin/check-time-stamp "$FILE1"
 FILE1="$DIR_ISO_NEW/boot/syslinux/readme.msg"
 echo ''
 echo "Updating $FILE1"
-bin/replace_mx_date "$FILE1"
+bin/replace-mx-date "$FILE1"
 bin/replace_sif 'MX Linux' "$EDITION_LONG" "$FILE1"
 bin/replace_sif "MX-$MX_VERSION" "$EDITION_LONG $SWIFT_VERSION" "$FILE1"
 
