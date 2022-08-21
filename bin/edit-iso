@@ -127,6 +127,17 @@ bin/check-swift-version "$FILE1"
 bin/check-time-stamp "$FILE1"
 bin/error-if-sif 'MX' "$FILE1"
 
+# Updating $DIR_ISO_NEW/boot/grub/theme/uefisb.txt
+FILE1="$DIR_ISO_NEW/boot/grub/theme/uefisb.txt"
+bin/replace-mx-code-name "$FILE1"
+bin/replace-sif "MX-$MX_VERSION" "$EDITION_LONG $SWIFT_VERSION" "$FILE1"
+
+# Checking $DIR_ISO_NEW/boot/grub/theme/uefisb.txt
+bin/check-edition-long "$FILE1"
+bin/check-swift-version "$FILE1"
+bin/check-time-stamp "$FILE1"
+bin/error-if-sif 'MX' "$FILE1"
+
 # Updating $DIR_ISO_NEW/boot/isolinux/readme.msg
 FILE1="$DIR_ISO_NEW/boot/isolinux/readme.msg"
 
