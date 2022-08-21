@@ -94,30 +94,40 @@ bin/check-mx-date "$FILE1"
 bin/replace-mx-code-name "$FILE1"
 bin/check-time-stamp "$FILE1"
 
+# Updating $DIR_ISO_NEW/boot/grub/theme/l10n.txt
+FILE1="$DIR_ISO_NEW/boot/grub/theme/l10n.txt"
+bin/replace-mx-code-name "$FILE1"
+bin/replace-sif "MX-$MX_VERSION" "$EDITION_LONG $SWIFT_VERSION" "$FILE1"
+
+# Checking $DIR_ISO_NEW/boot/grub/theme/l10n.txt
+bin/check-edition-long "$FILE1"
+bin/check-swift-version "$FILE1"
+bin/check-time-stamp "$FILE1"
+
 # Updating $DIR_ISO_NEW/boot/grub/theme/theme.txt
 FILE1="$DIR_ISO_NEW/boot/grub/theme/theme.txt"
 
 # Checking $DIR_ISO_NEW/boot/grub/theme/theme.txt
 
-# Updating $DIR_ISO_NEW/boot/syslinux/syslinux.cfg
-FILE1="$DIR_ISO_NEW/boot/syslinux/syslinux.cfg"
+# Updating $DIR_ISO_NEW/boot/grub/theme/uefi.txt
+FILE1="$DIR_ISO_NEW/boot/grub/theme/uefi.txt"
 
-# Checking $DIR_ISO_NEW/boot/syslinux/syslinux.cfg
+# Checking $DIR_ISO_NEW/boot/grub/theme/uefi.txt
 
 # Updating $DIR_ISO_NEW/boot/isolinux/readme.msg
 FILE1="$DIR_ISO_NEW/boot/isolinux/readme.msg"
 
 # Checking $DIR_ISO_NEW/boot/isolinux/readme.msg
 
-# Updating $DIR_ISO_NEW/boot/grub/theme/l10n.txt
-FILE1="$DIR_ISO_NEW/boot/grub/theme/l10n.txt"
-
-# Checking $DIR_ISO_NEW/boot/grub/theme/l10n.txt
-
 # Updating $DIR_ISO_NEW/boot/isolinux/isolinux.cfg
 FILE1="$DIR_ISO_NEW/boot/isolinux/isolinux.cfg"
 
 # Checking $DIR_ISO_NEW/boot/isolinux/isolinux.cfg
+
+# Updating $DIR_ISO_NEW/boot/syslinux/syslinux.cfg
+FILE1="$DIR_ISO_NEW/boot/syslinux/syslinux.cfg"
+
+# Checking $DIR_ISO_NEW/boot/syslinux/syslinux.cfg
 
 # Updating $DIR_ISO_NEW/boot/syslinux/readme.msg
 FILE1="$DIR_ISO_NEW/boot/syslinux/readme.msg"
