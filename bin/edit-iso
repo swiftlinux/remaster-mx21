@@ -27,12 +27,12 @@ echo "Updating $FILE1"
 echo "$EDITION_LONG $SWIFT_VERSION ($TIME_STAMP)" > "$FILE1"
 echo "Based on MX Linux $MX_VERSION (x64) $MX_CODE_NAME $MX_DATE" >> "$FILE1"
 echo ''
+
+# Checking $DIR_ISO_NEW/version
 echo '----------'
 echo "cat $FILE1"
 cat $FILE1
 echo ''
-
-# Checking $DIR_ISO_NEW/version
 bin/check-edition-long "$FILE1"
 bin/check-swift-version "$FILE1"
 bin/check-time-stamp "$FILE1"
@@ -44,15 +44,24 @@ echo "Updating $DIR_ISO_NEW/version"
 echo "$EDITION_LONG $SWIFT_VERSION ($TIME_STAMP)" > "$FILE1"
 echo "Based on MX Linux $MX_VERSION (x64) $MX_CODE_NAME $MX_DATE" >> "$FILE1"
 echo ''
+
+# Checking $DIR_ISO_NEW/.disk/info
 echo '----------'
 echo "cat $FILE1"
 cat $FILE1
 echo ''
-
-# Checking $DIR_ISO_NEW/.disk/info
 bin/check-edition-long "$FILE1"
 bin/check-swift-version "$FILE1"
 bin/check-time-stamp "$FILE1"
+
+# Updating $DIR_ISO_NEW/boot/grub/config/distro.cfg
+FILE1="$DIR_ISO_NEW/boot/grub/config/distro.cfg"
+bin/replace-sif 'MX Linux' "$EDITION_LONG" "$FILE1"
+bin/replace-sif 'MX' "$EDITION_LONG" "$FILE1"
+
+# Checking $DIR_ISO_NEW/boot/grub/config/distro.cfg
+bin/check-edition-long "$FILE1"
+bin/error-if-sif 'MX' "$FILE1"
 
 # Updating $DIR_ISO_NEW/boot/grub/grub.cfg
 FILE1="$DIR_ISO_NEW/boot/grub/grub.cfg"
@@ -84,6 +93,31 @@ bin/error-if-sif 'MX' "$FILE1"
 bin/check-mx-date "$FILE1"
 bin/replace-mx-code-name "$FILE1"
 bin/check-time-stamp "$FILE1"
+
+# Updating $DIR_ISO_NEW/boot/grub/theme/theme.txt
+FILE1="$DIR_ISO_NEW/boot/grub/theme/theme.txt"
+
+# Checking $DIR_ISO_NEW/boot/grub/theme/theme.txt
+
+# Updating $DIR_ISO_NEW/boot/syslinux/syslinux.cfg
+FILE1="$DIR_ISO_NEW/boot/syslinux/syslinux.cfg"
+
+# Checking $DIR_ISO_NEW/boot/syslinux/syslinux.cfg
+
+# Updating $DIR_ISO_NEW/boot/isolinux/readme.msg
+FILE1="$DIR_ISO_NEW/boot/isolinux/readme.msg"
+
+# Checking $DIR_ISO_NEW/boot/isolinux/readme.msg
+
+# Updating $DIR_ISO_NEW/boot/grub/theme/l10n.txt
+FILE1="$DIR_ISO_NEW/boot/grub/theme/l10n.txt"
+
+# Checking $DIR_ISO_NEW/boot/grub/theme/l10n.txt
+
+# Updating $DIR_ISO_NEW/boot/isolinux/isolinux.cfg
+FILE1="$DIR_ISO_NEW/boot/isolinux/isolinux.cfg"
+
+# Checking $DIR_ISO_NEW/boot/isolinux/isolinux.cfg
 
 # Updating $DIR_ISO_NEW/boot/syslinux/readme.msg
 FILE1="$DIR_ISO_NEW/boot/syslinux/readme.msg"
