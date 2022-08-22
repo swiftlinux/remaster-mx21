@@ -21,6 +21,8 @@ DATE1=$(date +%s)
 source definitions.sh
 
 bin/find-string-in-directory 'MX' "$DIR_ISO_NEW"
+bin/find-string-in-directory "$MX_DATE" "$DIR_ISO_NEW"
+bin/find-string-in-directory "$MX_CODE_NAME" "$DIR_ISO_NEW"
 
 # Updating $DIR_ISO_NEW/version
 FILE1="$DIR_ISO_NEW/version"
@@ -197,6 +199,8 @@ bin/check-mx-date "$FILE1"
 bin/check-time-stamp "$FILE1"
 
 bin/find-string-in-directory 'MX' "$DIR_ISO_NEW"
+bin/find-string-in-directory "$MX_DATE" "$DIR_ISO_NEW"
+bin/find-string-in-directory "$MX_CODE_NAME" "$DIR_ISO_NEW"
 
 DATE2=$(date +%s)
 
