@@ -20,6 +20,12 @@ DATE1=$(date +%s)
 
 source definitions.sh
 
+echo '-------------------------------'
+echo "Searching $DIR_ISO_NEW for 'MX'"
+echo ''
+grep -rnw -I "$DIR_ISO_NEW" -e 'MX'
+echo ''
+
 # Updating $DIR_ISO_NEW/version
 FILE1="$DIR_ISO_NEW/version"
 echo ''
@@ -153,8 +159,8 @@ bin/check-time-stamp "$FILE1"
 FILE1="$DIR_ISO_NEW/boot/isolinux/isolinux.cfg"
 bin/replace-mx-code-name "$FILE1"
 bin/replace-mx-date "$FILE1"
-bin/replace-sif '_x64' 'x64' "$FILE1"
 bin/replace-sif "MX-$MX_VERSION" "$EDITION_LONG $SWIFT_VERSION" "$FILE1"
+bin/replace-sif '_x64' ' x64' "$FILE1"
 
 # Checking $DIR_ISO_NEW/boot/isolinux/isolinux.cfg
 bin/check-edition-long "$FILE1"
@@ -193,6 +199,12 @@ bin/check-swift-version "$FILE1"
 bin/error-if-sif 'MX' "$FILE1"
 bin/check-mx-date "$FILE1"
 bin/check-time-stamp "$FILE1"
+
+echo '-------------------------------'
+echo "Searching $DIR_ISO_NEW for 'MX'"
+echo ''
+grep -rnw -I "$DIR_ISO_NEW" -e 'MX'
+echo ''
 
 DATE2=$(date +%s)
 
