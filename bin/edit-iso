@@ -20,187 +20,196 @@ DATE1=$(date +%s)
 
 source definitions.sh
 
-bin/find-string-in-directory 'MX' "$DIR_ISO_NEW"
-bin/find-string-in-directory "$MX_DATE" "$DIR_ISO_NEW"
+# Replace all instances of $MX_CODE_NAME with $SWIFT_TIME_STAMP
 bin/find-string-in-directory "$MX_CODE_NAME" "$DIR_ISO_NEW"
+bin/replace-sid "$MX_CODE_NAME" "$TIME_STAMP" "$DIR_ISO_NEW"
+bin/find-string-in-directory "$MX_CODE_NAME" "$DIR_ISO_NEW"
+
+# Replace all instances of $MX_DATE with $SWIFT_TIME_STAMP
+bin/find-string-in-directory "$MX_DATE" "$DIR_ISO_NEW"
+bin/replace-sid "$MX_CODE_NAME" "$TIME_STAMP" "$DIR_ISO_NEW"
+bin/find-string-in-directory "$MX_DATE" "$DIR_ISO_NEW"
+
+# Replace all instances of 'MX'
+bin/find-string-in-directory 'MX' "$DIR_ISO_NEW"
 
 # Updating $DIR_ISO_NEW/version
-FILE1="$DIR_ISO_NEW/version"
-echo ''
-echo "Updating $FILE1"
-echo "$EDITION_LONG $SWIFT_VERSION ($TIME_STAMP)" > "$FILE1"
-echo "Based on MX Linux $MX_VERSION (x64) $MX_CODE_NAME $MX_DATE" >> "$FILE1"
-echo ''
+# FILE1="$DIR_ISO_NEW/version"
+# echo ''
+# echo "Updating $FILE1"
+# echo "$EDITION_LONG $SWIFT_VERSION ($TIME_STAMP)" > "$FILE1"
+# echo "Based on MX Linux $MX_VERSION (x64) $MX_CODE_NAME $MX_DATE" >> "$FILE1"
+# echo ''
 
 # Checking $DIR_ISO_NEW/version
-echo '----------'
-echo "cat $FILE1"
-cat $FILE1
-echo ''
-bin/check-edition-long "$FILE1"
-bin/check-swift-version "$FILE1"
-bin/check-time-stamp "$FILE1"
+# echo '----------'
+# echo "cat $FILE1"
+# cat $FILE1
+# echo ''
+# bin/check-edition-long "$FILE1"
+# bin/check-swift-version "$FILE1"
+# bin/check-time-stamp "$FILE1"
 
 # Updating $DIR_ISO_NEW/.disk/info
-FILE1="$DIR_ISO_NEW/.disk/info"
-echo ''
-echo "Updating $DIR_ISO_NEW/version"
-echo "$EDITION_LONG $SWIFT_VERSION ($TIME_STAMP)" > "$FILE1"
-echo "Based on MX Linux $MX_VERSION (x64) $MX_CODE_NAME $MX_DATE" >> "$FILE1"
-echo ''
+# FILE1="$DIR_ISO_NEW/.disk/info"
+# echo ''
+# echo "Updating $DIR_ISO_NEW/version"
+# echo "$EDITION_LONG $SWIFT_VERSION ($TIME_STAMP)" > "$FILE1"
+# echo "Based on MX Linux $MX_VERSION (x64) $MX_CODE_NAME $MX_DATE" >> "$FILE1"
+# echo ''
 
 # Checking $DIR_ISO_NEW/.disk/info
-echo '----------'
-echo "cat $FILE1"
-cat $FILE1
-echo ''
-bin/check-edition-long "$FILE1"
-bin/check-swift-version "$FILE1"
-bin/check-time-stamp "$FILE1"
+# echo '----------'
+# echo "cat $FILE1"
+# cat $FILE1
+# echo ''
+# bin/check-edition-long "$FILE1"
+# bin/check-swift-version "$FILE1"
+# bin/check-time-stamp "$FILE1"
 
 # Updating $DIR_ISO_NEW/boot/grub/config/distro.cfg
-FILE1="$DIR_ISO_NEW/boot/grub/config/distro.cfg"
-bin/replace-sif 'MX Linux' "$EDITION_LONG" "$FILE1"
-bin/replace-sif 'MX' "$EDITION_LONG" "$FILE1"
+# FILE1="$DIR_ISO_NEW/boot/grub/config/distro.cfg"
+# bin/replace-sif 'MX Linux' "$EDITION_LONG" "$FILE1"
+# bin/replace-sif 'MX' "$EDITION_LONG" "$FILE1"
 
 # Checking $DIR_ISO_NEW/boot/grub/config/distro.cfg
-bin/check-edition-long "$FILE1"
-bin/error-if-sif 'MX' "$FILE1"
+# bin/check-edition-long "$FILE1"
+# bin/error-if-sif 'MX' "$FILE1"
 
 # Updating $DIR_ISO_NEW/boot/grub/grub.cfg
-FILE1="$DIR_ISO_NEW/boot/grub/grub.cfg"
-echo ''
-echo "Updating $FILE1"
-bin/replace-sif 'Live version of MX' "live version of $EDITION_LONG" "$FILE1"
-bin/replace-mx-date "$FILE1"
-bin/replace-sif "MX-$MX_VERSION" "$EDITION_LONG $SWIFT_VERSION" "$FILE1"
+# FILE1="$DIR_ISO_NEW/boot/grub/grub.cfg"
+# echo ''
+# echo "Updating $FILE1"
+# bin/replace-sif 'Live version of MX' "live version of $EDITION_LONG" "$FILE1"
+# bin/replace-mx-date "$FILE1"
+# bin/replace-sif "MX-$MX_VERSION" "$EDITION_LONG $SWIFT_VERSION" "$FILE1"
 
 # Checking $DIR_ISO_NEW/boot/grub/grub.cfg
-bin/check-edition-long "$FILE1"
-bin/check-swift-version "$FILE1"
-bin/error-if-sif 'MX' "$FILE1"
-bin/check-mx-date "$FILE1"
-bin/check-time-stamp "$FILE1"
+# bin/check-edition-long "$FILE1"
+# bin/check-swift-version "$FILE1"
+# bin/error-if-sif 'MX' "$FILE1"
+# bin/check-mx-date "$FILE1"
+# bin/check-time-stamp "$FILE1"
 
 # Updating $DIR_ISO_NEW/boot/grub/theme/bios.txt
-FILE1="$DIR_ISO_NEW/boot/grub/theme/bios.txt"
-echo ''
-echo "Updating $FILE1"
-bin/replace-mx-date "$FILE1"
-bin/replace-sif "MX-$MX_VERSION" "$EDITION_LONG $SWIFT_VERSION" "$FILE1"
-bin/replace-mx-code-name "$FILE1"
+# FILE1="$DIR_ISO_NEW/boot/grub/theme/bios.txt"
+# echo ''
+# echo "Updating $FILE1"
+# bin/replace-mx-date "$FILE1"
+# bin/replace-sif "MX-$MX_VERSION" "$EDITION_LONG $SWIFT_VERSION" "$FILE1"
+# bin/replace-mx-code-name "$FILE1"
 
 # Checking $DIR_ISO_NEW/boot/grub/theme/bios.txt
-bin/check-edition-long "$FILE1"
-bin/check-swift-version "$FILE1"
-bin/error-if-sif 'MX' "$FILE1"
-bin/check-mx-date "$FILE1"
-bin/check-mx-code-name "$FILE1"
-bin/check-time-stamp "$FILE1"
+# bin/check-edition-long "$FILE1"
+# bin/check-swift-version "$FILE1"
+# bin/error-if-sif 'MX' "$FILE1"
+# bin/check-mx-date "$FILE1"
+# bin/check-mx-code-name "$FILE1"
+# bin/check-time-stamp "$FILE1"
 
 # Updating $DIR_ISO_NEW/boot/grub/theme/l10n.txt
-FILE1="$DIR_ISO_NEW/boot/grub/theme/l10n.txt"
-bin/replace-mx-code-name "$FILE1"
-bin/replace-sif "MX-$MX_VERSION" "$EDITION_LONG $SWIFT_VERSION" "$FILE1"
+# FILE1="$DIR_ISO_NEW/boot/grub/theme/l10n.txt"
+# bin/replace-mx-code-name "$FILE1"
+# bin/replace-sif "MX-$MX_VERSION" "$EDITION_LONG $SWIFT_VERSION" "$FILE1"
 
 # Checking $DIR_ISO_NEW/boot/grub/theme/l10n.txt
-bin/check-edition-long "$FILE1"
-bin/check-swift-version "$FILE1"
-bin/check-time-stamp "$FILE1"
-bin/error-if-sif 'MX' "$FILE1"
+# bin/check-edition-long "$FILE1"
+# bin/check-swift-version "$FILE1"
+# bin/check-time-stamp "$FILE1"
+# bin/error-if-sif 'MX' "$FILE1"
 
 # Updating $DIR_ISO_NEW/boot/grub/theme/theme.txt
-FILE1="$DIR_ISO_NEW/boot/grub/theme/theme.txt"
-bin/replace-mx-code-name "$FILE1"
-bin/replace-sif "MX-$MX_VERSION" "$EDITION_LONG $SWIFT_VERSION" "$FILE1"
+# FILE1="$DIR_ISO_NEW/boot/grub/theme/theme.txt"
+# bin/replace-mx-code-name "$FILE1"
+# bin/replace-sif "MX-$MX_VERSION" "$EDITION_LONG $SWIFT_VERSION" "$FILE1"
 
 # Checking $DIR_ISO_NEW/boot/grub/theme/theme.txt
-bin/check-edition-long "$FILE1"
-bin/check-swift-version "$FILE1"
-bin/check-time-stamp "$FILE1"
-bin/error-if-sif 'MX' "$FILE1"
+# bin/check-edition-long "$FILE1"
+# bin/check-swift-version "$FILE1"
+# bin/check-time-stamp "$FILE1"
+# bin/error-if-sif 'MX' "$FILE1"
 
 # Updating $DIR_ISO_NEW/boot/grub/theme/uefi.txt
-FILE1="$DIR_ISO_NEW/boot/grub/theme/uefi.txt"
-bin/replace-mx-code-name "$FILE1"
-bin/replace-sif "MX-$MX_VERSION" "$EDITION_LONG $SWIFT_VERSION" "$FILE1"
+# FILE1="$DIR_ISO_NEW/boot/grub/theme/uefi.txt"
+# bin/replace-mx-code-name "$FILE1"
+# bin/replace-sif "MX-$MX_VERSION" "$EDITION_LONG $SWIFT_VERSION" "$FILE1"
 
 # Checking $DIR_ISO_NEW/boot/grub/theme/uefi.txt
-bin/check-edition-long "$FILE1"
-bin/check-swift-version "$FILE1"
-bin/check-time-stamp "$FILE1"
-bin/error-if-sif 'MX' "$FILE1"
+# bin/check-edition-long "$FILE1"
+# bin/check-swift-version "$FILE1"
+# bin/check-time-stamp "$FILE1"
+# bin/error-if-sif 'MX' "$FILE1"
 
 # Updating $DIR_ISO_NEW/boot/grub/theme/uefisb.txt
-FILE1="$DIR_ISO_NEW/boot/grub/theme/uefisb.txt"
-bin/replace-mx-code-name "$FILE1"
-bin/replace-sif "MX-$MX_VERSION" "$EDITION_LONG $SWIFT_VERSION" "$FILE1"
+# FILE1="$DIR_ISO_NEW/boot/grub/theme/uefisb.txt"
+# bin/replace-mx-code-name "$FILE1"
+# bin/replace-sif "MX-$MX_VERSION" "$EDITION_LONG $SWIFT_VERSION" "$FILE1"
 
 # Checking $DIR_ISO_NEW/boot/grub/theme/uefisb.txt
-bin/check-edition-long "$FILE1"
-bin/check-swift-version "$FILE1"
-bin/check-time-stamp "$FILE1"
-bin/error-if-sif 'MX' "$FILE1"
+# bin/check-edition-long "$FILE1"
+# bin/check-swift-version "$FILE1"
+# bin/check-time-stamp "$FILE1"
+# bin/error-if-sif 'MX' "$FILE1"
 
 # Updating $DIR_ISO_NEW/boot/isolinux/readme.msg
-FILE1="$DIR_ISO_NEW/boot/isolinux/readme.msg"
-bin/replace-sif 'MX Linux' "$EDITION_LONG $SWIFT_VERSION" "$FILE1"
-bin/replace-sif "MX-$MX_VERSION" "$EDITION_LONG $SWIFT_VERSION" "$FILE1"
-bin/replace-mx-date "$FILE1"
+# FILE1="$DIR_ISO_NEW/boot/isolinux/readme.msg"
+# bin/replace-sif 'MX Linux' "$EDITION_LONG $SWIFT_VERSION" "$FILE1"
+# bin/replace-sif "MX-$MX_VERSION" "$EDITION_LONG $SWIFT_VERSION" "$FILE1"
+# bin/replace-mx-date "$FILE1"
 
 # Checking $DIR_ISO_NEW/boot/isolinux/readme.msg
-bin/check-edition-long "$FILE1"
-bin/check-swift-version "$FILE1"
-bin/check-time-stamp "$FILE1"
+# bin/check-edition-long "$FILE1"
+# bin/check-swift-version "$FILE1"
+# bin/check-time-stamp "$FILE1"
 
 # Updating $DIR_ISO_NEW/boot/isolinux/isolinux.cfg
-FILE1="$DIR_ISO_NEW/boot/isolinux/isolinux.cfg"
-bin/replace-mx-code-name "$FILE1"
-bin/replace-mx-date "$FILE1"
-bin/replace-sif "MX-$MX_VERSION" "$EDITION_LONG $SWIFT_VERSION" "$FILE1"
-bin/replace-sif '_x64' ' x64' "$FILE1"
+# FILE1="$DIR_ISO_NEW/boot/isolinux/isolinux.cfg"
+# bin/replace-mx-code-name "$FILE1"
+# bin/replace-mx-date "$FILE1"
+# bin/replace-sif "MX-$MX_VERSION" "$EDITION_LONG $SWIFT_VERSION" "$FILE1"
+# bin/replace-sif '_x64' ' x64' "$FILE1"
 
 # Checking $DIR_ISO_NEW/boot/isolinux/isolinux.cfg
-bin/check-edition-long "$FILE1"
-bin/check-swift-version "$FILE1"
-bin/error-if-sif 'MX' "$FILE1"
-bin/check-mx-date "$FILE1"
-bin/check-mx-code-name "$FILE1"
-bin/check-time-stamp "$FILE1"
+# bin/check-edition-long "$FILE1"
+# bin/check-swift-version "$FILE1"
+# bin/error-if-sif 'MX' "$FILE1"
+# bin/check-mx-date "$FILE1"
+# bin/check-mx-code-name "$FILE1"
+# bin/check-time-stamp "$FILE1"
 
 # Updating $DIR_ISO_NEW/boot/syslinux/syslinux.cfg
-FILE1="$DIR_ISO_NEW/boot/syslinux/syslinux.cfg"
-bin/replace-mx-code-name "$FILE1"
-bin/replace-mx-date "$FILE1"
-bin/replace-sif '_x64' 'x64' "$FILE1"
-bin/replace-sif "MX-$MX_VERSION" "$EDITION_LONG $SWIFT_VERSION" "$FILE1"
+# FILE1="$DIR_ISO_NEW/boot/syslinux/syslinux.cfg"
+# bin/replace-mx-code-name "$FILE1"
+# bin/replace-mx-date "$FILE1"
+# bin/replace-sif '_x64' 'x64' "$FILE1"
+# bin/replace-sif "MX-$MX_VERSION" "$EDITION_LONG $SWIFT_VERSION" "$FILE1"
 
 # Checking $DIR_ISO_NEW/boot/syslinux/syslinux.cfg
-bin/check-edition-long "$FILE1"
-bin/check-swift-version "$FILE1"
-bin/error-if-sif 'MX' "$FILE1"
-bin/check-mx-date "$FILE1"
-bin/check-mx-code-name "$FILE1"
-bin/check-time-stamp "$FILE1"
+# bin/check-edition-long "$FILE1"
+# bin/check-swift-version "$FILE1"
+# bin/error-if-sif 'MX' "$FILE1"
+# bin/check-mx-date "$FILE1"
+# bin/check-mx-code-name "$FILE1"
+# bin/check-time-stamp "$FILE1"
 
 # Updating $DIR_ISO_NEW/boot/syslinux/readme.msg
-FILE1="$DIR_ISO_NEW/boot/syslinux/readme.msg"
-echo ''
-echo "Updating $FILE1"
-bin/replace-mx-date "$FILE1"
-bin/replace-sif 'MX Linux' "$EDITION_LONG" "$FILE1"
-bin/replace-sif "MX-$MX_VERSION" "$EDITION_LONG $SWIFT_VERSION" "$FILE1"
+# FILE1="$DIR_ISO_NEW/boot/syslinux/readme.msg"
+# echo ''
+# echo "Updating $FILE1"
+# bin/replace-mx-date "$FILE1"
+# bin/replace-sif 'MX Linux' "$EDITION_LONG" "$FILE1"
+# bin/replace-sif "MX-$MX_VERSION" "$EDITION_LONG $SWIFT_VERSION" "$FILE1"
 
 # Checking $DIR_ISO_NEW/boot/syslinux/readme.msg
-bin/check-edition-long "$FILE1"
-bin/check-swift-version "$FILE1"
-bin/error-if-sif 'MX' "$FILE1"
-bin/check-mx-date "$FILE1"
-bin/check-time-stamp "$FILE1"
+# bin/check-edition-long "$FILE1"
+# bin/check-swift-version "$FILE1"
+# bin/error-if-sif 'MX' "$FILE1"
+# bin/check-mx-date "$FILE1"
+# bin/check-time-stamp "$FILE1"
 
-bin/find-string-in-directory 'MX' "$DIR_ISO_NEW"
-bin/find-string-in-directory "$MX_DATE" "$DIR_ISO_NEW"
-bin/find-string-in-directory "$MX_CODE_NAME" "$DIR_ISO_NEW"
+# bin/find-string-in-directory 'MX' "$DIR_ISO_NEW"
+# bin/find-string-in-directory "$MX_DATE" "$DIR_ISO_NEW"
+# bin/find-string-in-directory "$MX_CODE_NAME" "$DIR_ISO_NEW"
 
 DATE2=$(date +%s)
 

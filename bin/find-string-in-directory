@@ -11,6 +11,10 @@ DIRECTORY=$2
 # This function lists all incidences of a string in all files within a directory
 
 # -I flag: omits binary files from the results
+# -r flag: recursive
+# -n flag: show the line number
+# -w flag: match the whole word
+# -e flag: the pattern used during the search
 
 echo '----------------------------------------------'
 echo "BEGIN: searching for '$STR1' within $DIRECTORY"
