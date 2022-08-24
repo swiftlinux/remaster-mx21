@@ -20,14 +20,14 @@ DATE1=$(date +%s)
 
 source definitions.sh
 
-# Replace all instances of $MX_CODE_NAME with $SWIFT_TIME_STAMP
+# Replace all instances of $MX_CODE_NAME with $TIME_STAMP
 bin/find-string-in-directory "$MX_CODE_NAME" "$DIR_ISO_NEW"
 bin/replace-sid "$MX_CODE_NAME" "$TIME_STAMP" "$DIR_ISO_NEW"
 bin/find-string-in-directory "$MX_CODE_NAME" "$DIR_ISO_NEW"
 
-# Replace all instances of $MX_DATE with $SWIFT_TIME_STAMP
+# Replace all instances of $MX_DATE with $TIME_STAMP
 bin/find-string-in-directory "$MX_DATE" "$DIR_ISO_NEW"
-bin/replace-sid "$MX_CODE_NAME" "$TIME_STAMP" "$DIR_ISO_NEW"
+bin/replace-sid "$MX_DATE" "$TIME_STAMP" "$DIR_ISO_NEW"
 bin/find-string-in-directory "$MX_DATE" "$DIR_ISO_NEW"
 
 # Replace all instances of 'MX'

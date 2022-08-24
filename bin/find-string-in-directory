@@ -19,7 +19,7 @@ DIRECTORY=$2
 echo '----------------------------------------------'
 echo "BEGIN: searching for '$STR1' within $DIRECTORY"
 echo '----------------------------------------------'
-grep -rnw -I "$DIRECTORY" -e "$STR1"
+echo 'No instances found' || grep -rnw -I "$DIRECTORY" -e "$STR1"
 echo '-------------------------------------------------'
 echo "FINISHED: searching for '$STR1' within $DIRECTORY"
 echo '-------------------------------------------------'

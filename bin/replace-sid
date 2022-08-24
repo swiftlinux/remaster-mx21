@@ -10,18 +10,9 @@ STR2=$2
 DIRECTORY=$3
 
 # This script replaces incidences of one string (STR1) with another (STR2)
-# within all files within (DIRECTORY).
-
-# -I flag: omits binary files from the results
-# -r flag: recursive
-# -e flag: the pattern used during the search
-
-echo '---------------------------------------------------------'
-echo "BEGIN: replacing '$STR1' within '$STR2' within $DIRECTORY"
-echo '---------------------------------------------------------'
-
-grep -rnw -I "$DIRECTORY" -e "$STR1" | xargs sed -i "s/$STR1/$STR2/g"
-
-echo '------------------------------------------------------------'
-echo "FINISHED: replacing '$STR1' within '$STR2' within $DIRECTORY"
-echo '------------------------------------------------------------'
+# in all files within a directory (DIRECTORY).
+echo "Replacing '$STR1' with '$STR2' in all files within $DIRECTORY"
+for FILE1 in $(grep -rnwl -I "$DIRECTORY" -e "$STR1");
+do
+  bin/replace-sif "$STR1" "$STR2" "$FILE1"
+done;
