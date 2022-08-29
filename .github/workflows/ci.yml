@@ -36,76 +36,64 @@ jobs:
       - name: Display parameters
         run: bin/welcome
 
-      # Stage 0
-      - name: Test upload to SourceForge
+      - name: STAGE 0 - Test upload to SourceForge
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           SSH_PUBLIC_KEY: ${{ secrets.SSH_PUBLIC_KEY }}
           SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
         run: bin/test-upload
 
-      # Stage 1A
-      - name: Provisioning - apt-get update
+      - name: STAGE 1A - Provisioning (apt-get update)
         run: sudo bin/provision-apt-get-update
 
-      # Stage 1B (main branch only)
-      - name: Provisioning - apt-get upgrade - only in main branch
+      - name: STAGE 1B - Provisioning (apt-get upgrade, main branch only)
         run: sudo bin/provision-apt-get-upgrade
         if: ${{ github.ref == 'refs/heads/main' }}
 
-      # Stage 1C
-      - name: Provisioning - apt-get install
+      - name: STAGE 1C - Provisioning (apt-get install)
         run: sudo bin/provision-apt-get-install
 
-      # Stage 2
-      - name: Cache downloaded ISO file
+      - name: STAGE 2 - Cache downloaded ISO file
         id: cache-downloaded-iso
         uses: actions/cache@v3
         with:
           path: iso-downloaded
           key: key-iso-file
 
-      - name: Downloading the Linux ISO
+      - name: STAGE 2 - Downloading the Linux ISO
         run: bin/download-iso
 
-      # Stage 3
-      - name: Mounting the virtual Linux DVD
+      - name: STAGE 3 - Mounting the virtual Linux DVD
         run: sudo bin/mount-iso
 
-      # Stage 4
-      - name: Copying the content from the virtual Linux DVD
+      - name: STAGE 4 - Copying the content from the virtual Linux DVD
         run: sudo bin/copy-iso
 
-      # Stage 5
-      - name: Mounting the compressed FS file
+      - name: STAGE 5 - Mounting the compressed FS file
         run: sudo bin/mount-compressed-fs
 
-      # Stage 6
-      - name: Copying the squashfs files
+      - name: STAGE 6 - Copying the squashfs files
         run: sudo bin/copy-squashfs
 
-      # Stage 7A: chroot mounts
-      - name: Mounting directories needed for chroot
+      - name: STAGE 7A - Mounting directories needed for chroot
         run: sudo bin/chroot-mounts
 
-      # Stage 7B: chroot apt-get update
-      - name: Updating the chroot environment
+      - name: STAGE 7B - Updating the chroot environment
         run: sudo bin/chroot-update
 
-      # Stage 7C: chroot apt-get upgrade (main branch only)
-      - name: Upgrading the chroot environment
+      - name: STAGE 7C - Upgrading the chroot environment (main branch only)
         run: sudo bin/chroot-upgrade
         if: ${{ github.ref == 'refs/heads/main' }}
 
-      # Stage 7D: chroot install of KeePassXC (main branch only)
-      - name: Installing KeePassXC in chroot
+      - name: STAGE 7D - Installing KeePassXC in chroot (main branch only)
         run: sudo bin/chroot-keepassxc
         if: ${{ github.ref == 'refs/heads/main' }}
 
-      # Stage 7E: chroot unmounting
-      - name: Ending the chroot mounts
+      - name: STAGE 7E - Ending the chroot mounts
         run: sudo bin/chroot-unmount
 
-      # Stage 7F: chroot cleanup
-      - name: Post-chroot cleanup operations
+      - name: STAGE 7F - Post-chroot cleanup operations
         run: sudo bin/chroot-cleanup
+
+      - name: STAGE 8A - Editing the files of the new ISO component files
+        run: sudo bin/edit-iso
