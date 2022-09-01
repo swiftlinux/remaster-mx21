@@ -13,8 +13,6 @@ DATE1=$(date +%s)
 
 source definitions.sh
 
-MX_VERSION=`cat parameters/MX-version.txt`
-
 # List of MX Linux download mirrors:
 # https://mxlinux.org/wiki/system/iso-download-mirrors/
 
