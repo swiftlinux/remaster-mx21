@@ -27,7 +27,7 @@ cat $DIR_ISO_NEW/.disk/info
 
 bin/string-in-directory 'list' "$DIR_ISO_NEW" "$MX_CODE_NAME"
 bin/string-in-directory 'replace' "$DIR_ISO_NEW" "$MX_CODE_NAME" "$TIME_STAMP"
-bin/string-in-directory 'list' "$DIR_ISO_NEW" "$MX_CODE_NAME"
+bin/string-in-directory 'error-if-present' "$DIR_ISO_NEW" "$MX_CODE_NAME"
 
 DATE2=$(date +%s)
 

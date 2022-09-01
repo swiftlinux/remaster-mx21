@@ -6,18 +6,22 @@
 set -eo pipefail
 
 MODE=$1
-DIRECTORY=$2
+FILENAME=$2
 STR1=$3
 STR2=$4
 
 if [ "$MODE" = 'replace' ]; then
-  echo "Replacing '$STR1' with '$STR2' in all files in $DIRECTORY"
+  echo "Replacing '$STR1' with '$STR2' in $DIRECTORY"
   find $DIRECTORY -type f -exec sed -i "s/$STR1/$STR2/g" {} +
 elif [ "$MODE" = 'error-if-present' ]; then
-  echo "Checking to confirm that 'S$TR1' is not present in any file in $DIRECTORY"
   for FILENAME in $(find $DIRECTORY -type f);
   do
-    bin/string-in-file 'error-if-present' "$FILENAME" "$STR1"
+    if grep -q "$STR1" "$FILENAME"; then
+      echo "The file $FILENAME still contains:"
+      echo "$STR1"
+      echo 'This is against expectations and constitutes an error.'
+      exit 1
+    fi
   done;
 elif [ "$MODE" = 'list' ]; then # NOTE: throws error if no files have $STR1
   echo '-----------------------------------------------------'
