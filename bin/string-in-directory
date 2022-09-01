@@ -18,7 +18,7 @@ elif [ "$MODE" = 'error-if-present' ]; then
   for FILENAME in $(find $DIRECTORY -type f);
   do
     echo $FILENAME
-    # bin/string-in-file 'error-if-present' "$FILENAME" "$STR1"
+    bin/string-in-file 'error-if-present' "$FILENAME" "$STR1"
   done;
 elif [ "$MODE" = 'list' ]; then # NOTE: throws error if no files have $STR1
   echo '-----------------------------------------------------'
