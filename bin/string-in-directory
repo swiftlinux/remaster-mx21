@@ -14,7 +14,7 @@ if [ "$MODE" = 'replace' ]; then
   echo "Replacing '$STR1' with '$STR2' in all files in $DIRECTORY"
   find $DIRECTORY -type f -exec sed -i "s/$STR1/$STR2/g" {} +
 elif [ "$MODE" = 'error-if-present' ]; then
-  echo "Checking to confirm that 'S$TR1' is not present in any file in $DIRECTORY"
+  echo "Checking to confirm that '$STR1' is not present in any file in $DIRECTORY"
   for FILENAME in $(find $DIRECTORY -type f);
   do
     bin/string-in-file 'error-if-present' "$FILENAME" "$STR1"
