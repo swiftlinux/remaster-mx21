@@ -19,7 +19,7 @@ SWIFT_VERSION=`cat $DIR_MAIN/parameters/Swift-version.txt`
 
 DIR_ISO_INPUT=$DIR_MAIN/iso-downloaded
 
-CD_VIRTUAL=$DIR_ISO_INPUT/linux.iso
+CD_VIRTUAL=$DIR_ISO_INPUT/mx-linux-$MX_VERSION.iso
 
 DIR_REMASTER=$DIR_MAIN/remaster
 
