@@ -1,0 +1,47 @@
+#!/bin/bash
+
+# NOTE: set -o pipefail is needed to ensure that any error or failure causes the whole pipeline to fail.
+# Without this specification, the CI status will provide a false sense of security by showing builds
+# as succeeding in spite of errors or failures.
+set -eo pipefail
+
+echo '#############################################################################'
+echo 'BEGIN STAGE 8: Customizing MX Linux to create the Swift Linux special edition'
+echo '#############################################################################'
+
+echo '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
+echo 'BEGIN STAGE 8A: customizing the Swift Linux ISO component files'
+echo '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
+
+DATE1=$(date +%s)
+
+source definitions.sh
+
+FILE_LIST_STATUS_MX_CODE_NAME="tmp8a/list-iso-$EDITION_SHORT.txt"
+mkdir -p tmp8a
+
+echo '------------------------'
+echo "cat $DIR_ISO_NEW/version"
+cat $DIR_ISO_NEW/version
+
+echo '---------------------------'
+echo "cat $DIR_ISO_NEW/.disk/info"
+cat $DIR_ISO_NEW/.disk/info
+
+# If $MX_CODE_NAME has been removed from all the files as a result of
+# previously running this script, the "bin/string-in-directory 'list'"
+# command will produce an error.
+if [ ! -f $FILE_LIST_STATUS_MX_CODE_NAME ]
+then
+  bin/string-in-directory 'list' "$DIR_ISO_NEW" "$MX_CODE_NAME"
+  touch $FILE_LIST_STATUS_MX_CODE_NAME
+fi
+
+bin/string-in-directory 'replace' "$DIR_ISO_NEW" "$MX_CODE_NAME" "$TIME_STAMP"
+bin/string-in-directory 'error-if-present' "$DIR_ISO_NEW" "$MX_CODE_NAME"
+
+DATE2=$(date +%s)
+
+echo '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
+echo "FINISHED 8A: customizing the Swift Linux ISO component files ($((DATE2-DATE1)) seconds)"
+echo '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'

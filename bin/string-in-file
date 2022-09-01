@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# NOTE: set -o pipefail is needed to ensure that any error or failure causes the whole pipeline to fail.
+# Without this specification, the CI status will provide a false sense of security by showing builds
+# as succeeding in spite of errors or failures.
+set -eo pipefail
+
+MODE=$1
+FILENAME=$2
+STR1=$3
+STR2=$4
+
+if [ "$MODE" = 'replace' ]; then
+  sed -i "s/$STR1/$STR2/g" "$FILENAME"
+elif [ "$MODE" = 'error-if-present' ]; then
+  if grep -q "$STR1" "$FILENAME"; then
+    echo "The file $FILENAME still contains:"
+    echo "$STR1"
+    echo 'This is against expectations and constitutes an error.'
+    exit 1
+  fi
+elif [ "$MODE" = 'list' ]; then # NOTE: throws error if no files have $STR1
+  echo '-----------------------------------------------------'
+  echo "BEGIN: list of files containing '$STR1' in $DIRECTORY"
+  echo '-----------------------------------------------------'
+  grep -rnw "$DIRECTORY" -e "$STR1"
+  echo '--------------------------------------------------------'
+  echo "FINISHED: list of files containing '$STR1' in $DIRECTORY"
+  echo '--------------------------------------------------------'
+else
+  echo 'Default mode here'
+fi

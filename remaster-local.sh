@@ -44,3 +44,5 @@ fi
 sudo bin/chroot-unmount
 
 sudo bin/chroot-cleanup
+
+sudo bin/edit-iso
