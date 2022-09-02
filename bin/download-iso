@@ -86,6 +86,10 @@ i=0
 # Stage 2A: downloading the SHA256 file
 download_sha256
 
+echo '--------------------'
+echo 'ls -l iso-downloaded'
+ls -l iso-downloaded
+
 # Repeat until the ISO file has the right SHA256 value
 # or 3 unsuccessful attempts have been made,
 # whichever comes first.
