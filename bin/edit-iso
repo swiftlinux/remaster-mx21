@@ -17,24 +17,42 @@ DATE1=$(date +%s)
 
 source definitions.sh
 
-FILE_LIST_STATUS_MX_CODE_NAME="tmp8a/list-iso-$EDITION_SHORT.txt"
 mkdir -p tmp8a
 
 echo '------------------------'
 echo "cat $DIR_ISO_NEW/version"
 cat $DIR_ISO_NEW/version
+echo ''
 
 echo '---------------------------'
 echo "cat $DIR_ISO_NEW/.disk/info"
 cat $DIR_ISO_NEW/.disk/info
+echo ''
+
+# If MX-$MX_VERSION has been removed from all the files as a result of
+# previously running this script, the "bin/string-in-directory 'list'"
+# command will produce an error.
+FILE1="tmp8a/list-iso-mx-mx-version-$EDITION_SHORT.txt"
+STRING1="MX-$MX_VERSION"
+STRING2="$EDITION_LONG $SWIFT_VERSION"
+
+if [ ! -f $FILE1 ]
+then
+  bin/string-in-directory 'list' "$DIR_ISO_NEW" "$STRING1"
+  touch $FILE1
+fi
+
+bin/string-in-directory 'replace' "$DIR_ISO_NEW" "$STRING1" "$STRING2"
+bin/string-in-directory 'error-if-present' "$DIR_ISO_NEW" "$STRING1"
 
 # If $MX_CODE_NAME has been removed from all the files as a result of
 # previously running this script, the "bin/string-in-directory 'list'"
 # command will produce an error.
-if [ ! -f $FILE_LIST_STATUS_MX_CODE_NAME ]
+FILE1="tmp8a/list-iso-code-name-$EDITION_SHORT.txt"
+if [ ! -f $FILE1 ]
 then
   bin/string-in-directory 'list' "$DIR_ISO_NEW" "$MX_CODE_NAME"
-  touch $FILE_LIST_STATUS_MX_CODE_NAME
+  touch $FILE1
 fi
 
 bin/string-in-directory 'replace' "$DIR_ISO_NEW" "$MX_CODE_NAME" "$TIME_STAMP"
