@@ -30,7 +30,7 @@ cat $DIR_ISO_NEW/.disk/info
 echo ''
 
 # Listing the files containing MX-$MX_VERSION, $MX_CODE_NAME, and $MX_DATE
-bin/string-in-directory 'list' "$DIR_ISO_NEW" "$MX-$MX_VERSION"
+bin/string-in-directory 'list' "$DIR_ISO_NEW" "MX-$MX_VERSION"
 bin/string-in-directory 'list' "$DIR_ISO_NEW" "$MX_CODE_NAME"
 bin/string-in-directory 'list' "$DIR_ISO_NEW" "$MX_DATE"
 bin/string-in-directory 'list' "$DIR_ISO_NEW" 'MX Linux'
