@@ -20,11 +20,13 @@ elif [ "$MODE" = 'error-if-present' ]; then
   do
     bin/string-in-file 'error-if-present' "$FILENAME" "$STR1"
   done;
-elif [ "$MODE" = 'list' ]; then # NOTE: throws error if no files have $STR1
+elif [ "$MODE" = 'list' ]; then
   echo '-----------------------------------------------------'
   echo "BEGIN: list of files containing '$STR1' in $DIRECTORY"
   echo '-----------------------------------------------------'
-  grep -rnw "$DIRECTORY" -e "$STR1"
+  set +e # Needed to alow script to continue if no files are found
+  grep -rnw "$DIRECTORY" -e "$STR1" # NOTE: throws error if no files have $STR1
+  set -e
   echo '--------------------------------------------------------'
   echo "FINISHED: list of files containing '$STR1' in $DIRECTORY"
   echo '--------------------------------------------------------'

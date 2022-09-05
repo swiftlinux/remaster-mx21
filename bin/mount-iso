@@ -20,6 +20,7 @@ DATE1=$(date +%s)
 
 source definitions.sh
 
+rm -rf $DIR_REMASTER
 mkdir -p $DIR_ISO_ORIG
 
 cd $DIR_MAIN
