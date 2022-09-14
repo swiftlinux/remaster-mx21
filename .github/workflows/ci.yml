@@ -84,7 +84,7 @@ jobs:
 
       - name: STAGE 7C - Upgrading the chroot environment (main branch only)
         run: sudo bin/chroot-upgrade
-        if: ${{ github.ref == 'refs/heads/main' }}
+        # if: ${{ github.ref == 'refs/heads/main' }}
 
       - name: STAGE 7D - Installing KeePassXC in chroot (main branch only)
         run: sudo bin/chroot-keepassxc

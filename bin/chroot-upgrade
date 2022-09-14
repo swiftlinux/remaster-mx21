@@ -10,12 +10,23 @@ echo 'BEGIN STAGE 7C: chroot apt-get upgrade -y'
 echo '+++++++++++++++++++++++++++++++++++++++++'
 
 #  PURPOSE:
-
 #  This substage performs apt-get upgrade in the chroot environment.
 
 DATE1=$(date +%s)
 
 source definitions.sh
+
+# Upgrading certain packages with apt-get upgrade results in errors and requests for user input.
+# This script removes the files that were modified since installation.
+
+echo 'rm -f /etc/grub.d/10_linux'
+chroot $DIR_SQUASHFS_NEW rm -f /etc/grub.d/10_linux
+
+echo 'rm -f /etc/grub.d/30_os-prober'
+chroot $DIR_SQUASHFS_NEW rm -f /etc/grub.d/30_os-prober
+
+rm 'rm -f /etc/grub.d/30_uefi-firmware'
+chroot $DIR_SQUASHFS_NEW rm -f /etc/grub.d/30_uefi-firmware
 
 echo '--------------------------------------------------'
 echo "BEGIN: chroot $DIR_SQUASHFS_NEW apt-get upgrade -y"
