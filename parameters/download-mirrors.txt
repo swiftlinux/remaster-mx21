@@ -4,7 +4,6 @@ http://mirror.it.ubc.ca/mxlinux-iso/MX/Final/Xfce
 http://www.gtlib.gatech.edu/pub/MX-Linux/MX-Linux/MX/Final/Xfce
 http://mirror.umd.edu/mxlinux-iso/MX/Final/Xfce
 http://mirror.math.princeton.edu/pub/mxlinux-iso/MX/Final/Xfce
-http://mirrors.rit.edu/mxlinux/mx-isos/MX/Final/Xfce
 http://mxlinux.csail.mit.edu/mxlinux-iso/MX/Final/Xfce
 http://mirror.its.dal.ca/mxlinux-cd/MX/Final/Xfce
 https://mirror.csclub.uwaterloo.ca/mxlinux-iso/MX/Final/Xfce
