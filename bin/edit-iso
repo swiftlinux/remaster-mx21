@@ -34,19 +34,28 @@ bin/string-in-directory 'list' "$DIR_ISO_NEW" "$MX_DATE"
 bin/string-in-directory 'list' "$DIR_ISO_NEW" 'MX Linux'
 bin/string-in-directory 'list' "$DIR_ISO_NEW" 'MX'
 
+# Replacing MX-$MX_VERSION
 STRING1="MX-$MX_VERSION"
 STRING2="$EDITION_LONG $SWIFT_VERSION"
-
 bin/string-in-directory 'replace' "$DIR_ISO_NEW" "$STRING1" "$STRING2"
 bin/string-in-directory 'error-if-present' "$DIR_ISO_NEW" "$STRING1"
 
-bin/string-in-directory 'replace' "$DIR_ISO_NEW" "$MX_CODE_NAME" "$TIME_STAMP"
-bin/string-in-directory 'error-if-present' "$DIR_ISO_NEW" "$MX_CODE_NAME"
+# Replacing $MX_CODE_NAME
+STRING1="$MX_CODE_NAME"
+STRING2="$TIME_STAMP"
+bin/string-in-directory 'replace' "$DIR_ISO_NEW" "$STRING1" "$STRING2"
+bin/string-in-directory 'error-if-present' "$DIR_ISO_NEW" "$STRING1"
 
-# Listing the files containing $EDITION_LONG, $SWIFT_VERSION
+# Replacing $MX_DATE
+STRING1="$MX_DATE"
+STRING2="$TIME_STAMP"
+bin/string-in-directory 'replace' "$DIR_ISO_NEW" "$STRING1" "$STRING2"
+bin/string-in-directory 'error-if-present' "$DIR_ISO_NEW" "$STRING1"
+
+# Listing the files containing $EDITION_LONG, $SWIFT_VERSION, $TIME_STAMP
 bin/string-in-directory 'list' "$DIR_ISO_NEW" "$EDITION_LONG"
 bin/string-in-directory 'list' "$DIR_ISO_NEW" "$SWIFT_VERSION"
-
+bin/string-in-directory 'list' "$DIR_ISO_NEW" "$TIME_STAMP"
 
 DATE2=$(date +%s)
 

@@ -11,6 +11,7 @@ STR1=$3
 STR2=$4
 
 if [ "$MODE" = 'replace' ]; then
+  echo '---------------------------------------------------------'
   echo "Replacing '$STR1' with '$STR2' in all files in $DIRECTORY"
   find $DIRECTORY -type f -exec sed -i "s/$STR1/$STR2/g" {} +
 elif [ "$MODE" = 'error-if-present' ]; then
