@@ -25,8 +25,8 @@ chroot $DIR_SQUASHFS_NEW rm -f /etc/grub.d/10_linux
 echo 'rm -f /etc/grub.d/30_os-prober'
 chroot $DIR_SQUASHFS_NEW rm -f /etc/grub.d/30_os-prober
 
-rm 'rm -f /etc/grub.d/30_uefi-firmware'
-chroot $DIR_SQUASHFS_NEW rm -f /etc/grub.d/30_uefi-firmware
+# rm 'rm -f /etc/grub.d/30_uefi-firmware'
+# chroot $DIR_SQUASHFS_NEW rm -f /etc/grub.d/30_uefi-firmware
 
 echo '--------------------------------------------------'
 echo "BEGIN: chroot $DIR_SQUASHFS_NEW apt-get upgrade -y"
