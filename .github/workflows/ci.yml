@@ -53,12 +53,13 @@ jobs:
       - name: STAGE 1C - Provisioning (apt-get install)
         run: sudo bin/provision-apt-get-install
 
+      # Cache key needs to be updated to clear cache
       - name: STAGE 2 - Cache downloaded ISO file
         id: cache-downloaded-iso
         uses: actions/cache@v3
         with:
           path: iso-downloaded
-          key: key-iso-file-2022-09-01
+          key: key-iso-file-2022-09-05
 
       - name: STAGE 2 - Downloading the Linux ISO
         run: bin/download-iso
