@@ -28,6 +28,35 @@ chroot $DIR_SQUASHFS_NEW rm -f /etc/grub.d/30_os-prober
 # rm 'rm -f /etc/grub.d/30_uefi-firmware'
 # chroot $DIR_SQUASHFS_NEW rm -f /etc/grub.d/30_uefi-firmware
 
+function purge_and_install_package {
+  PACKAGE=$1
+  echo '--------------------------------'
+  echo "BEGIN: apt-get purge -y $PACKAGE"
+  echo '--------------------------------'
+  apt-get purge -y $PACKAGE
+  wait
+  echo '-----------------------------------'
+  echo "FINISHED: apt-get purge -y $PACKAGE"
+  echo '-----------------------------------'
+
+  echo '----------------------------------'
+  echo "BEGIN: apt-get install -y $PACKAGE"
+  echo '----------------------------------'
+  apt-get install -y $PACKAGE
+  wait
+  echo '-------------------------------------'
+  echo "FINISHED: apt-get install -y $PACKAGE"
+  echo '-------------------------------------'
+}
+
+purge_and_install_package 'grub-common'
+
+echo ''
+echo 'BEGIN: apt-get purge -y grub-common'
+chroot $DIR_SQUASHFS_NEW apt-get purge -y grub-common
+
+chroot $DIR_SQUASHFS_NEW apt-get install -y grub-common
+
 echo '--------------------------------------------------'
 echo "BEGIN: chroot $DIR_SQUASHFS_NEW apt-get upgrade -y"
 echo '--------------------------------------------------'
