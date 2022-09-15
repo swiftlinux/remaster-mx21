@@ -29,12 +29,19 @@ echo ''
 
 # Listing the files containing MX-$MX_VERSION, $MX_CODE_NAME, and $MX_DATE
 wait
+bin/string-in-directory 'list' "$DIR_ISO_NEW" "MX-$MX_VERSION_x64"
 bin/string-in-directory 'list' "$DIR_ISO_NEW" "MX-$MX_VERSION"
 bin/string-in-directory 'list' "$DIR_ISO_NEW" "$MX_CODE_NAME"
 bin/string-in-directory 'list' "$DIR_ISO_NEW" "$MX_DATE"
-bin/string-in-directory 'list' "$DIR_ISO_NEW" '_x64'
 bin/string-in-directory 'list' "$DIR_ISO_NEW" 'MX Linux'
 bin/string-in-directory 'list' "$DIR_ISO_NEW" 'MX'
+
+# Replacing MX-$MX_VERSION_x64
+wait
+STRING1="MX-$MX_VERSION_x64"
+STRING2='$EDITION_LONG $SWIFT_VERSION x64'
+bin/string-in-directory 'replace' "$DIR_ISO_NEW" "$STRING1" "$STRING2"
+bin/string-in-directory 'error-if-present' "$DIR_ISO_NEW" "$STRING1"
 
 # Replacing MX-$MX_VERSION
 wait
@@ -54,13 +61,6 @@ bin/string-in-directory 'error-if-present' "$DIR_ISO_NEW" "$STRING1"
 wait
 STRING1="$MX_DATE"
 STRING2="$TIME_STAMP"
-bin/string-in-directory 'replace' "$DIR_ISO_NEW" "$STRING1" "$STRING2"
-bin/string-in-directory 'error-if-present' "$DIR_ISO_NEW" "$STRING1"
-
-# Replacing _x64
-wait
-STRING1='_x64'
-STRING2=' x64'
 bin/string-in-directory 'replace' "$DIR_ISO_NEW" "$STRING1" "$STRING2"
 bin/string-in-directory 'error-if-present' "$DIR_ISO_NEW" "$STRING1"
 
