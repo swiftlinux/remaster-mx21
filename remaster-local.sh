@@ -33,13 +33,13 @@ sudo bin/chroot-mounts
 
 sudo bin/chroot-update
 
-# if [ "$GIT_BRANCH" = 'main' ]; then
+if [ "$GIT_BRANCH" = 'main' ]; then
   sudo bin/chroot-upgrade
   sudo bin/chroot-keepassxc
-# else
-  # echo 'Skipping chroot apt-get upgrade (executed only in the main branch)'
-  # echo 'Skipping chroot installation of KeePassXC (executed only in the main branch)'
-# fi
+else
+  echo 'Skipping chroot apt-get upgrade (executed only in the main branch)'
+  echo 'Skipping chroot installation of KeePassXC (executed only in the main branch)'
+fi
 
 sudo bin/chroot-unmount
 
