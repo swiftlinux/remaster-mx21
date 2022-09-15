@@ -14,6 +14,7 @@ echo 'BEGIN STAGE 8A: customizing the Swift Linux ISO component files'
 echo '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
 
 DATE1=$(date +%s)
+QUOTE2='"'
 
 source definitions.sh
 STR64='_x64'
@@ -65,8 +66,30 @@ STRING2="$TIME_STAMP"
 bin/string-in-directory 'replace' "$DIR_ISO_NEW" "$STRING1" "$STRING2"
 bin/string-in-directory 'error-if-present' "$DIR_ISO_NEW" "$STRING1"
 
+# Replacing 'MX Linux'
+wait
+STRING1='MX Linux'
+STRING2="$EDITION_LONG"
+bin/string-in-directory 'replace' "$DIR_ISO_NEW" "$STRING1" "$STRING2"
+bin/string-in-directory 'error-if-present' "$DIR_ISO_NEW" "$STRING1"
+
+# Replacing 'version of MX'
+wait
+STRING1='version of MX'
+STRING2="version of $EDITION_LONG"
+bin/string-in-directory 'replace' "$DIR_ISO_NEW" "$STRING1" "$STRING2"
+bin/string-in-directory 'error-if-present' "$DIR_ISO_NEW" "$STRING1"
+
+# Replacing 'distro="MX"'
+wait
+STRING1='distro="MX"'
+STRING2="distro=$QUOTE2$EDITION_LONG$QUOTE2"
+bin/string-in-directory 'replace' "$DIR_ISO_NEW" "$STRING1" "$STRING2"
+bin/string-in-directory 'error-if-present' "$DIR_ISO_NEW" "$STRING1"
+
 # Listing the files containing $EDITION_LONG, $SWIFT_VERSION, $TIME_STAMP
 wait
+bin/string-in-directory 'list' "$DIR_ISO_NEW" 'MX'
 bin/string-in-directory 'list' "$DIR_ISO_NEW" "$EDITION_LONG"
 bin/string-in-directory 'list' "$DIR_ISO_NEW" "$SWIFT_VERSION"
 bin/string-in-directory 'list' "$DIR_ISO_NEW" "$TIME_STAMP"
