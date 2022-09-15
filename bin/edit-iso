@@ -16,6 +16,7 @@ echo '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
 DATE1=$(date +%s)
 
 source definitions.sh
+STR64='_x64'
 
 echo '------------------------'
 echo "cat $DIR_ISO_NEW/version"
@@ -27,9 +28,9 @@ echo "cat $DIR_ISO_NEW/.disk/info"
 cat $DIR_ISO_NEW/.disk/info
 echo ''
 
-# Listing the files containing MX-$MX_VERSION, $MX_CODE_NAME, and $MX_DATE
+# Listing the files containing certain strings of interest
 wait
-bin/string-in-directory 'list' "$DIR_ISO_NEW" "MX-$MX_VERSION_x64"
+bin/string-in-directory 'list' "$DIR_ISO_NEW" "MX-$MX_VERSION$STR64"
 bin/string-in-directory 'list' "$DIR_ISO_NEW" "MX-$MX_VERSION"
 bin/string-in-directory 'list' "$DIR_ISO_NEW" "$MX_CODE_NAME"
 bin/string-in-directory 'list' "$DIR_ISO_NEW" "$MX_DATE"
@@ -38,7 +39,7 @@ bin/string-in-directory 'list' "$DIR_ISO_NEW" 'MX'
 
 # Replacing MX-$MX_VERSION_x64
 wait
-STRING1="MX-$MX_VERSION_x64"
+STRING1="MX-$MX_VERSION$STR64"
 STRING2='$EDITION_LONG $SWIFT_VERSION x64'
 bin/string-in-directory 'replace' "$DIR_ISO_NEW" "$STRING1" "$STRING2"
 bin/string-in-directory 'error-if-present' "$DIR_ISO_NEW" "$STRING1"
