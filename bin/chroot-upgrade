@@ -10,12 +10,43 @@ echo 'BEGIN STAGE 7C: chroot apt-get upgrade -y'
 echo '+++++++++++++++++++++++++++++++++++++++++'
 
 #  PURPOSE:
-
 #  This substage performs apt-get upgrade in the chroot environment.
 
 DATE1=$(date +%s)
 
 source definitions.sh
+
+# Upgrading certain packages with apt-get upgrade results in errors and requests for user input.
+# This script removes the files that were modified since installation.
+
+echo "chroot $DIR_SQUASHFS_NEW rm -f /etc/grub.d/10_linux"
+chroot $DIR_SQUASHFS_NEW rm -f /etc/grub.d/10_linux
+
+echo "chroot $DIR_SQUASHFS_NEW rm -f /etc/grub.d/30_os-prober"
+chroot $DIR_SQUASHFS_NEW rm -f /etc/grub.d/30_os-prober
+
+function purge_and_install_package {
+  PACKAGE=$1
+  echo '----------------------------------------------------------------------------------'
+  echo "BEGIN: chroot $DIR_SQUASHFS_NEW apt-get purge -y --allow-remove-essential $PACKAGE"
+  echo '----------------------------------------------------------------------------------'
+  chroot $DIR_SQUASHFS_NEW apt-get purge -y --allow-remove-essential $PACKAGE
+  wait
+  echo '-------------------------------------------------------------------------------------'
+  echo "FINISHED: chroot $DIR_SQUASHFS_NEW apt-get purge -y --allow-remove-essential $PACKAGE"
+  echo '-------------------------------------------------------------------------------------'
+
+  echo '-----------------------------------------------------------'
+  echo "BEGIN: chroot $DIR_SQUASHFS_NEW apt-get install -y $PACKAGE"
+  echo '-----------------------------------------------------------'
+  chroot $DIR_SQUASHFS_NEW apt-get install -y $PACKAGE
+  wait
+  echo '--------------------------------------------------------------'
+  echo "FINISHED: chroot $DIR_SQUASHFS_NEW apt-get install -y $PACKAGE"
+  echo '--------------------------------------------------------------'
+}
+
+purge_and_install_package 'grub-common'
 
 echo '--------------------------------------------------'
 echo "BEGIN: chroot $DIR_SQUASHFS_NEW apt-get upgrade -y"
