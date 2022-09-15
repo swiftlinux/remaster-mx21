@@ -40,7 +40,7 @@ bin/string-in-directory 'list' "$DIR_ISO_NEW" 'MX'
 # Replacing MX-$MX_VERSION_x64
 wait
 STRING1="MX-$MX_VERSION$STR64"
-STRING2='$EDITION_LONG $SWIFT_VERSION x64'
+STRING2="$EDITION_LONG $SWIFT_VERSION x64"
 bin/string-in-directory 'replace' "$DIR_ISO_NEW" "$STRING1" "$STRING2"
 bin/string-in-directory 'error-if-present' "$DIR_ISO_NEW" "$STRING1"
 
