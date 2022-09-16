@@ -14,10 +14,8 @@ echo 'BEGIN STAGE 8A: customizing the Swift Linux ISO component files'
 echo '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
 
 DATE1=$(date +%s)
-QUOTE2='"'
 
 source definitions.sh
-STR64='_x64'
 
 echo '------------------------'
 echo "cat $DIR_ISO_NEW/version"
