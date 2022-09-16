@@ -9,6 +9,9 @@ DIR_MAIN=$PWD
 
 source tmp-edition/definitions.sh
 
+QUOTE2='"'
+STR64='_x64'
+
 MX_VERSION=`cat $DIR_MAIN/parameters/MX-version.txt`
 
 MX_DATE=`cat $DIR_MAIN/parameters/MX-date.txt`
