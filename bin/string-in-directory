@@ -26,7 +26,9 @@ elif [ "$MODE" = 'list' ]; then
   echo "BEGIN: list of files containing '$STR1' in $DIRECTORY"
   echo '-----------------------------------------------------'
   set +e # Needed to alow script to continue if no files are found
-  grep -rnw "$DIRECTORY" -e "$STR1" # NOTE: throws error if no files have $STR1
+  # NOTE 1: The grep command throws an error if no files have $STR1.
+  # NOTE 2: The "-I" flag omits binary files from the search results.
+  grep -rnwI "$DIRECTORY" -e "$STR1"
   set -e
   echo '--------------------------------------------------------'
   echo "FINISHED: list of files containing '$STR1' in $DIRECTORY"
