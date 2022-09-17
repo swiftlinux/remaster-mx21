@@ -1,4 +1,4 @@
-name: Find Strings in SquashFS Directory
+name: SquashFS
 
 on: [push]
 
