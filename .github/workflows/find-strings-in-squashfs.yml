@@ -6,10 +6,51 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
+   # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
-      - name: Run the find-strings-in-squashfs.sh script
-        run: bash find-strings-in-squashfs.sh
+      # Set parameters
+      - name: Set parameters
+        run: bash set-params-ci-find-strings-in-squashfs.sh
+
+      # Display parameters
+      - name: Display parameters
+        run: bin/welcome
+
+      - name: STAGE 1A - Provisioning (apt-get update)
+        run: sudo bin/provision-apt-get-update
+
+       # STAGE 1B (apt-get upgrade) is skipped.
+
+      - name: STAGE 1C - Provisioning (apt-get install)
+        run: sudo bin/provision-apt-get-install
+
+      # Cache key needs to be updated to clear cache
+      - name: STAGE 2 - Cache downloaded ISO file
+        id: cache-downloaded-iso
+        uses: actions/cache@v3
+        with:
+          path: iso-downloaded
+          key: key-iso-file-2022-09-14
+
+      - name: STAGE 2 - Downloading the Linux ISO
+        run: bin/download-iso
+
+      - name: STAGE 3 - Mounting the virtual Linux DVD
+        run: sudo bin/mount-iso
+
+      - name: STAGE 4 - Copying the content from the virtual Linux DVD
+        run: sudo bin/copy-iso
+
+      - name: STAGE 5 - Mounting the compressed FS file
+        run: sudo bin/mount-compressed-fs
+
+      - name: STAGE 6 - Copying the squashfs files
+        run: sudo bin/copy-squashfs
+
+      # Stage 7 (chroot) is skipped
+
+      - name: Find strings in SquashFS
+        run: sudo bin/find-strings-in-squashfs
