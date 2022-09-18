@@ -9,5 +9,5 @@ mkdir -p tmp-edition
 echo "EDITION_SHORT='EDITION_SHORT_1'" > tmp-edition/definitions.sh
 echo "EDITION_LONG='EDITION_LONG_1'" >> tmp-edition/definitions.sh
 
-bin/replace_sif 'EDITION_SHORT_1' "generic" "tmp-edition/definitions.sh"
-bin/replace_sif 'EDITION_LONG_1' 'Generic Swift Linux' "tmp-edition/definitions.sh"
+bin/string-in-file 'replace' 'tmp-edition/definitions.sh' 'EDITION_SHORT_1' 'generic'
+bin/string-in-file 'replace' 'tmp-edition/definitions.sh' 'EDITION_LONG_1' 'Generic Swift Linux'
