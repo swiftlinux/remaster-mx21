@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# NOTE: set -o pipefail is needed to ensure that any error or failure causes the whole pipeline to fail.
+# Without this specification, the CI status will provide a false sense of security by showing builds
+# as succeeding in spite of errors or failures.
+set -eo pipefail
+
+echo '##################################################################'
+echo 'BEGIN STAGE 10: creating the new linuxfs file for the new ISO file'
+echo '##################################################################'
+
+# PURPOSE:
+
+# In the previous stage, selected files in $DIR_SQUASHFS_NEW were customized for Swift Linux.
+
+# In this stage, the contents of $DIR_SQUASHFS_NEW are used to create a new squashfs file (linuxfs)
+# within $DIR_ISO_NEW.
+
+DATE1=$(date +%s)
+
+source definitions.sh
+
+echo '----------------------------------------------------------------'
+echo "mksquashfs $DIR_SQUASHFS_NEW $DIR_ISO_NEW/antiX/linuxfs -comp xz"
+echo 'NOTE: This will take some time.'
+mksquashfs $DIR_SQUASHFS_NEW $DIR_ISO_NEW/antiX/linuxfs -comp xz
+if [[ $? -ne 0 ]]; then
+  echo -e "Error making linuxfs file. Script aborted.\n" 
+  exit 5
+fi
+
+DATE2=$(date +%s)
+
+echo '################################################################################################'
+echo "FINISHED STAGE 10: creating the new linuxfs file for the new ISO file ($((DATE2-DATE1)) seconds)"
+echo '################################################################################################'
