@@ -101,3 +101,6 @@ jobs:
 
       - name: STAGE 10 - Creating the new linuxfs file for the new ISO file
         run: sudo bin/make-squashfs
+
+      - name: STAGE 11 - Creating the new Swift Linux ISO file
+        run: bin/make-iso
