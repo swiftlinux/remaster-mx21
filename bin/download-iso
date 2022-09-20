@@ -35,7 +35,9 @@ function download_file () {
   echo '---------------------------------------------------------'
   echo "BEGIN: downloading from $URL_TO_DOWNLOAD to $PATH_TO_FILE"
   echo '---------------------------------------------------------'
+  set +e
   wget -c "$URL_TO_DOWNLOAD" --progress=dot -e dotbytes=10M -O "$PATH_TO_FILE"
+  set -e
   wait
   echo '---------------------------------------------------------'
   echo "FINISHED: downloading from $URL_TO_DOWNLOAD to $PATH_TO_FILE"
