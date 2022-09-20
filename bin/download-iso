@@ -22,12 +22,6 @@ source definitions.sh
 # This ensures that a successful download happens sooner or later.
 # Mirror sites that prove to be unreliable or slow can be removed
 # from the file specified below.
-BASE_URL=`shuf -n 1 $DIR_MAIN/parameters/download-mirrors.txt`
-
-SHA256_URL="$BASE_URL/MX-$MX_VERSION"_x64.iso.sha256
-SHA256_FILENAME='iso-downloaded/sha256.txt'
-ISO_URL="$BASE_URL/MX-$MX_VERSION"_x64.iso
-ISO_FILENAME="$CD_VIRTUAL"
 
 function download_file () {
   URL_TO_DOWNLOAD=$1
@@ -52,11 +46,16 @@ function download_sha256 () {
   # Delete the old SHA256 file (may be outdated)
   rm -f $SHA256_FILENAME
   wait
+  BASE_URL=`shuf -n 1 $DIR_MAIN/parameters/download-mirrors.txt`
+  SHA256_URL="$BASE_URL/MX-$MX_VERSION"_x64.iso.sha256
   download_file "$SHA256_URL" "$SHA256_FILENAME"
   wait
 }
 
 function download_iso_file () {
+  BASE_URL=`shuf -n 1 $DIR_MAIN/parameters/download-mirrors.txt`
+  ISO_URL="$BASE_URL/MX-$MX_VERSION"_x64.iso
+  ISO_FILENAME="$CD_VIRTUAL"
   download_file "$ISO_URL" "$ISO_FILENAME"
   wait
 }
@@ -111,7 +110,7 @@ done
 # Throw error code if the process did not pan out.
 if [ "$FINISHED" = 'false' ]
 then
-  echo "The download from $URL_TO_DOWNLOAD failed.  Try again later."
+  echo "The download failed.  Try again later."
   exit 1
 else
   echo "Successfully downloaded from $SHA256_URL to $SHA256_FILENAME"
