@@ -59,7 +59,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: iso-downloaded
-          key: key-iso-file-2022-09-14
+          key: key-iso-file-2022-09-24
 
       - name: STAGE 2 - Downloading the Linux ISO
         run: bin/download-iso
