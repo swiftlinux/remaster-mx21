@@ -5,9 +5,9 @@
 # as succeeding in spite of errors or failures.
 set -eo pipefail
 
-DIR_MAIN=$PWD
+DIR_MAIN="$PWD"
 
-source tmp-edition/definitions.sh
+source "tmp-edition/definitions.sh"
 
 QUOTE2='"'
 STR64='_x64'
@@ -24,6 +24,8 @@ DIR_ISO_INPUT="$DIR_MAIN/iso-downloaded"
 
 CD_VIRTUAL="$DIR_ISO_INPUT/mx-linux-$MX_VERSION.iso"
 
+SHA256_CD_VIRTUAL="$CD_VIRTUAL.sha256.txt"
+
 DIR_REMASTER="$DIR_MAIN/remaster"
 
 DIR_ISO_ORIG="$DIR_REMASTER/iso-orig"
@@ -34,7 +36,7 @@ if [ ! -f "$DIR_MAIN/tmp/timestamp.txt" ]
 then
   TIME_STAMP=`date -u +%Y-%m%d-%H%M%S`
   mkdir -p "$DIR_MAIN/tmp"
-  echo "$TIME_STAMP" > $DIR_MAIN/tmp/timestamp.txt
+  echo "$TIME_STAMP" > "$DIR_MAIN/tmp/timestamp.txt"
 fi
 
 TIME_STAMP=`cat tmp/timestamp.txt`
