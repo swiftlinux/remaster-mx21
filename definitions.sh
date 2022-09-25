@@ -5,9 +5,9 @@
 # as succeeding in spite of errors or failures.
 set -eo pipefail
 
-DIR_MAIN=$PWD
+DIR_MAIN="$PWD"
 
-source tmp-edition/definitions.sh
+source "tmp-edition/definitions.sh"
 
 QUOTE2='"'
 STR64='_x64'
@@ -20,21 +20,23 @@ MX_CODE_NAME=`cat $DIR_MAIN/parameters/MX-code-name.txt`
 
 SWIFT_VERSION=`cat $DIR_MAIN/parameters/Swift-version.txt`
 
-DIR_ISO_INPUT=$DIR_MAIN/iso-downloaded
+DIR_ISO_INPUT="$DIR_MAIN/iso-downloaded"
 
-CD_VIRTUAL=$DIR_ISO_INPUT/mx-linux-$MX_VERSION.iso
+CD_VIRTUAL="$DIR_ISO_INPUT/mx-linux-$MX_VERSION.iso"
 
-DIR_REMASTER=$DIR_MAIN/remaster
+SHA256_CD_VIRTUAL="$CD_VIRTUAL.sha256.txt"
 
-DIR_ISO_ORIG=$DIR_REMASTER/iso-orig
+DIR_REMASTER="$DIR_MAIN/remaster"
+
+DIR_ISO_ORIG="$DIR_REMASTER/iso-orig"
 
 DIR_ISO_NEW="$DIR_REMASTER/iso-$EDITION_SHORT"
 
-if [ ! -f $DIR_MAIN/tmp/timestamp.txt ]
+if [ ! -f "$DIR_MAIN/tmp/timestamp.txt" ]
 then
   TIME_STAMP=`date -u +%Y-%m%d-%H%M%S`
-  mkdir -p $DIR_MAIN/tmp
-  echo "$TIME_STAMP" > $DIR_MAIN/tmp/timestamp.txt
+  mkdir -p "$DIR_MAIN/tmp"
+  echo "$TIME_STAMP" > "$DIR_MAIN/tmp/timestamp.txt"
 fi
 
 TIME_STAMP=`cat tmp/timestamp.txt`
@@ -47,11 +49,11 @@ fi
 
 FILE_SQUASHFS_ORIG=''
 
-if [ -f $DIR_MAIN/tmp/path_squashfs.txt ]
+if [ -f "$DIR_MAIN/tmp/path_squashfs.txt" ]
 then
   FILE_SQUASHFS_ORIG=`cat $DIR_MAIN/tmp/path_squashfs.txt`
 fi
 
-DIR_SQUASHFS_ORIG=$DIR_REMASTER/squashfs-orig
+DIR_SQUASHFS_ORIG="$DIR_REMASTER/squashfs-orig"
 
 DIR_SQUASHFS_NEW="$DIR_REMASTER/squashfs-$EDITION_SHORT"

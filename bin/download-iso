@@ -13,6 +13,13 @@ DATE1=$(date +%s)
 
 source definitions.sh
 
+SHA256_FILENAME="$SHA256_CD_VIRTUAL"
+ISO_FILENAME="$CD_VIRTUAL"
+
+BASE_URL=''
+SHA256_URL=''
+ISO_URL=''''
+
 # List of MX Linux download mirrors:
 # https://mxlinux.org/wiki/system/iso-download-mirrors/
 
@@ -22,6 +29,11 @@ source definitions.sh
 # This ensures that a successful download happens sooner or later.
 # Mirror sites that prove to be unreliable or slow can be removed
 # from the file specified below.
+function change_mirror () {
+  BASE_URL=`shuf -n 1 $DIR_MAIN/parameters/download-mirrors.txt`
+  SHA256_URL="$BASE_URL/MX-$MX_VERSION"_x64.iso.sha256
+  ISO_URL="$BASE_URL/MX-$MX_VERSION"_x64.iso
+}
 
 function download_file () {
   URL_TO_DOWNLOAD=$1
@@ -35,9 +47,7 @@ function download_file () {
   echo '---------------------------------------------------------'
   echo "BEGIN: downloading from $URL_TO_DOWNLOAD to $PATH_TO_FILE"
   echo '---------------------------------------------------------'
-  set +e
   wget -c "$URL_TO_DOWNLOAD" --progress=dot -e dotbytes=10M -O "$PATH_TO_FILE"
-  set -e
   wait
   echo '---------------------------------------------------------'
   echo "FINISHED: downloading from $URL_TO_DOWNLOAD to $PATH_TO_FILE"
@@ -48,16 +58,14 @@ function download_sha256 () {
   # Delete the old SHA256 file (may be outdated)
   rm -f $SHA256_FILENAME
   wait
-  BASE_URL=`shuf -n 1 $DIR_MAIN/parameters/download-mirrors.txt`
-  SHA256_URL="$BASE_URL/MX-$MX_VERSION"_x64.iso.sha256
+  change_mirror
   download_file "$SHA256_URL" "$SHA256_FILENAME"
   wait
 }
 
 function download_iso_file () {
-  BASE_URL=`shuf -n 1 $DIR_MAIN/parameters/download-mirrors.txt`
-  ISO_URL="$BASE_URL/MX-$MX_VERSION"_x64.iso
-  ISO_FILENAME="$CD_VIRTUAL"
+  wait
+  # Switch to a different mirror if the download fails
   download_file "$ISO_URL" "$ISO_FILENAME"
   wait
 }
@@ -78,52 +86,93 @@ function check_iso () {
     echo 'The input ISO file is ready.'
   else
     echo 'The input ISO file is not ready.'
+    ((i=i+1))
   fi
 }
 
+# Stage 2A: downloading the SHA256 file
+# Repeat until the ISO file has the right SHA256 value
+# or 10 unsuccessful attempts have been made,
+# whichever comes first.
+
+echo '+++++++++++++++++++++++++++++++++++++++++++'
+echo 'BEGIN STAGE 2A: downloading the SHA256 file'
+echo '+++++++++++++++++++++++++++++++++++++++++++'
+
 FINISHED='false'
 i=0
-
-# Stage 2A: downloading the SHA256 file
-download_sha256
+while [[ "$FINISHED" = 'false' && $i -lt 10 ]]
+do
+  if download_sha256; then
+    # If download succeeds
+    FINISHED='true'
+  else
+    # if download fails
+    echo 'This attempt to download the SHA256 file did not pan out.'
+    ((i=i+1))
+  fi
+done
 
 echo '--------------------'
 echo 'ls -l iso-downloaded'
 ls -l iso-downloaded
 
+if [[ "$FINISHED" = 'false' ]]
+then
+  echo 'The attempts to download the SHA256 file did not pan out.'
+  echo 'Try again later.'
+  exit 1
+fi
+
+echo '++++++++++++++++++++++++++++++++++++++++++++++'
+echo 'FINISHED STAGE 2A: downloading the SHA256 file'
+echo '++++++++++++++++++++++++++++++++++++++++++++++'
+
+# Stage 2B: downloading the ISO file (if necessary)
 # Repeat until the ISO file has the right SHA256 value
-# or 3 unsuccessful attempts have been made,
+# or 10 unsuccessful attempts have been made,
 # whichever comes first.
-while [[ "$FINISHED" = 'false' && $i -lt 4 ]]
+
+# Repeat until the ISO file has the right SHA256 value
+# or 10 unsuccessful attempts have been made,
+# whichever comes first.
+
+echo '++++++++++++++++++++++++++++++++++++++++++++++++++++++'
+echo 'BEGIN STAGE 2B: downloading and verifying the ISO file'
+echo '++++++++++++++++++++++++++++++++++++++++++++++++++++++'
+
+FINISHED='false'
+i=0
+while [[ "$FINISHED" = 'false' && $i -lt 10 ]]
 do
-  # Stage 2B: downloading the ISO file (if it is not already present)
   if ! test -f "$ISO_FILENAME"
   then
-    rm -rf $DIR_REMASTER
-    download_iso_file
+    rm -rf "$DIR_REMASTER"
+    if download_iso_file; then
+      # Stage 2C: checking the SHA256 value of the ISO file
+      check_iso
+    else
+      echo 'This attempt to download the ISO file did not pan out.'
+      ((i=i+1))
+    fi
   fi
-
-  # Stage 2C: checking the SHA256 value of the ISO file and
-  # (if necessary) downloading a new ISO file
-  check_iso
-  ((i=i+1))
 done
 
 # Throw error code if the process did not pan out.
 if [ "$FINISHED" = 'false' ]
 then
-  echo "The download failed.  Try again later."
+  echo 'The attempts to download the ISO file did not pan out.'
+  echo 'Try again later.'
   exit 1
-else
-  echo "Successfully downloaded from $SHA256_URL to $SHA256_FILENAME"
-  echo '--------------------'
-  echo "cat $SHA256_FILENAME"
-  cat "$SHA256_FILENAME"
-  echo ''
-  echo '--------------------'
-  echo 'ls -l iso-downloaded'
-  ls -l iso-downloaded
 fi
+
+echo '--------------------'
+echo 'ls -l iso-downloaded'
+ls -l iso-downloaded
+
+echo '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
+echo 'FINISHED STAGE 2B: downloading and verifying the ISO file'
+echo '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
 
 DATE2=$(date +%s)
 
