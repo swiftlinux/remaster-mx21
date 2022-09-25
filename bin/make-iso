@@ -31,20 +31,30 @@ source definitions.sh
 # -b: specifies the path and filename of the boot image to be used when making an El Torito bootable CD for x86 PCs
 # -c: specifies the path and filename of the boot catalog
 # -o: output file
-mkdir -p DIR_ISO_OUTPUT
+mkdir -p "$DIR_ISO_OUTPUT"
+# genisoimage -l -V antiXlive -R -J -pad -no-emul-boot -boot-load-size 4 -boot-info-table -b boot/isolinux/isolinux.bin -c boot/isolinux/isolinux.cat -o $1 $REM/new-iso && isohybrid $1 $REM/new-iso
 genisoimage -l -V antiXlive -R -J -pad -no-emul-boot -boot-load-size 4 -boot-info-table -b boot/isolinux/isolinux.bin -c boot/isolinux/isolinux.cat -o $ISO_OUTPUT_FULL $DIR_ISO_NEW && isohybrid $ISO_OUTPUT_FULL $DIR_ISO_NEW
 if [[ $? -eq 0 ]]; then
   echo
   echo 'The new Swift Linux ISO file is complete.  It is at:'
   echo "$ISO_OUTPUT_FULL"
   echo 'Recording the sha256sum value of the output ISO in'
+  echo "$SHA256_ISO_OUTPUT_FULL"
   sha256sum "$ISO_OUTPUT_FULL" > "$SHA256_ISO_OUTPUT_FULL"
   echo ''
   echo 'The sha256sum value of the output ISO file is:'
   cat "$SHA256_ISO_OUTPUT_FULL"
   echo ''
   echo 'Recording the sha256sum value of the output ISO in'
-  echo "$ISOPATH/$ISO_SHORT"
+  echo "$SHA256_ISO_OUTPUT_FULL"
+
+  # Changing the ownership of the output ISO directory
+  REGULAR_USER=$(stat -c '%U' $DIR_MAIN/tmp-edition)
+  REGULAR_GROUP=$(stat -c '%G' $DIR_MAIN/tmp-edition)
+  chown -R "$REGULAR_USER:$REGULAR_GROUP" "$DIR_ISO_OUTPUT"
+  echo '---------------------'
+  echo "ls -l $DIR_ISO_OUTPUT"
+  ls -l "$DIR_ISO_OUTPUT"
 else
   echo
   echo -e "ISO building failed.\n"

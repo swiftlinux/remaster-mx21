@@ -49,4 +49,4 @@ sudo bin/edit-iso
 
 sudo bin/make-squashfs
 
-bin/make-iso
+sudo bin/make-iso
