@@ -1,0 +1,68 @@
+#!/bin/bash
+
+# NOTE: set -o pipefail is needed to ensure that any error or failure causes the whole pipeline to fail.
+# Without this specification, the CI status will provide a false sense of security by showing builds
+# as succeeding in spite of errors or failures.
+set -eo pipefail
+
+echo '#####################################################'
+echo 'BEGIN STAGE 11: creating the new Swift Linux ISO file'
+echo '#####################################################'
+
+# PURPOSE:
+
+# In the previous stage, selected files in $DIR_SQUASHFS_NEW were customized for Swift Linux.
+
+# In this stage, the contents of $DIR_SQUASHFS_NEW are used to create a new squashfs file (linuxfs)
+# within $DIR_ISO_NEW.
+
+DATE1=$(date +%s)
+
+source definitions.sh
+
+# -l: allow full 31-character filenames
+# -V: sets the name of the ISO 9660 filesystem
+# -R: generate SUSP and RR records using the Rock Ridge protocol to further describe the files on the ISO9660 filesystem
+# -J: generate Joliet directory records in addition to regular ISO9660 filenames
+# -pad: pad the end of the whole image by 150 sectors (300 kB)
+# -no-emul-boot: specifies that the boot image used to create El Torito bootable CDs is a "no emulation" image
+# -boot-load-size: specifies the number of "virtual" (512-byte) sectors to load in no-emulation mode
+# -boot-info-table: specifies that a 56-byte table with information of the CD-ROM layout will be patched in at offset 8 in the boot file
+# -b: specifies the path and filename of the boot image to be used when making an El Torito bootable CD for x86 PCs
+# -c: specifies the path and filename of the boot catalog
+# -o: output file
+mkdir -p "$DIR_ISO_OUTPUT"
+# genisoimage -l -V antiXlive -R -J -pad -no-emul-boot -boot-load-size 4 -boot-info-table -b boot/isolinux/isolinux.bin -c boot/isolinux/isolinux.cat -o $1 $REM/new-iso && isohybrid $1 $REM/new-iso
+genisoimage -l -V antiXlive -R -J -pad -no-emul-boot -boot-load-size 4 -boot-info-table -b boot/isolinux/isolinux.bin -c boot/isolinux/isolinux.cat -o $ISO_OUTPUT_FULL $DIR_ISO_NEW && isohybrid $ISO_OUTPUT_FULL $DIR_ISO_NEW
+if [[ $? -eq 0 ]]; then
+  echo
+  echo 'The new Swift Linux ISO file is complete.  It is at:'
+  echo "$ISO_OUTPUT_FULL"
+  echo 'Recording the sha256sum value of the output ISO in'
+  echo "$SHA256_ISO_OUTPUT_FULL"
+  sha256sum "$ISO_OUTPUT_FULL" > "$SHA256_ISO_OUTPUT_FULL"
+  echo ''
+  echo 'The sha256sum value of the output ISO file is:'
+  cat "$SHA256_ISO_OUTPUT_FULL"
+  echo ''
+  echo 'Recording the sha256sum value of the output ISO in'
+  echo "$SHA256_ISO_OUTPUT_FULL"
+
+  # Changing the ownership of the output ISO directory
+  REGULAR_USER=$(stat -c '%U' $DIR_MAIN/tmp-edition)
+  REGULAR_GROUP=$(stat -c '%G' $DIR_MAIN/tmp-edition)
+  chown -R "$REGULAR_USER:$REGULAR_GROUP" "$DIR_ISO_OUTPUT"
+  echo '---------------------'
+  echo "ls -l $DIR_ISO_OUTPUT"
+  ls -l "$DIR_ISO_OUTPUT"
+else
+  echo
+  echo -e "ISO building failed.\n"
+  exit 1
+fi
+
+DATE2=$(date +%s)
+
+echo '###################################################################################'
+echo "FINISHED STAGE 11: creating the new Swift Linux ISO file ($((DATE2-DATE1)) seconds)"
+echo '###################################################################################'
