@@ -18,7 +18,9 @@ MX_DATE=`cat $DIR_MAIN/parameters/MX-date.txt`
 
 MX_CODE_NAME=`cat $DIR_MAIN/parameters/MX-code-name.txt`
 
-SWIFT_VERSION=`cat $DIR_MAIN/parameters/Swift-version.txt`
+SWIFT_LETTER=`cat $DIR_MAIN/parameters/Swift-letter.txt`
+
+SWIFT_VERSION="$MX_VERSION$SWIFT_LETTER"
 
 DIR_ISO_INPUT="$DIR_MAIN/iso-downloaded"
 
