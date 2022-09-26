@@ -149,12 +149,13 @@ do
   then
     rm -rf "$DIR_REMASTER"
     if download_iso_file; then
-      # Stage 2C: checking the SHA256 value of the ISO file
       check_iso
     else
       echo 'This attempt to download the ISO file did not pan out.'
       ((i=i+1))
     fi
+  else
+    check_iso
   fi
 done
 
