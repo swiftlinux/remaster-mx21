@@ -56,8 +56,7 @@ function download_file () {
   # Not having this step for the SHA256 file leads to an empty file.
   # This makes it impossible to verify that the ISO has the correct SHA256 value
   # and leads to a false error.
-  [ -s "$PATH_TO_FILE" ] || echo rm "$PATH_TO_FILE"
-  
+  [ -s "$PATH_TO_FILE" ] || rm "$PATH_TO_FILE" 
 }
 
 function download_sha256 () {
