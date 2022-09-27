@@ -11,10 +11,7 @@ echo '#####################################################'
 
 # PURPOSE:
 
-# In the previous stage, selected files in $DIR_SQUASHFS_NEW were customized for Swift Linux.
-
-# In this stage, the contents of $DIR_SQUASHFS_NEW are used to create a new squashfs file (linuxfs)
-# within $DIR_ISO_NEW.
+# This stage creates the new Swift Linux ISO file from the contents of the $DIR_ISO_NEW directory.
 
 DATE1=$(date +%s)
 

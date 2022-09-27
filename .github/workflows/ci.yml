@@ -104,3 +104,6 @@ jobs:
 
       - name: STAGE 11 - Creating the new Swift Linux ISO file
         run: sudo bin/make-iso
+
+      - name: STAGE 12 - Uploading Swift Linux
+        run: bin/upload-iso

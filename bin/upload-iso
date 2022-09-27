@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# NOTE: set -o pipefail is needed to ensure that any error or failure causes the whole pipeline to fail.
+# Without this specification, the CI status will provide a false sense of security by showing builds
+# as succeeding in spite of errors or failures.
+set -eo pipefail
+
+echo '#####################################'
+echo 'BEGIN STAGE 12: uploading Swift Linux'
+echo '#####################################'
+
+# PURPOSE: Upload the Swift Linux ISO file and SHA256 file to SourceForge.
+
+DATE1=$(date +%s)
+
+source definitions.sh
+
+function upload_file {
+  FILE_TO_UPLOAD=$1
+  echo '--------------------------------'
+  echo "BEGIN: uploading $FILE_TO_UPLOAD"
+  echo '--------------------------------'
+  rsync -avPz -e ssh "$FILE_TO_UPLOAD" jhsu802701@frs.sourceforge.net:/home/frs/p/swiftlinux/$EDITION_SHORT/testing/$MX_VERSION/
+  echo '-----------------------------------'
+  echo "FINISHED: uploading $FILE_TO_UPLOAD"
+  echo '-----------------------------------'
+}
+
+upload_file "$SHA256_ISO_OUTPUT_FULL"
+upload_file "$ISO_OUTPUT_FULL"
+
+DATE2=$(date +%s)
+
+echo '###################################################################'
+echo "FINISHED STAGE 11: uploading Swift Linux ($((DATE2-DATE1)) seconds)"
+echo '###################################################################'
