@@ -52,11 +52,11 @@ function download_file () {
   echo '------------------------------------------------------------'
   echo "FINISHED: downloading from $URL_TO_DOWNLOAD to $PATH_TO_FILE"
   echo '------------------------------------------------------------'
-  # Delete the new file if it is empty.
-  # Not having this step for the SHA256 file leads to an empty file.
+  # If wget fails to download the SHA256 file, the result is an empty file but no error.
   # This makes it impossible to verify that the ISO has the correct SHA256 value
-  # and leads to a false error.
-  [ -s "$PATH_TO_FILE" ] || rm "$PATH_TO_FILE" 
+  # and leads to an error even if the ISO file is legitimate.
+  # Thus, it is necessary to throw an error if the file is empty.
+  [ -s "$PATH_TO_FILE" ] || exit 1
 }
 
 function download_sha256 () {
