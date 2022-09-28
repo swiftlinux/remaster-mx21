@@ -5,7 +5,7 @@
 # as succeeding in spite of errors or failures.
 set -eo pipefail
 
-PARAM1='taylorswift'
+PARAM1='TaylorSwift'
 PARAM2='Taylor Swift Linux'
 
 bash set-params.sh "$PARAM1" "$PARAM2"

@@ -52,17 +52,9 @@ function download_file () {
   echo '------------------------------------------------------------'
   echo "FINISHED: downloading from $URL_TO_DOWNLOAD to $PATH_TO_FILE"
   echo '------------------------------------------------------------'
-  # Delete the new file if it is empty.
-  # Not having this step for the SHA256 file leads to an empty file.
-  # This makes it impossible to verify that the ISO has the correct SHA256 value
-  # and leads to a false error.
-  [ -s "$PATH_TO_FILE" ] || echo rm "$PATH_TO_FILE"
-  
 }
 
 function download_sha256 () {
-  # Delete the old SHA256 file (may be outdated)
-  rm -f $SHA256_FILENAME
   wait
   change_mirror
   download_file "$SHA256_URL" "$SHA256_FILENAME"
@@ -71,7 +63,6 @@ function download_sha256 () {
 
 function download_iso_file () {
   wait
-  # Switch to a different mirror if the download fails
   download_file "$ISO_URL" "$ISO_FILENAME"
   wait
 }
@@ -109,13 +100,14 @@ FINISHED='false'
 i=0
 while [[ "$FINISHED" = 'false' && $i -lt 10 ]]
 do
-  if download_sha256; then
-    # If download succeeds
+  download_sha256
+  FILE_SIZE=$(ls -l $SHA256_FILENAME | cut -d " " -f 5)
+  if [ $FILE_SIZE -gt 0 ]
+  then
     FINISHED='true'
   else
-    # if download fails
     echo 'This attempt to download the SHA256 file did not pan out.'
-    ((i=i+1))
+    ((i=i+1))    
   fi
 done
 
