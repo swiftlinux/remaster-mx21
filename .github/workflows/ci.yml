@@ -105,5 +105,6 @@ jobs:
       - name: STAGE 11 - Creating the new Swift Linux ISO file
         run: sudo bin/make-iso
 
-      - name: STAGE 12 - Uploading Swift Linux
+      - name: STAGE 12 - Uploading Swift Linux (main branch only)
         run: bin/upload-iso
+        if: ${{ github.ref == 'refs/heads/main' }}
