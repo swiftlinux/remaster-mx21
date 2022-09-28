@@ -99,7 +99,7 @@ jobs:
       - name: STAGE 7F - Post-chroot cleanup operations
         run: sudo bin/chroot-cleanup
 
-      - name: STAGE 8A - Editing the files of the new ISO component files
+      - name: STAGE 8 - Editing the files of the new ISO component files
         run: sudo bin/edit-iso
 
       - name: STAGE 10 - Creating the new linuxfs file for the new ISO file
