@@ -19,14 +19,13 @@ elif [ "$MODE" = 'error-if-present' ]; then
     echo 'This is against expectations and constitutes an error.'
     exit 1
   fi
-elif [ "$MODE" = 'list' ]; then # NOTE: throws error if no files have $STR1
-  echo '-----------------------------------------------------'
-  echo "BEGIN: list of files containing '$STR1' in $DIRECTORY"
-  echo '-----------------------------------------------------'
-  grep -rnw "$DIRECTORY" -e "$STR1"
-  echo '--------------------------------------------------------'
-  echo "FINISHED: list of files containing '$STR1' in $DIRECTORY"
-  echo '--------------------------------------------------------'
+elif [ "$MODE" = 'error-if-absent' ]; then
+  if grep -L "$STR1" "$FILENAME"; then
+    echo "The file $FILENAME still does NOT contain:"
+    echo "$STR1"
+    echo 'This is against expectations and constitutes an error.'
+    exit 1
+  fi
 else
   echo 'Default mode here'
 fi

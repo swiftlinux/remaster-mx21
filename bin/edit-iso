@@ -60,6 +60,9 @@ STRING2="$TIME_STAMP"
 bin/string-in-directory 'replace' "$DIR_ISO_NEW" "$STRING1" "$STRING2"
 bin/string-in-directory 'error-if-present' "$DIR_ISO_NEW" "$STRING1"
 
+# Checking that the previous string replacement actions worked
+bin/string-in-file 'error-if-absent' "$DIR_ISO_NEW/boot/syslinux/syslinux.cfg" "Welcome to $EDITION_LONG $SWIFT_VERSION ($TIME_STAMP)"
+
 # Replacing 'MX Linux'
 wait
 STRING1='MX Linux'

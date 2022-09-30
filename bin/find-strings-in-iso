@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# NOTE: set -o pipefail is needed to ensure that any error or failure causes the whole pipeline to fail.
+# Without this specification, the CI status will provide a false sense of security by showing builds
+# as succeeding in spite of errors or failures.
+set -eo pipefail
+
+DATE1=$(date +%s)
+
+source definitions.sh
+
+echo '************************************************************'
+echo "BEGIN: listing instances of selected strings in $DIR_ISO_NEW"
+echo '************************************************************'
+
+# Listing the files containing certain strings of interest
+wait
+bin/string-in-directory 'list' "$DIR_ISO_NEW" "MX-$MX_VERSION$STR64"
+bin/string-in-directory 'list' "$DIR_ISO_NEW" "MX-$MX_VERSION"
+bin/string-in-directory 'list' "$DIR_ISO_NEW" "$MX_CODE_NAME"
+bin/string-in-directory 'list' "$DIR_ISO_NEW" "$MX_DATE"
+bin/string-in-directory 'list' "$DIR_ISO_NEW" 'MX Linux'
+bin/string-in-directory 'list' "$DIR_ISO_NEW" 'MX'
+
+DATE2=$(date +%s)
+
+echo '******************************************************************************************'
+echo "FINISHED: listing instances of selected strings in $DIR_ISO_NEW ($((DATE2-DATE1)) seconds)"
+echo '******************************************************************************************'
