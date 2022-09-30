@@ -5,11 +5,22 @@
 # as succeeding in spite of errors or failures.
 set -eo pipefail
 
-PARAM1='generic'
-PARAM2='Generic Swift Linux'
+bin/welcome
 
-bash set-params.sh "$PARAM1" "$PARAM2"
+sudo bin/provision-apt-get-update
 
-mkdir -p log
-LOG_FILE="log/find-strings-in-squashfs.txt"
-bash exec-find-strings-in-squashfs.sh 2>&1 | tee "$LOG_FILE"
+sudo bin/provision-apt-get-install
+
+bin/download-iso
+
+sudo bin/mount-iso
+
+sudo bin/copy-iso
+
+sudo bin/mount-compressed-fs
+
+sudo bin/copy-squashfs
+
+sudo bin/find-strings-in-iso
+
+sudo bin/find-strings-in-squashfs

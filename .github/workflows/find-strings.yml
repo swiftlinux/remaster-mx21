@@ -1,4 +1,4 @@
-name: SquashFS
+name: FindStrings
 
 on:
   push:
@@ -54,6 +54,9 @@ jobs:
         run: sudo bin/copy-squashfs
 
       # Stage 7 (chroot) is skipped
+
+      - name: Find strings in ISO
+        run: sudo bin/find-strings-in-iso
 
       - name: Find strings in SquashFS
         run: sudo bin/find-strings-in-squashfs

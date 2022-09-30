@@ -38,6 +38,8 @@ STRING1="MX-$MX_VERSION$STR64"
 STRING2="$EDITION_LONG $SWIFT_VERSION x64"
 bin/string-in-directory 'replace' "$DIR_ISO_NEW" "$STRING1" "$STRING2"
 bin/string-in-directory 'error-if-present' "$DIR_ISO_NEW" "$STRING1"
+bin/string-in-file 'error-if-absent' "$DIR_ISO_NEW/boot/syslinux/syslinux.cfg" "$STRING2"
+bin/string-in-file 'error-if-absent' "$DIR_ISO_NEW/boot/boot/isolinux/isolinux.cfg" "$STRING2"
 
 # Replacing MX-$MX_VERSION
 wait
@@ -45,6 +47,13 @@ STRING1="MX-$MX_VERSION"
 STRING2="$EDITION_LONG $SWIFT_VERSION"
 bin/string-in-directory 'replace' "$DIR_ISO_NEW" "$STRING1" "$STRING2"
 bin/string-in-directory 'error-if-present' "$DIR_ISO_NEW" "$STRING1"
+bin/string-in-file 'error-if-absent' "$DIR_ISO_NEW/boot/syslinux/readme.msg" "$STRING2"
+bin/string-in-file 'error-if-absent' "$DIR_ISO_NEW/boot/grub/theme/uefi.txt" "$STRING2"
+bin/string-in-file 'error-if-absent' "$DIR_ISO_NEW/boot/grub/theme/uefisb.txt" "$STRING2"
+bin/string-in-file 'error-if-absent' "$DIR_ISO_NEW/boot/grub/theme/l10n.txt" "$STRING2"
+bin/string-in-file 'error-if-absent' "$DIR_ISO_NEW/boot/grub/theme/bios.txt" "$STRING2"
+bin/string-in-file 'error-if-absent' "$DIR_ISO_NEW/boot/grub/theme/theme.txt" "$STRING2"
+bin/string-in-file 'error-if-absent' "$DIR_ISO_NEW/boot/grub/grub.cfg" "$STRING2"
 
 # Replacing $MX_CODE_NAME
 wait
@@ -52,6 +61,13 @@ STRING1="$MX_CODE_NAME"
 STRING2="$TIME_STAMP"
 bin/string-in-directory 'replace' "$DIR_ISO_NEW" "$STRING1" "$STRING2"
 bin/string-in-directory 'error-if-present' "$DIR_ISO_NEW" "$STRING1"
+bin/string-in-file 'error-if-absent' "$DIR_ISO_NEW/boot/syslinux/syslinux.cfg" "$STRING2"
+bin/string-in-file 'error-if-absent' "$DIR_ISO_NEW/boot/grub/theme/uefi.txt" "$STRING2"
+bin/string-in-file 'error-if-absent' "$DIR_ISO_NEW/boot/grub/theme/uefisb.txt" "$STRING2"
+bin/string-in-file 'error-if-absent' "$DIR_ISO_NEW/boot/grub/theme/l10n.txt" "$STRING2"
+bin/string-in-file 'error-if-absent' "$DIR_ISO_NEW/boot/grub/theme/bios.txt" "$STRING2"
+bin/string-in-file 'error-if-absent' "$DIR_ISO_NEW/boot/grub/theme/theme.txt" "$STRING2"
+bin/string-in-file 'error-if-absent' "$DIR_ISO_NEW/boot/syslinux/syslinux.cfg" "$STRING2"
 
 # Replacing $MX_DATE
 wait
@@ -59,6 +75,11 @@ STRING1="$MX_DATE"
 STRING2="$TIME_STAMP"
 bin/string-in-directory 'replace' "$DIR_ISO_NEW" "$STRING1" "$STRING2"
 bin/string-in-directory 'error-if-present' "$DIR_ISO_NEW" "$STRING1"
+bin/string-in-file 'error-if-absent' "$DIR_ISO_NEW/boot/syslinux/readme.msg" "$STRING2"
+bin/string-in-file 'error-if-absent' "$DIR_ISO_NEW/boot/syslinux/syslinux.cfg" "$STRING2"
+bin/string-in-file 'error-if-absent' "$DIR_ISO_NEW/boot/boot/grub/grub.cfg" "$STRING2"
+bin/string-in-file 'error-if-absent' "$DIR_ISO_NEW/boot/isolinux/readme.msg" "$STRING2"
+bin/string-in-file 'error-if-absent' "$DIR_ISO_NEW/boot/isolinux/isolinux.cfg" "$STRING2"
 
 # Replacing 'MX Linux'
 wait
@@ -66,6 +87,9 @@ STRING1='MX Linux'
 STRING2="$EDITION_LONG"
 bin/string-in-directory 'replace' "$DIR_ISO_NEW" "$STRING1" "$STRING2"
 bin/string-in-directory 'error-if-present' "$DIR_ISO_NEW" "$STRING1"
+bin/string-in-file 'error-if-absent' "$DIR_ISO_NEW/boot/syslinux/readme.msg" "$STRING2"
+bin/string-in-file 'error-if-absent' "$DIR_ISO_NEW/boot/grub/config/distro.cfg" "$STRING2"
+bin/string-in-file 'error-if-absent' "$DIR_ISO_NEW/boot/isolinux/readme.msg" "$STRING2"
 
 # Replacing 'version of MX'
 wait
@@ -73,6 +97,7 @@ STRING1='version of MX'
 STRING2="version of $EDITION_LONG"
 bin/string-in-directory 'replace' "$DIR_ISO_NEW" "$STRING1" "$STRING2"
 bin/string-in-directory 'error-if-present' "$DIR_ISO_NEW" "$STRING1"
+bin/string-in-file 'error-if-absent' "$DIR_ISO_NEW/boot/grub/grub.cfg" "$STRING2"
 
 # Replacing 'distro="MX"'
 wait
@@ -80,6 +105,7 @@ STRING1='distro="MX"'
 STRING2="distro=$QUOTE2$EDITION_LONG$QUOTE2"
 bin/string-in-directory 'replace' "$DIR_ISO_NEW" "$STRING1" "$STRING2"
 bin/string-in-directory 'error-if-present' "$DIR_ISO_NEW" "$STRING1"
+bin/string-in-file 'error-if-absent' "$DIR_ISO_NEW/boot/grub/config/distro.cfg" "$STRING2"
 
 # Updating $DIR_ISO_NEW/version and $DIR_ISO_NEW/.disk/info
 wait
