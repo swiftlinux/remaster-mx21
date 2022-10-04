@@ -1,0 +1,50 @@
+#!/bin/bash
+
+# NOTE: set -o pipefail is needed to ensure that any error or failure causes the whole pipeline to fail.
+# Without this specification, the CI status will provide a false sense of security by showing builds
+# as succeeding in spite of errors or failures.
+set -eo pipefail
+
+echo '#########################################################'
+echo 'BEGIN STAGE 9: customizing the Swift Linux SquashFS files'
+echo '#########################################################'
+
+DATE1=$(date +%s)
+
+source definitions.sh
+
+DIR_CONKY_THEME_NEW="$DIR_SQUASHFS_NEW/etc/skel/.conky/MX-SwiftLinux"
+
+echo 'Adding Swift Linux Conky theme'
+cp -R "$DIR_SQUASHFS_NEW/etc/skel/.conky/MX-antiX" "$DIR_CONKY_THEME_NEW"
+
+echo 'Modifying the new MX-SwiftLinux Conky theme'
+FILE1="$DIR_CONKY_THEME_NEW/MX-antiX17"
+STRING1='MX Linux'
+STRING2='Swift Linux'
+bin/string-in-file 'replace' "$FILE1" "$STRING1" "$STRING2"
+bin/string-in-file 'error-if-present' "$FILE1" "$STRING1"
+bin/string-in-file 'error-if-absent' "$FILE1" "$STRING2"
+echo 'Based on the MX-antiX Conky theme' > "$DIR_CONKY_THEME_NEW/source.txt"
+echo 'Based on the MX-antiX Conky theme' > "$DIR_CONKY_THEME_NEW/source_info.txt"
+
+echo 'Editing the Conky startrup script to use the MX-SwiftLinux Conky theme'
+FILE1="$DIR_SQUASHFS_NEW/etc/skel/.conky/conky-startup.sh"
+STRING1='MX-CowonPink'
+STRING2='MX-SwiftLinux'
+bin/string-in-file 'replace' "$FILE1" "$STRING1" "$STRING2"
+bin/string-in-file 'error-if-present' "$FILE1" "$STRING1"
+bin/string-in-file 'error-if-absent' "$FILE1" "$STRING2"
+STRING1='MX-Cowon_pink_roboto'
+STRING2='MX-antiX17'
+bin/string-in-file 'replace' "$FILE1" "$STRING1" "$STRING2"
+STRING1='MX-CowonPink/MX-Cowon_pink_roboto'
+STRING2='MX-SwiftLinux/MX-antiX17'
+bin/string-in-file 'error-if-present' "$FILE1" "$STRING1"
+bin/string-in-file 'error-if-absent' "$FILE1" "$STRING2"
+
+DATE2=$(date +%s)
+
+echo '#######################################################################################'
+echo "FINISHED STAGE 9: customizing the Swift Linux SquashFS files ($((DATE2-DATE1)) seconds)"
+echo '#######################################################################################'

@@ -102,6 +102,9 @@ jobs:
       - name: STAGE 8 - Editing the files of the new ISO component files
         run: sudo bin/edit-iso
 
+      - name: STAGE 9 - Editing the new SquashFS files
+        run: sudo bin/edit-squashfs
+
       - name: STAGE 10 - Creating the new linuxfs file for the new ISO file
         run: sudo bin/make-squashfs
 

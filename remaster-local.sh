@@ -47,6 +47,8 @@ sudo bin/chroot-cleanup
 
 sudo bin/edit-iso
 
+sudo bin/edit-squashfs
+
 sudo bin/make-squashfs
 
 sudo bin/make-iso

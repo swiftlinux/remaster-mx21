@@ -121,6 +121,6 @@ bin/string-in-directory 'list' "$DIR_ISO_NEW" "$TIME_STAMP"
 
 DATE2=$(date +%s)
 
-echo '######################################################################################'
-echo "FINISHED 8: customizing the Swift Linux ISO component files ($((DATE2-DATE1)) seconds)"
-echo '######################################################################################'
+echo '############################################################################################'
+echo "FINISHED STAGE 8: customizing the Swift Linux ISO component files ($((DATE2-DATE1)) seconds)"
+echo '############################################################################################'
