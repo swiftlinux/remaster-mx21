@@ -20,6 +20,10 @@ MX_CODE_NAME=`cat $DIR_MAIN/parameters/MX-code-name.txt`
 
 SWIFT_LETTER=`cat $DIR_MAIN/parameters/Swift-letter.txt`
 
+MX_CONKY_1=`cat $DIR_MAIN/parameters/MX-conky-1.txt`
+
+MX_CONKY_2=`cat $DIR_MAIN/parameters/MX-conky-2.txt`
+
 SWIFT_VERSION="$MX_VERSION$SWIFT_LETTER"
 
 DIR_ISO_INPUT="$DIR_MAIN/iso-downloaded"
