@@ -22,9 +22,24 @@ echo 'Modifying the new MX-SwiftLinux Conky theme'
 FILE1="$DIR_CONKY_THEME_NEW/MX-antiX17"
 STRING1='MX Linux'
 STRING2='Swift Linux'
+
 bin/string-in-file 'replace' "$FILE1" "$STRING1" "$STRING2"
 bin/string-in-file 'error-if-present' "$FILE1" "$STRING1"
 bin/string-in-file 'error-if-absent' "$FILE1" "$STRING2"
+
+echo 'Editing the MX-SwiftLinux Conky theme to be opaque instead of transparent'
+STRING1='own_window_argb_value = 0'
+STRING2='own_window_argb_value = 255'
+bin/string-in-file 'replace' "$FILE1" "$STRING1" "$STRING2"
+bin/string-in-file 'error-if-present' "$FILE1" "$STRING1"
+bin/string-in-file 'error-if-absent' "$FILE1" "$STRING2"
+
+STRING1='own_window_transparent = true,'
+STRING2='own_window_transparent = false,'
+bin/string-in-file 'replace' "$FILE1" "$STRING1" "$STRING2"
+bin/string-in-file 'error-if-present' "$FILE1" "$STRING1"
+bin/string-in-file 'error-if-absent' "$FILE1" "$STRING2"
+
 echo 'Based on the MX-antiX Conky theme' > "$DIR_CONKY_THEME_NEW/source.txt"
 echo 'Based on the MX-antiX Conky theme' > "$DIR_CONKY_THEME_NEW/source_info.txt"
 
