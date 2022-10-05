@@ -45,15 +45,15 @@ echo 'Based on the MX-antiX Conky theme' > "$DIR_CONKY_THEME_NEW/source_info.txt
 
 echo 'Editing the Conky startrup script to use the MX-SwiftLinux Conky theme'
 FILE1="$DIR_SQUASHFS_NEW/etc/skel/.conky/conky-startup.sh"
-STRING1='MX-CowonPink'
+STRING1="$MX_CONKY_1"
 STRING2='MX-SwiftLinux'
 bin/string-in-file 'replace' "$FILE1" "$STRING1" "$STRING2"
 bin/string-in-file 'error-if-present' "$FILE1" "$STRING1"
 bin/string-in-file 'error-if-absent' "$FILE1" "$STRING2"
-STRING1='MX-Cowon_pink_roboto'
+STRING1="$MX_CONKY_2"
 STRING2='MX-antiX17'
 bin/string-in-file 'replace' "$FILE1" "$STRING1" "$STRING2"
-STRING1='MX-CowonPink/MX-Cowon_pink_roboto'
+STRING1="$MX_CONKY_1/$MX_CONKY_2"
 STRING2='MX-SwiftLinux/MX-antiX17'
 bin/string-in-file 'error-if-present' "$FILE1" "$STRING1"
 bin/string-in-file 'error-if-absent' "$FILE1" "$STRING2"
