@@ -64,6 +64,13 @@ echo "Downloading the images for $EDITION_LONG"
 rm -rf "$DIR_IMAGES"
 git clone https://github.com/swiftlinux/images-$EDITION_SHORT.git "$DIR_IMAGES"
 
+FILE_MX_LOGO_BACKUP="$DIR_SQUASHFS_NEW/usr/share/gazelle-installer-data/logo-mx.png"
+if [ ! -f "$FILE_MX_LOGO_BACKUP" ]
+then
+  echo "Copying $FILE_MX_LOGO to $FILE_MX_LOGO_BACKUP"
+  cp $FILE_MX_LOGO $FILE_MX_LOGO_BACKUP
+fi
+
 DATE2=$(date +%s)
 
 echo '#######################################################################################'
