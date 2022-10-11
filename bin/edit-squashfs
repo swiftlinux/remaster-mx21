@@ -62,14 +62,29 @@ bin/string-in-file 'error-if-absent' "$FILE1" "$STRING2"
 
 echo "Downloading the images for $EDITION_LONG"
 rm -rf "$DIR_IMAGES"
+wait
 git clone https://github.com/swiftlinux/images-$EDITION_SHORT.git "$DIR_IMAGES"
+wait
 
-FILE_MX_LOGO_BACKUP="$DIR_SQUASHFS_NEW/usr/share/gazelle-installer-data/logo-mx.png"
-if [ ! -f "$FILE_MX_LOGO_BACKUP" ]
-then
-  echo "Copying $FILE_MX_LOGO to $FILE_MX_LOGO_BACKUP"
-  cp $FILE_MX_LOGO $FILE_MX_LOGO_BACKUP
-fi
+function backup_file {
+  FILE_A="$1"
+  FILE_B="$2"
+  FULL_PATH_A="$DIR_SQUASHFS_NEW$FILE_A"
+  FULL_PATH_B="$DIR_SQUASHFS_NEW$FILE_B"
+  if [ ! -f "$FULL_PATH_B" ]
+  then
+    echo "Copying $FULL_PATH_A to $FULL_PATH_B"
+    cp "$FULL_PATH_A" "$FULL_PATH_B"
+    wait
+    ls -l "$FULL_PATH_A" "$FULL_PATH_B"
+  fi
+}
+
+backup_file "$FILE_MX_LOGO_1A" "$FILE_MX_LOGO_1B"
+backup_file "$FILE_MX_LOGO_2A" "$FILE_MX_LOGO_2B"
+
+# echo "STAGE 6J: updating MX Linux's version of the Windows Start button"
+# replace_text_in_file '/usr/local/share/icons/mxfcelogo-rounded.png' "/usr/local/share/icons/icon-$ABBREV.png" 'new-squashfs/etc/skel/.config/xfce4/panel/whiskermenu-20.rc'
 
 DATE2=$(date +%s)
 
