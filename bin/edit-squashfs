@@ -83,6 +83,19 @@ function backup_file {
 backup_file "$FILE_MX_LOGO_1A" "$FILE_MX_LOGO_1B"
 backup_file "$FILE_MX_LOGO_2A" "$FILE_MX_LOGO_2B"
 
+function replace_file {
+  FILE_DEST="$1"
+  FULL_PATH_DEST="$DIR_SQUASHFS_NEW$FILE_DEST"
+  FILE_LOGO="$DIR_IMAGES/icon.png"
+  echo "Copying $FILE_LOGO to $FULL_PATH_DEST"
+  cp "$FILE_LOGO" "$FULL_PATH_DEST"
+}
+echo "$FILE_MX_LOGO_1A"
+echo "$FILE_MX_LOGO_2A"
+
+replace_file "$FILE_MX_LOGO_1A"
+replace_file "$FILE_MX_LOGO_2A"
+
 # echo "STAGE 6J: updating MX Linux's version of the Windows Start button"
 # replace_text_in_file '/usr/local/share/icons/mxfcelogo-rounded.png' "/usr/local/share/icons/icon-$ABBREV.png" 'new-squashfs/etc/skel/.config/xfce4/panel/whiskermenu-20.rc'
 
