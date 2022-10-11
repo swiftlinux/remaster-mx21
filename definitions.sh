@@ -64,6 +64,11 @@ DIR_SQUASHFS_ORIG="$DIR_REMASTER/squashfs-orig"
 
 DIR_SQUASHFS_NEW="$DIR_REMASTER/squashfs-$EDITION_SHORT"
 
+FILE_MX_LOGO_1A=`cat $DIR_MAIN/parameters/MX-logo-1A.txt` # Original location of MX Linux logo
+FILE_MX_LOGO_1B=`cat $DIR_MAIN/parameters/MX-logo-1B.txt` # New location of MX Linux logo
+FILE_MX_LOGO_2A=`cat $DIR_MAIN/parameters/MX-logo-2A.txt` # Original location of rounded MX Linux logo
+FILE_MX_LOGO_2B=`cat $DIR_MAIN/parameters/MX-logo-2B.txt` # New location of rounded MX Linux logo
+
 DIR_ISO_OUTPUT="$DIR_MAIN/iso-output"
 
 ISO_OUTPUT_SHORT="swiftlinux-$EDITION_SHORT-x64-$SWIFT_VERSION-$TIME_STAMP.iso"

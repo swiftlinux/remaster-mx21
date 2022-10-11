@@ -6,3 +6,4 @@ tmp*
 download
 download.*
 wget-log
+images-*/*
