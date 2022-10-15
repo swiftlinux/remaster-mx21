@@ -20,7 +20,7 @@ function upload_file {
   echo '--------------------------------'
   echo "BEGIN: uploading $FILE_TO_UPLOAD"
   echo '--------------------------------'
-  rsync -avPz -e ssh "$FILE_TO_UPLOAD" jhsu802701@frs.sourceforge.net:/home/frs/p/swiftlinux/$EDITION_SHORT/testing/$MX_VERSION/
+  rsync -avPz -e ssh "$FILE_TO_UPLOAD" "jhsu802701@frs.sourceforge.net:/home/frs/p/$SOURCEFORGE_NAME/$MX_VERSION/"
   echo '-----------------------------------'
   echo "FINISHED: uploading $FILE_TO_UPLOAD"
   echo '-----------------------------------'
