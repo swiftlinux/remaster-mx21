@@ -23,7 +23,7 @@ echo "$EDITION_LONG" > $TEST_FILE
 
 echo '--------------------'
 echo "Uploading $TEST_FILE"
-rsync -avPz -e ssh "$TEST_FILE" jhsu802701@frs.sourceforge.net:/home/frs/p/swiftlinux/test-upload/
+rsync -avPz -e ssh "$TEST_FILE" "jhsu802701@frs.sourceforge.net:/home/frs/p/$SOURCEFORGE_NAME/test-upload/"
 
 DATE2=$(date +%s)
 

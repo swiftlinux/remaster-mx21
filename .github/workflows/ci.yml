@@ -3,7 +3,7 @@ name: CI
 on:
   push:
   schedule:
-    - cron: '32 7 * * *'
+    - cron: '32 7 1,16 * *'
 
 jobs:
   build:
@@ -15,16 +15,21 @@ jobs:
         include:
           - EDITION_SHORT: 'HannahMontana'
             EDITION_LONG: 'Hannah Montana Linux'
+            SOURCEFORGE_NAME: 'testhannahmontanaswiftlinux'
           - EDITION_SHORT: 'Interstate'
             EDITION_LONG: 'Interstate Swift Linux'
+            SOURCEFORGE_NAME: 'testinterstateswiftlinux'
           - EDITION_SHORT: 'TaylorSwift'
             EDITION_LONG: 'Taylor Swift Linux'
+            SOURCEFORGE_NAME: 'testtaylorswiftlinux'
           - EDITION_SHORT: 'TwilightZone'
             EDITION_LONG: 'Twilight Zone Swift Linux'
+            SOURCEFORGE_NAME: 'testtwilightzoneswiftlinux'
 
     env:
       EDITION_SHORT_CI: ${{ matrix.EDITION_SHORT }}
       EDITION_LONG_CI: ${{ matrix.EDITION_LONG }}
+      SOURCEFORGE_NAME_CI: ${{ matrix.SOURCEFORGE_NAME }}
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
