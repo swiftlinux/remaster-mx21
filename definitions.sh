@@ -69,7 +69,7 @@ FILE_MX_LOGO_1B=`cat $DIR_MAIN/parameters/MX-logo-1B.txt` # New location of MX L
 FILE_MX_LOGO_2A=`cat $DIR_MAIN/parameters/MX-logo-2A.txt` # Original location of rounded MX Linux logo
 FILE_MX_LOGO_2B=`cat $DIR_MAIN/parameters/MX-logo-2B.txt` # New location of rounded MX Linux logo
 
-MX_WALLPAPER_DESKTOP=`cat $DIR_MAIN/parameters/MX-wallpaper-desktop.txt`
+FILE_MX_WALLPAPER_DESKTOP=`cat $DIR_MAIN/parameters/MX-wallpaper-desktop.txt`
 
 DIR_ISO_OUTPUT="$DIR_MAIN/iso-output"
 
