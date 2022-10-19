@@ -96,6 +96,19 @@ echo "$FILE_MX_LOGO_2A"
 replace_file "$FILE_MX_LOGO_1A"
 replace_file "$FILE_MX_LOGO_2A"
 
+function copy_wallpaper {
+  SHORT_PATH_WALLPAPER_SOURCE="$1" # Base is $DIR_IMAGES
+  SHORT_PATH_WALLPAPER_DEST="$2" # Base is $DIR_SQUASHFS_NEW
+  FULL_PATH_A="$DIR_IMAGES/$SHORT_PATH_WALLPAPER_SOURCE"
+  FULL_PATH_B="$DIR_SQUASHFS_NEW$SHORT_PATH_WALLPAPER_DEST"
+  echo "cp $FULL_PATH_A $FULL_PATH_B"
+  cp $FULL_PATH_A $FULL_PATH_B
+}
+
+echo '------------------------------'
+echo 'Updating the desktop wallpaper'
+copy_wallpaper 'desktop.jpg' "/usr/share/backgrounds/desktop-$EDITION_SHORT.jpg"
+
 # echo "STAGE 6J: updating MX Linux's version of the Windows Start button"
 # replace_text_in_file '/usr/local/share/icons/mxfcelogo-rounded.png' "/usr/local/share/icons/icon-$ABBREV.png" 'new-squashfs/etc/skel/.config/xfce4/panel/whiskermenu-20.rc'
 
