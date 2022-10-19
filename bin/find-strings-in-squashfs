@@ -17,6 +17,7 @@ echo '*****************************************************************'
 wait
 bin/string-in-directory 'list' "$DIR_SQUASHFS_NEW" "$FILE_MX_LOGO_1A"
 bin/string-in-directory 'list' "$DIR_SQUASHFS_NEW" "$FILE_MX_LOGO_2A"
+bin/string-in-directory 'list' "$DIR_SQUASHFS_NEW" "$FILE_MX_WALLPAPER_DESKTOP"
 bin/string-in-directory 'list' "$DIR_SQUASHFS_NEW" "MX-$MX_VERSION$STR64"
 bin/string-in-directory 'list' "$DIR_SQUASHFS_NEW" "MX-$MX_VERSION"
 bin/string-in-directory 'list' "$DIR_SQUASHFS_NEW" "$MX_CODE_NAME"
