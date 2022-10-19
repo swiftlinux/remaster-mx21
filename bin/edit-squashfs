@@ -105,12 +105,24 @@ function copy_wallpaper {
   cp $FULL_PATH_A $FULL_PATH_B
 }
 
-echo '------------------------------'
-echo 'Updating the desktop wallpaper'
+echo '----------------------------'
+echo 'Adding the desktop wallpaper'
 copy_wallpaper 'desktop.jpg' "/usr/share/backgrounds/desktop-$EDITION_SHORT.jpg"
 
-# echo "STAGE 6J: updating MX Linux's version of the Windows Start button"
-# replace_text_in_file '/usr/local/share/icons/mxfcelogo-rounded.png' "/usr/local/share/icons/icon-$ABBREV.png" 'new-squashfs/etc/skel/.config/xfce4/panel/whiskermenu-20.rc'
+echo '-----------------------------------------------------'
+echo 'Configuring XFCE to use the special edition wallpaper'
+
+# Replace honesty.jpg
+FILE1="$DIR_SQUASHFS_NEW/etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml"
+FILE2="$DIR_SQUASHFS_NEW/root/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml"
+STRING1="$FILE_MX_WALLPAPER_DESKTOP_SHORT"
+STRING2="desktop-$EDITION_SHORT.jpg"
+bin/string-in-file 'replace' "$FILE1" "$STRING1" "$STRING2"
+bin/string-in-file 'error-if-present' "$FILE1" "$STRING1"
+bin/string-in-file 'error-if-absent' "$FILE1" "$STRING2"
+bin/string-in-file 'replace' "$FILE2" "$STRING1" "$STRING2"
+bin/string-in-file 'error-if-present' "$FILE2" "$STRING1"
+bin/string-in-file 'error-if-absent' "$FILE2" "$STRING2"
 
 DATE2=$(date +%s)
 
