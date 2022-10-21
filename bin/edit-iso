@@ -39,7 +39,7 @@ STRING2="$EDITION_LONG $SWIFT_VERSION x64"
 bin/string-in-directory 'replace' "$DIR_ISO_NEW" "$STRING1" "$STRING2"
 bin/string-in-directory 'error-if-present' "$DIR_ISO_NEW" "$STRING1"
 bin/string-in-file 'error-if-absent' "$DIR_ISO_NEW/boot/syslinux/syslinux.cfg" "$STRING2"
-bin/string-in-file 'error-if-absent' "$DIR_ISO_NEW/boot/boot/isolinux/isolinux.cfg" "$STRING2"
+bin/string-in-file 'error-if-absent' "$DIR_ISO_NEW/boot/isolinux/isolinux.cfg" "$STRING2"
 
 # Replacing MX-$MX_VERSION
 wait
@@ -77,7 +77,7 @@ bin/string-in-directory 'replace' "$DIR_ISO_NEW" "$STRING1" "$STRING2"
 bin/string-in-directory 'error-if-present' "$DIR_ISO_NEW" "$STRING1"
 bin/string-in-file 'error-if-absent' "$DIR_ISO_NEW/boot/syslinux/readme.msg" "$STRING2"
 bin/string-in-file 'error-if-absent' "$DIR_ISO_NEW/boot/syslinux/syslinux.cfg" "$STRING2"
-bin/string-in-file 'error-if-absent' "$DIR_ISO_NEW/boot/boot/grub/grub.cfg" "$STRING2"
+bin/string-in-file 'error-if-absent' "$DIR_ISO_NEW/boot/grub/grub.cfg" "$STRING2"
 bin/string-in-file 'error-if-absent' "$DIR_ISO_NEW/boot/isolinux/readme.msg" "$STRING2"
 bin/string-in-file 'error-if-absent' "$DIR_ISO_NEW/boot/isolinux/isolinux.cfg" "$STRING2"
 
