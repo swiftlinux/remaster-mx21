@@ -69,6 +69,8 @@ FILE_MX_LOGO_1B=`cat $DIR_MAIN/parameters/MX-logo-1B.txt` # New location of MX L
 FILE_MX_LOGO_2A=`cat $DIR_MAIN/parameters/MX-logo-2A.txt` # Original location of rounded MX Linux logo
 FILE_MX_LOGO_2B=`cat $DIR_MAIN/parameters/MX-logo-2B.txt` # New location of rounded MX Linux logo
 
+FILE_MX_WALLPAPER_DESKTOP_SHORT=`cat $DIR_MAIN/parameters/MX-wallpaper-desktop.txt` # Name of file used for Xfce background
+
 DIR_ISO_OUTPUT="$DIR_MAIN/iso-output"
 
 ISO_OUTPUT_SHORT="swiftlinux-$EDITION_SHORT-x64-$SWIFT_VERSION-$TIME_STAMP.iso"

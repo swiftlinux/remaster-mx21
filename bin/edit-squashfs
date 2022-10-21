@@ -96,8 +96,47 @@ echo "$FILE_MX_LOGO_2A"
 replace_file "$FILE_MX_LOGO_1A"
 replace_file "$FILE_MX_LOGO_2A"
 
-# echo "STAGE 6J: updating MX Linux's version of the Windows Start button"
-# replace_text_in_file '/usr/local/share/icons/mxfcelogo-rounded.png' "/usr/local/share/icons/icon-$ABBREV.png" 'new-squashfs/etc/skel/.config/xfce4/panel/whiskermenu-20.rc'
+function copy_wallpaper {
+  SHORT_PATH_WALLPAPER_SOURCE="$1" # Base is $DIR_IMAGES
+  SHORT_PATH_WALLPAPER_DEST="$2" # Base is $DIR_SQUASHFS_NEW
+  FULL_PATH_A="$DIR_IMAGES/$SHORT_PATH_WALLPAPER_SOURCE"
+  FULL_PATH_B="$DIR_SQUASHFS_NEW$SHORT_PATH_WALLPAPER_DEST"
+  echo "cp $FULL_PATH_A $FULL_PATH_B"
+  cp $FULL_PATH_A $FULL_PATH_B
+}
+
+echo '----------------------------'
+echo 'Adding the desktop wallpaper'
+copy_wallpaper 'desktop.jpg' "/usr/share/backgrounds/desktop-$EDITION_SHORT.jpg"
+
+echo '-----------------------------------------------------'
+echo 'Configuring XFCE to use the special edition wallpaper'
+
+# Replace the default wallpaper (honesty.jpg)
+FILE1="$DIR_SQUASHFS_NEW/etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml"
+FILE2="$DIR_SQUASHFS_NEW/root/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml"
+STRING1="$FILE_MX_WALLPAPER_DESKTOP_SHORT"
+STRING2="desktop-$EDITION_SHORT.jpg"
+bin/string-in-file 'replace' "$FILE1" "$STRING1" "$STRING2"
+bin/string-in-file 'error-if-present' "$FILE1" "$STRING1"
+bin/string-in-file 'error-if-absent' "$FILE1" "$STRING2"
+bin/string-in-file 'replace' "$FILE2" "$STRING1" "$STRING2"
+bin/string-in-file 'error-if-present' "$FILE2" "$STRING1"
+bin/string-in-file 'error-if-absent' "$FILE2" "$STRING2"
+
+# Make wallpaper zoomed:
+# Resizes the image to fill the display while preserving aspect ratio.
+# If the image doesn't match the aspect ratio then it gets cropped to fit.
+echo '----------------------------------------------------------'
+echo 'Configuring XFCE to use a different wallpaper zoom setting'
+STRING1='property name="image-style" type="int" value="3"'
+STRING2='property name="image-style" type="int" value="5"'
+bin/string-in-file 'replace' "$FILE1" "$STRING1" "$STRING2"
+bin/string-in-file 'error-if-present' "$FILE1" "$STRING1"
+bin/string-in-file 'error-if-absent' "$FILE1" "$STRING2"
+bin/string-in-file 'replace' "$FILE2" "$STRING1" "$STRING2"
+bin/string-in-file 'error-if-present' "$FILE2" "$STRING1"
+bin/string-in-file 'error-if-absent' "$FILE2" "$STRING2"
 
 DATE2=$(date +%s)
 
