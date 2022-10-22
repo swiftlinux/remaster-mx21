@@ -37,7 +37,9 @@ if [[ $? -eq 0 ]]; then
   echo "$ISO_OUTPUT_FULL"
   echo 'Recording the sha256sum value of the output ISO in'
   echo "$SHA256_ISO_OUTPUT_FULL"
-  sha256sum "$ISO_OUTPUT_FULL" > "$SHA256_ISO_OUTPUT_FULL"
+  cd $DIR_ISO_OUTPUT && sha256sum "$ISO_OUTPUT_SHORT" > "$SHA256_ISO_OUTPUT_FULL"
+  cd $DIR_MAIN
+  # sha256sum "$ISO_OUTPUT_FULL" > "$SHA256_ISO_OUTPUT_FULL"
   echo ''
   echo 'The sha256sum value of the output ISO file is:'
   cat "$SHA256_ISO_OUTPUT_FULL"
