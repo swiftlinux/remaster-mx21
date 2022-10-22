@@ -29,6 +29,11 @@ if [[ $? -ne 0 ]]; then
   exit 5
 fi
 
+echo '---------------------------------------'
+echo "Updating $DIR_ISO_NEW/antiX/linuxfs.md5"
+cd $DIR_ISO_NEW/antiX && md5sum 'linuxfs' > 'linuxfs.md5'
+cd $DIR_MAIN
+
 DATE2=$(date +%s)
 
 echo '################################################################################################'

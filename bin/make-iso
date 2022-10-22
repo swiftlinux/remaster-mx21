@@ -39,7 +39,6 @@ if [[ $? -eq 0 ]]; then
   echo "$SHA256_ISO_OUTPUT_FULL"
   cd $DIR_ISO_OUTPUT && sha256sum "$ISO_OUTPUT_SHORT" > "$SHA256_ISO_OUTPUT_FULL"
   cd $DIR_MAIN
-  # sha256sum "$ISO_OUTPUT_FULL" > "$SHA256_ISO_OUTPUT_FULL"
   echo ''
   echo 'The sha256sum value of the output ISO file is:'
   cat "$SHA256_ISO_OUTPUT_FULL"
